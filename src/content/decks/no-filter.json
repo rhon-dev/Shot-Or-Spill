@@ -288,5 +288,315 @@
     "text": "Water Break. Everyone drinks water. Big confessions deserve a clear head.",
     "shots": 1,
     "tags": ["pacing"]
+  },
+  {
+    "id": "nofilter-030",
+    "deck": "no-filter",
+    "type": "spill_or_shot",
+    "intensity": 3,
+    "target": "current",
+    "text": "What's the most reckless thing you've done for love or attraction, and did anyone in the barkada have to bail you out?",
+    "shots": 1,
+    "tags": ["recklessness", "love"]
+  },
+  {
+    "id": "nofilter-031",
+    "deck": "no-filter",
+    "type": "spill_or_shot",
+    "intensity": 3,
+    "target": "current",
+    "text": "Have you ever hooked up with a coworker? How did you survive the office afterward?",
+    "shots": 1,
+    "tags": ["work", "hookups"]
+  },
+  {
+    "id": "nofilter-032",
+    "deck": "no-filter",
+    "type": "spill_or_shot",
+    "intensity": 3,
+    "target": "current",
+    "text": "What's the biggest lie you've told your parents to get out of trouble, and who took the blame?",
+    "shots": 1,
+    "tags": ["lies", "regret"]
+  },
+  {
+    "id": "nofilter-033",
+    "deck": "no-filter",
+    "type": "spill_or_shot",
+    "intensity": 3,
+    "target": "current",
+    "text": "Which person from your past would you avoid at all costs if you saw them at the mall, and why?",
+    "shots": 1,
+    "tags": ["past", "grudges"]
+  },
+  {
+    "id": "nofilter-034",
+    "deck": "no-filter",
+    "type": "spill_or_shot",
+    "intensity": 3,
+    "target": "p1",
+    "text": "{p1}, what's the one thing you've never told your closest friend, even now?",
+    "shots": 1,
+    "tags": ["secrets", "friendship"]
+  },
+  {
+    "id": "nofilter-035",
+    "deck": "no-filter",
+    "type": "spill_or_shot",
+    "intensity": 3,
+    "target": "current",
+    "text": "Have you ever been so jealous that you went through a partner's messages or tracked where they were?",
+    "shots": 1,
+    "tags": ["jealousy"]
+  },
+  {
+    "id": "nofilter-036",
+    "deck": "no-filter",
+    "type": "spill_or_shot",
+    "intensity": 3,
+    "target": "current",
+    "text": "What's something you did in your twenties that you hope your future kids, and your titas, never find out about?",
+    "shots": 1,
+    "tags": ["past", "secrets"]
+  },
+  {
+    "id": "nofilter-037",
+    "deck": "no-filter",
+    "type": "spill_or_shot",
+    "intensity": 3,
+    "target": "current",
+    "text": "Have you ever hooked up with someone you didn't even like, just for the experience?",
+    "shots": 1,
+    "tags": ["hookups"]
+  },
+  {
+    "id": "nofilter-038",
+    "deck": "no-filter",
+    "type": "spill_or_shot",
+    "intensity": 3,
+    "target": "current",
+    "text": "What's the most painful truth someone has ever told you about yourself?",
+    "shots": 1,
+    "tags": ["honesty"]
+  },
+  {
+    "id": "nofilter-039",
+    "deck": "no-filter",
+    "type": "spill_or_shot",
+    "intensity": 3,
+    "target": "tanggero",
+    "text": "The Tanggero picks someone to answer: what's your biggest regret from a night out that this group doesn't know about?",
+    "shots": 1,
+    "tags": ["regret", "inuman"]
+  },
+  {
+    "id": "nofilter-040",
+    "deck": "no-filter",
+    "type": "spill_or_shot",
+    "intensity": 3,
+    "target": "current",
+    "text": "Have you ever said 'I'm fine' to your family while falling apart? When was the last time?",
+    "shots": 1,
+    "tags": ["honesty", "feelings"]
+  },
+  {
+    "id": "nofilter-041",
+    "deck": "no-filter",
+    "type": "spill_or_shot",
+    "intensity": 3,
+    "target": "current",
+    "text": "What's the most irresponsible money decision you've made because of a relationship, like lending money you never got back?",
+    "shots": 1,
+    "tags": ["money", "relationship"]
+  },
+  {
+    "id": "nofilter-042",
+    "deck": "no-filter",
+    "type": "spill_or_shot",
+    "intensity": 3,
+    "target": "current",
+    "text": "Have you ever stayed silent when you knew a friend's partner was cheating on them?",
+    "shots": 1,
+    "tags": ["cheating", "friendship"]
+  },
+  {
+    "id": "nofilter-043",
+    "deck": "no-filter",
+    "type": "spill_or_shot",
+    "intensity": 3,
+    "target": "current",
+    "text": "What's the closest you've come to quitting everything and moving abroad or back to the province?",
+    "shots": 1,
+    "tags": ["escape"]
+  },
+  {
+    "id": "nofilter-044",
+    "deck": "no-filter",
+    "type": "spill_or_shot",
+    "intensity": 3,
+    "target": "p1",
+    "text": "{p1}, what's the most inappropriate thing you've said at a family gathering after a few drinks?",
+    "shots": 1,
+    "tags": ["family", "drunk"]
+  },
+  {
+    "id": "nofilter-045",
+    "deck": "no-filter",
+    "type": "spill_or_shot",
+    "intensity": 3,
+    "target": "current",
+    "text": "Have you ever lied about your age, your job, or your salary to impress someone?",
+    "shots": 1,
+    "tags": ["lies"]
+  },
+  {
+    "id": "nofilter-046",
+    "deck": "no-filter",
+    "type": "spill_or_shot",
+    "intensity": 3,
+    "target": "current",
+    "text": "What's the worst thing you've ever done to get revenge?",
+    "shots": 1,
+    "tags": ["revenge"]
+  },
+  {
+    "id": "nofilter-047",
+    "deck": "no-filter",
+    "type": "spill_or_shot",
+    "intensity": 3,
+    "target": "current",
+    "text": "Have you ever wished a friend's relationship would end? Spill or shot.",
+    "shots": 1,
+    "tags": ["friendship", "jealousy"]
+  },
+  {
+    "id": "nofilter-048",
+    "deck": "no-filter",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "What do you think this table would be most shocked to learn about you?",
+    "shots": 1,
+    "tags": ["secrets"]
+  },
+  {
+    "id": "nofilter-049",
+    "deck": "no-filter",
+    "type": "everyone_who",
+    "intensity": 3,
+    "target": "group",
+    "text": "Everyone who has kissed someone at a party or a debut and never learned their name, drink.",
+    "shots": 1,
+    "tags": ["hookups", "party"]
+  },
+  {
+    "id": "nofilter-050",
+    "deck": "no-filter",
+    "type": "everyone_who",
+    "intensity": 3,
+    "target": "group",
+    "text": "Everyone who has deleted old photos of an ex to hide them from a new partner, drink.",
+    "shots": 1,
+    "tags": ["exes", "secrets"]
+  },
+  {
+    "id": "nofilter-051",
+    "deck": "no-filter",
+    "type": "everyone_who",
+    "intensity": 3,
+    "target": "group",
+    "text": "Everyone who has lied to their parents about where they were sleeping that night, drink.",
+    "shots": 1,
+    "tags": ["family", "lies"]
+  },
+  {
+    "id": "nofilter-052",
+    "deck": "no-filter",
+    "type": "everyone_who",
+    "intensity": 3,
+    "target": "group",
+    "text": "Everyone who has had a crush on a friend's sibling, drink.",
+    "shots": 1,
+    "tags": ["crush", "friendship"]
+  },
+  {
+    "id": "nofilter-053",
+    "deck": "no-filter",
+    "type": "most_likely",
+    "intensity": 3,
+    "target": "group",
+    "text": "Most likely to get caught in a lie before the next tagay. Point on 3.",
+    "shots": 1,
+    "tags": ["lies"]
+  },
+  {
+    "id": "nofilter-054",
+    "deck": "no-filter",
+    "type": "most_likely",
+    "intensity": 3,
+    "target": "group",
+    "text": "Most likely to have wild stories from their early twenties that the titas never heard. Point on 3.",
+    "shots": 1,
+    "tags": ["past"]
+  },
+  {
+    "id": "nofilter-055",
+    "deck": "no-filter",
+    "type": "most_likely",
+    "intensity": 3,
+    "target": "group",
+    "text": "Most likely to go silent in the barkada group chat after tonight's confessions. Point on 3.",
+    "shots": 1,
+    "tags": ["group-chat", "secrets"]
+  },
+  {
+    "id": "nofilter-056",
+    "deck": "no-filter",
+    "type": "hot_seat",
+    "intensity": 3,
+    "target": "p1",
+    "text": "Hot Seat: {p1} answers three questions from the group about their wildest night out after an inuman. One shot skips one.",
+    "shots": 1,
+    "tags": ["hot-seat", "inuman"]
+  },
+  {
+    "id": "nofilter-057",
+    "deck": "no-filter",
+    "type": "double_down",
+    "intensity": 3,
+    "target": "current",
+    "text": "What's the biggest secret you're keeping from someone sitting at this table? Spill, or take 2 shots.",
+    "shots": 2,
+    "tags": ["secrets"]
+  },
+  {
+    "id": "nofilter-058",
+    "deck": "no-filter",
+    "type": "double_down",
+    "intensity": 3,
+    "target": "current",
+    "text": "Have you ever cheated on a partner or been cheated on? Tell the story, or take 2 shots.",
+    "shots": 2,
+    "tags": ["cheating"]
+  },
+  {
+    "id": "nofilter-059",
+    "deck": "no-filter",
+    "type": "double_down",
+    "intensity": 3,
+    "target": "current",
+    "text": "What's the one thing you did that you'll never forgive yourself for? Spill, or take 2 shots.",
+    "shots": 2,
+    "tags": ["regret"]
+  },
+  {
+    "id": "nofilter-060",
+    "deck": "no-filter",
+    "type": "water_break",
+    "intensity": 1,
+    "target": "group",
+    "text": "Water Break. Everyone drinks water. Whatever is said here stays here, hydrated.",
+    "shots": 1,
+    "tags": ["pacing"]
   }
 ]

@@ -107,8 +107,37 @@ async function flipIfNeeded() {
   await page.getByText("Now reading").waitFor();
 }
 
+/**
+ * Fastest honest path from opening the link to the first card: 4 names, default
+ * decks. The script types instantly, so this is a floor for the PRD's "under 20
+ * seconds" goal (§3), not a measure of it. Real groups are timed in playtests.
+ */
+async function speedRun(): Promise<number> {
+  const ctx = await browser.newContext({ viewport: { width: 360, height: 800 }, isMobile: true, hasTouch: true });
+  const p = await ctx.newPage();
+  const t0 = performance.now();
+  await p.goto(url);
+  await p.getByRole("button", { name: /^I'm 18 or older/ }).click();
+  const names = p.getByLabel("Player name");
+  for (const n of ["Juan", "Maria", "Bea", "Carlo"]) {
+    await names.fill(n);
+    await names.press("Enter");
+  }
+  await p.getByRole("button", { name: /^Next: pick decks/ }).click();
+  await p.getByRole("button", { name: /^Start the night/ }).click();
+  await p.getByRole("button", { name: /^Let's go/ }).click();
+  await p.getByText("Pass the phone to").waitFor();
+  const ms = performance.now() - t0;
+  await ctx.close();
+  return ms;
+}
+
 try {
   console.log(`Browser: ${executablePath}`);
+  console.log("Speed run (F1 to first card)");
+  const ms = await speedRun();
+  check(ms < 20_000, `scripted open to first card in ${(ms / 1000).toFixed(1)} s, with names typed instantly (goal: under 20 s for a real group)`);
+
   const response = await page.goto(url);
   check(response?.headers()["content-security-policy"] === headers["Content-Security-Policy"], "served with the production CSP");
 

@@ -238,5 +238,265 @@
     "text": "Water Break. Everyone drinks water. Your lola would want you hydrated.",
     "shots": 1,
     "tags": ["pacing"]
+  },
+  {
+    "id": "family-025",
+    "deck": "family-adulting",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "What's the most uncomfortable question your parents asked about your love life, and how did you dodge it?",
+    "shots": 1,
+    "tags": ["family", "love"]
+  },
+  {
+    "id": "family-026",
+    "deck": "family-adulting",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "Has a relative ever compared you to a cousin? What was the comparison?",
+    "shots": 1,
+    "tags": ["family", "comparison"]
+  },
+  {
+    "id": "family-027",
+    "deck": "family-adulting",
+    "type": "spill_or_shot",
+    "intensity": 1,
+    "target": "current",
+    "text": "What's the family recipe or dish you hope never gets lost?",
+    "shots": 1,
+    "tags": ["food", "family"]
+  },
+  {
+    "id": "family-028",
+    "deck": "family-adulting",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "What do you do at work that your family thinks is a completely different job?",
+    "shots": 1,
+    "tags": ["work", "family"]
+  },
+  {
+    "id": "family-029",
+    "deck": "family-adulting",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "What's a sacrifice your parents made for you that you only understood years later?",
+    "shots": 1,
+    "tags": ["family", "gratitude"]
+  },
+  {
+    "id": "family-030",
+    "deck": "family-adulting",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "What's your honest opinion of your boss, in one sentence?",
+    "shots": 1,
+    "tags": ["work"]
+  },
+  {
+    "id": "family-031",
+    "deck": "family-adulting",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "p1",
+    "text": "{p1}, which relative's party dish always disappears first, and which one is left on the table?",
+    "shots": 1,
+    "tags": ["food", "family"]
+  },
+  {
+    "id": "family-032",
+    "deck": "family-adulting",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "What's the longest you've gone without telling your family something important?",
+    "shots": 1,
+    "tags": ["secrets", "family"]
+  },
+  {
+    "id": "family-033",
+    "deck": "family-adulting",
+    "type": "spill_or_shot",
+    "intensity": 1,
+    "target": "current",
+    "text": "How many group chats are you in with your family, and which one do you mute first?",
+    "shots": 1,
+    "tags": ["group-chat", "family"]
+  },
+  {
+    "id": "family-034",
+    "deck": "family-adulting",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "tanggero",
+    "text": "The Tanggero picks someone to answer: what's the most generous thing you've done for your family that nobody thanked you for?",
+    "shots": 1,
+    "tags": ["family", "generosity"]
+  },
+  {
+    "id": "family-035",
+    "deck": "family-adulting",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "What's the worst job you've ever had, and how long did you last?",
+    "shots": 1,
+    "tags": ["work"]
+  },
+  {
+    "id": "family-036",
+    "deck": "family-adulting",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "Have you ever pretended to have plans just to skip a family gathering?",
+    "shots": 1,
+    "tags": ["family", "excuses"]
+  },
+  {
+    "id": "family-037",
+    "deck": "family-adulting",
+    "type": "spill_or_shot",
+    "intensity": 1,
+    "target": "current",
+    "text": "What's the oldest thing in your house that nobody dares to throw away?",
+    "shots": 1,
+    "tags": ["home"]
+  },
+  {
+    "id": "family-038",
+    "deck": "family-adulting",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "What's the most you've spent on a gift for a family member, and did they appreciate it?",
+    "shots": 1,
+    "tags": ["gifts", "money"]
+  },
+  {
+    "id": "family-039",
+    "deck": "family-adulting",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "Have you ever stretched the truth on a resume or in a job interview? What was it?",
+    "shots": 1,
+    "tags": ["work", "lies"]
+  },
+  {
+    "id": "family-040",
+    "deck": "family-adulting",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "What money advice from your parents did you ignore, and did it come back to bite you?",
+    "shots": 1,
+    "tags": ["money", "family"]
+  },
+  {
+    "id": "family-041",
+    "deck": "family-adulting",
+    "type": "everyone_who",
+    "intensity": 1,
+    "target": "group",
+    "text": "Everyone who has been asked to sing or dance for relatives at a family gathering, drink.",
+    "shots": 1,
+    "tags": ["family", "reunion"]
+  },
+  {
+    "id": "family-042",
+    "deck": "family-adulting",
+    "type": "everyone_who",
+    "intensity": 2,
+    "target": "group",
+    "text": "Everyone who has received a gift from a ninong or ninang that was clearly regifted, drink.",
+    "shots": 1,
+    "tags": ["ninong", "gifts"]
+  },
+  {
+    "id": "family-043",
+    "deck": "family-adulting",
+    "type": "everyone_who",
+    "intensity": 2,
+    "target": "group",
+    "text": "Everyone who has been asked 'when will you get a real job?' by a relative, drink.",
+    "shots": 1,
+    "tags": ["work", "family"]
+  },
+  {
+    "id": "family-044",
+    "deck": "family-adulting",
+    "type": "everyone_who",
+    "intensity": 2,
+    "target": "group",
+    "text": "Everyone who has paid the bill for the whole family and never got paid back, drink.",
+    "shots": 1,
+    "tags": ["money", "family"]
+  },
+  {
+    "id": "family-045",
+    "deck": "family-adulting",
+    "type": "most_likely",
+    "intensity": 2,
+    "target": "group",
+    "text": "Most likely to be the family's go-to person for emergency loans. Point on 3.",
+    "shots": 1,
+    "tags": ["utang", "family"]
+  },
+  {
+    "id": "family-046",
+    "deck": "family-adulting",
+    "type": "most_likely",
+    "intensity": 1,
+    "target": "group",
+    "text": "Most likely to cry at a family reunion. Point on 3.",
+    "shots": 1,
+    "tags": ["reunion", "family"]
+  },
+  {
+    "id": "family-047",
+    "deck": "family-adulting",
+    "type": "most_likely",
+    "intensity": 2,
+    "target": "group",
+    "text": "Most likely to get promoted before everyone else at this table. Point on 3.",
+    "shots": 1,
+    "tags": ["work"]
+  },
+  {
+    "id": "family-048",
+    "deck": "family-adulting",
+    "type": "hot_seat",
+    "intensity": 2,
+    "target": "current",
+    "text": "Hot Seat: you take three questions from the group about your first job and your first paycheck. One shot skips one.",
+    "shots": 1,
+    "tags": ["hot-seat", "work"]
+  },
+  {
+    "id": "family-049",
+    "deck": "family-adulting",
+    "type": "double_down",
+    "intensity": 2,
+    "target": "current",
+    "text": "What's the biggest argument you've had with a parent, and who was actually right? Spill, or take 2 shots.",
+    "shots": 2,
+    "tags": ["family", "fights"]
+  },
+  {
+    "id": "family-050",
+    "deck": "family-adulting",
+    "type": "water_break",
+    "intensity": 1,
+    "target": "group",
+    "text": "Water Break. Everyone drinks water before the family tea gets any hotter.",
+    "shots": 1,
+    "tags": ["pacing"]
   }
 ]

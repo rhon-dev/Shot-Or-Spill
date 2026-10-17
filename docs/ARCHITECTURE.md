@@ -11,7 +11,7 @@ The build follows this plan. A few details differ:
 - **Info pages:** they're hash routes (`#about`, `#drink-responsibly`, `#terms`), so the
   phone's back button closes them.
 - **Animation loading:** Motion's animation features load after first paint, which
-  keeps the first-load JS at 102 KB.
+  keeps the first-load JS at about 108 KB with all 310 cards bundled.
 - **Turn rules:** the PHASES.md "Phase 3 result" section lists the turn rules the build
   settled.
 
@@ -59,6 +59,7 @@ shot-or-spill/
 │  ├─ check-contrast.ts      # WCAG AA check of the design tokens
 │  ├─ check-size.ts          # first-load JS budget (D-18)
 │  ├─ smoke.ts               # end-to-end run in headless Chromium with the production CSP
+│  ├─ find-card.ts           # look up a card by id or text (playtest notes)
 │  └─ render-mocks.ts        # regenerates docs/design from tokens + real cards
 ├─ src/
 │  ├─ content/

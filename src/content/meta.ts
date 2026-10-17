@@ -60,8 +60,6 @@ export interface DeckMeta {
   adultOptIn: boolean;
   /** Launch target from PRD §6. */
   launchCount: number;
-  /** Phase 1 target from docs/PHASES.md. */
-  phase1Count: number;
 }
 
 export const DECKS: Record<DeckId, DeckMeta> = {
@@ -74,7 +72,6 @@ export const DECKS: Record<DeckId, DeckMeta> = {
     tagline: "Icebreakers, food",
     adultOptIn: false,
     launchCount: 60,
-    phase1Count: 29,
   },
   "barkada-tea": {
     id: "barkada-tea",
@@ -85,7 +82,6 @@ export const DECKS: Record<DeckId, DeckMeta> = {
     tagline: "Crushes, gossip",
     adultOptIn: false,
     launchCount: 70,
-    phase1Count: 34,
   },
   "love-life": {
     id: "love-life",
@@ -96,7 +92,6 @@ export const DECKS: Record<DeckId, DeckMeta> = {
     tagline: "Exes, ghosting",
     adultOptIn: false,
     launchCount: 70,
-    phase1Count: 34,
   },
   "family-adulting": {
     id: "family-adulting",
@@ -107,7 +102,6 @@ export const DECKS: Record<DeckId, DeckMeta> = {
     tagline: "Titas, money, work",
     adultOptIn: false,
     launchCount: 50,
-    phase1Count: 24,
   },
   "no-filter": {
     id: "no-filter",
@@ -118,7 +112,6 @@ export const DECKS: Record<DeckId, DeckMeta> = {
     tagline: "Regrets, secrets",
     adultOptIn: true,
     launchCount: 60,
-    phase1Count: 29,
   },
 };
 

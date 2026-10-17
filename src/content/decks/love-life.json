@@ -338,5 +338,365 @@
     "text": "Water Break. Everyone drinks water before anyone gets sentimental about an ex.",
     "shots": 1,
     "tags": ["pacing"]
+  },
+  {
+    "id": "love-035",
+    "deck": "love-life",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "What's the cringiest pickup line anyone has used on you at a party or a videoke night, and did it work?",
+    "shots": 1,
+    "tags": ["pickup-lines"]
+  },
+  {
+    "id": "love-036",
+    "deck": "love-life",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "Have you ever pretended to like someone's favorite band or hobby just to impress them?",
+    "shots": 1,
+    "tags": ["crush", "pretending"]
+  },
+  {
+    "id": "love-037",
+    "deck": "love-life",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "What's the longest you've waited for a crush to reply, and did the barkada notice you checking?",
+    "shots": 1,
+    "tags": ["crush", "waiting"]
+  },
+  {
+    "id": "love-038",
+    "deck": "love-life",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "p1",
+    "text": "{p1}, what's the most romantic thing you've ever done, and did the whole barkada find out?",
+    "shots": 1,
+    "tags": ["romance"]
+  },
+  {
+    "id": "love-039",
+    "deck": "love-life",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "Have you ever brought a date to a family event and regretted it immediately?",
+    "shots": 1,
+    "tags": ["dating", "family"]
+  },
+  {
+    "id": "love-040",
+    "deck": "love-life",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "What's the strangest place a date ever took you, like a mall food court, a church fiesta, or a cousin's debut?",
+    "shots": 1,
+    "tags": ["dating"]
+  },
+  {
+    "id": "love-041",
+    "deck": "love-life",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "Have you ever stayed in touch with an ex's family after the breakup?",
+    "shots": 1,
+    "tags": ["exes", "family"]
+  },
+  {
+    "id": "love-042",
+    "deck": "love-life",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "What's the best advice a tita or a barkada member gave you after a heartbreak, and did you follow it?",
+    "shots": 1,
+    "tags": ["heartbreak", "advice"]
+  },
+  {
+    "id": "love-043",
+    "deck": "love-life",
+    "type": "spill_or_shot",
+    "intensity": 3,
+    "target": "current",
+    "text": "Have you ever been attracted to a friend's partner? You don't have to say who.",
+    "shots": 1,
+    "tags": ["attraction", "friends"]
+  },
+  {
+    "id": "love-044",
+    "deck": "love-life",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "What's the most you've changed about yourself for someone you liked, like your hair, your music, or your whole barkada?",
+    "shots": 1,
+    "tags": ["change"]
+  },
+  {
+    "id": "love-045",
+    "deck": "love-life",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "tanggero",
+    "text": "The Tanggero picks someone to answer: what's the sweetest thing a crush ever did for you?",
+    "shots": 1,
+    "tags": ["crush"]
+  },
+  {
+    "id": "love-046",
+    "deck": "love-life",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "Have you ever kept dating someone just because you were already invited to their family's Christmas party?",
+    "shots": 1,
+    "tags": ["dating", "christmas"]
+  },
+  {
+    "id": "love-047",
+    "deck": "love-life",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "Have you ever liked someone mainly because your whole barkada approved of them?",
+    "shots": 1,
+    "tags": ["barkada", "dating"]
+  },
+  {
+    "id": "love-048",
+    "deck": "love-life",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "What's one thing you could never forgive in a relationship, no matter how much you loved them?",
+    "shots": 1,
+    "tags": ["dealbreakers"]
+  },
+  {
+    "id": "love-049",
+    "deck": "love-life",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "p1",
+    "text": "{p1}, which of your exes would the barkada call the worst for you, and do you agree?",
+    "shots": 1,
+    "tags": ["exes", "barkada"]
+  },
+  {
+    "id": "love-050",
+    "deck": "love-life",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "Have you ever been friends with someone for years while secretly hoping for more?",
+    "shots": 1,
+    "tags": ["friend-zone"]
+  },
+  {
+    "id": "love-051",
+    "deck": "love-life",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "What's the most extra thing you've done for an anniversary, like a surprise at a restaurant or a videoke serenade?",
+    "shots": 1,
+    "tags": ["romance"]
+  },
+  {
+    "id": "love-052",
+    "deck": "love-life",
+    "type": "spill_or_shot",
+    "intensity": 3,
+    "target": "current",
+    "text": "Have you ever lied about your relationship status to avoid an awkward conversation?",
+    "shots": 1,
+    "tags": ["lies", "relationship"]
+  },
+  {
+    "id": "love-053",
+    "deck": "love-life",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "What's the longest you've kept a crush secret from the whole barkada?",
+    "shots": 1,
+    "tags": ["crush", "secrets"]
+  },
+  {
+    "id": "love-054",
+    "deck": "love-life",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "p1",
+    "text": "{p1}, what's the biggest mistake you've made in a relationship that the barkada still brings up?",
+    "shots": 1,
+    "tags": ["relationship", "regret"]
+  },
+  {
+    "id": "love-055",
+    "deck": "love-life",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "Have you ever blocked an ex and then unblocked them just to check on them?",
+    "shots": 1,
+    "tags": ["exes", "stalking"]
+  },
+  {
+    "id": "love-056",
+    "deck": "love-life",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "Who was your first love, and do your titas still ask about them?",
+    "shots": 1,
+    "tags": ["first-love"]
+  },
+  {
+    "id": "love-057",
+    "deck": "love-life",
+    "type": "everyone_who",
+    "intensity": 1,
+    "target": "group",
+    "text": "Everyone who has rewatched a romantic teleserye just to feel something, drink.",
+    "shots": 1,
+    "tags": ["teleserye", "romance"]
+  },
+  {
+    "id": "love-058",
+    "deck": "love-life",
+    "type": "everyone_who",
+    "intensity": 2,
+    "target": "group",
+    "text": "Everyone who has written a love letter or poem they never sent, drink.",
+    "shots": 1,
+    "tags": ["romance", "crush"]
+  },
+  {
+    "id": "love-059",
+    "deck": "love-life",
+    "type": "everyone_who",
+    "intensity": 2,
+    "target": "group",
+    "text": "Everyone who has been ghosted by someone they really liked after the barkada already met them, drink.",
+    "shots": 1,
+    "tags": ["ghosting"]
+  },
+  {
+    "id": "love-060",
+    "deck": "love-life",
+    "type": "everyone_who",
+    "intensity": 2,
+    "target": "group",
+    "text": "Everyone who has cried over a breakup in a jeepney, a car, or the shower, drink.",
+    "shots": 1,
+    "tags": ["heartbreak"]
+  },
+  {
+    "id": "love-061",
+    "deck": "love-life",
+    "type": "everyone_who",
+    "intensity": 2,
+    "target": "group",
+    "text": "Everyone who has gone on a date just because they were bored and the barkada was busy, drink.",
+    "shots": 1,
+    "tags": ["dating"]
+  },
+  {
+    "id": "love-062",
+    "deck": "love-life",
+    "type": "most_likely",
+    "intensity": 2,
+    "target": "group",
+    "text": "Most likely to marry their first love and invite the whole barkada. Point on 3.",
+    "shots": 1,
+    "tags": ["first-love"]
+  },
+  {
+    "id": "love-063",
+    "deck": "love-life",
+    "type": "most_likely",
+    "intensity": 2,
+    "target": "group",
+    "text": "Most likely to stay friends with every ex and bring them to barkada parties. Point on 3.",
+    "shots": 1,
+    "tags": ["exes"]
+  },
+  {
+    "id": "love-064",
+    "deck": "love-life",
+    "type": "most_likely",
+    "intensity": 2,
+    "target": "group",
+    "text": "Most likely to get engaged within two years and ask the barkada to plan it. Point on 3.",
+    "shots": 1,
+    "tags": ["marriage"]
+  },
+  {
+    "id": "love-065",
+    "deck": "love-life",
+    "type": "hot_seat",
+    "intensity": 2,
+    "target": "p1",
+    "text": "Hot Seat: {p1} answers three questions from the group about their first kiss or first heartbreak. One shot skips one.",
+    "shots": 1,
+    "tags": ["hot-seat", "first-love"]
+  },
+  {
+    "id": "love-066",
+    "deck": "love-life",
+    "type": "hot_seat",
+    "intensity": 3,
+    "target": "current",
+    "text": "Hot Seat: you take three questions from the group about your biggest relationship regret. One shot skips one.",
+    "shots": 1,
+    "tags": ["hot-seat", "regret"]
+  },
+  {
+    "id": "love-067",
+    "deck": "love-life",
+    "type": "double_down",
+    "intensity": 3,
+    "target": "current",
+    "text": "What's the most hurtful thing you've ever said to a partner during a fight? Spill, or take 2 shots.",
+    "shots": 2,
+    "tags": ["fights", "regret"]
+  },
+  {
+    "id": "love-068",
+    "deck": "love-life",
+    "type": "double_down",
+    "intensity": 3,
+    "target": "current",
+    "text": "Have you ever stayed with someone after falling out of love? How long? Spill, or take 2 shots.",
+    "shots": 2,
+    "tags": ["relationship", "honesty"]
+  },
+  {
+    "id": "love-069",
+    "deck": "love-life",
+    "type": "water_break",
+    "intensity": 1,
+    "target": "group",
+    "text": "Water Break. Everyone drinks water. Love can wait a few sips.",
+    "shots": 1,
+    "tags": ["pacing"]
+  },
+  {
+    "id": "love-070",
+    "deck": "love-life",
+    "type": "water_break",
+    "intensity": 1,
+    "target": "group",
+    "text": "Water Break. Everyone drinks water. Save the sad love songs for after hydration.",
+    "shots": 1,
+    "tags": ["pacing"]
   }
 ]

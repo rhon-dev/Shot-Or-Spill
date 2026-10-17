@@ -8,8 +8,9 @@ and the player answers honestly (spill) or takes a shot.
 
 It's a mobile-first web app with no install, no account, and no ads.
 
-> **Status:** Phase 3 (Build MVP) is in review. The game is playable end to end with
-> all 150 cards, and the checks below pass. It isn't deployed yet.
+> **Status:** The game is playable end to end with all 310 cards, and the checks below
+> pass. Phase 4 (playtests) is next: the cards and the playtest kit are ready, and the
+> real inuman sessions need people at a table. It isn't deployed yet.
 
 Repo: [github.com/rhon-dev/Spill-Or-Shot](https://github.com/rhon-dev/Spill-Or-Shot)
 
@@ -29,7 +30,9 @@ Repo: [github.com/rhon-dev/Spill-Or-Shot](https://github.com/rhon-dev/Spill-Or-S
 | [docs/DECISIONS.md](docs/DECISIONS.md) | Decisions log (D-01 to D-21) |
 | [docs/DESIGN.md](docs/DESIGN.md) | Design spec: brand, tokens, screens, motion, accessibility |
 | [docs/content-guide.md](docs/content-guide.md) | Rules for writing cards |
-| [docs/content-review.md](docs/content-review.md) | Review log for the current card batch, plus the table-read sheet |
+| [docs/content-review.md](docs/content-review.md) | Review log for both card batches, plus the table-read sheets |
+| [docs/PLAYTEST.md](docs/PLAYTEST.md) | How to run the Phase 4 playtests: sessions, measures, device checklist, No Filter test |
+| [docs/playtest-log.md](docs/playtest-log.md) | Blank results sheet for the playtests |
 
 ## Run it
 
@@ -42,6 +45,7 @@ npm run check     # typecheck + card validation + WCAG contrast check + unit tes
 npm run build     # validates cards, then builds to dist/
 npm run size      # first-load JS budget: 150 KB gzipped (D-18)
 npm run smoke     # plays a full night in headless Chromium against the build
+npm run card -- "ghosted by someone"   # find a card's id from its text (or pass an id)
 npm run mocks     # regenerate the design mocks in docs/design/
 ```
 
@@ -72,7 +76,7 @@ It prints a deck and type-mix report, and the run fails if any card breaks a rul
 | 1. Content v1 | Writing guide + 150 validated cards | 1 week | Done (table read moves to Phase 4) |
 | 2. Design | Brand, card back, 6 key screens + all states (SVG mocks) | 1 week | Done |
 | 3. Build MVP | Setup, game loop, counters, recap | 2 weeks | In review (needs a Vercel preview) |
-| 4. Playtest | 4–5 real inuman sessions, reach 300+ cards | 1 week | Not started |
+| 4. Playtest | 4–5 real inuman sessions, reach 300+ cards | 1 week | In progress: 310 cards and the playtest kit are done; the sessions need Rhon |
 | 5. Launch | Deploy, legal pages, analytics, share | 3–4 days | Not started |
 | 6. v1.1 / v2 | Custom cards, PWA, then rooms | After launch | Not started |
 

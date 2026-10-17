@@ -11,6 +11,7 @@
     "test": "vitest run",
     "typecheck": "tsc --noEmit",
     "validate:cards": "tsx scripts/validate-cards.ts",
+    "card": "tsx scripts/find-card.ts",
     "check:contrast": "tsx scripts/check-contrast.ts",
     "check": "npm run typecheck && npm run validate:cards && npm run check:contrast && npm run test",
     "size": "tsx scripts/check-size.ts",

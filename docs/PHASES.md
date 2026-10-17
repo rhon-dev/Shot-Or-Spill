@@ -214,7 +214,7 @@ preview, and the JS budget is met.
 | Every Must requirement | Built. Each one is checked by unit tests and/or the browser smoke test (see the traceability table). |
 | Unit tests | 41 pass (`npm test`): 27 engine, 14 store and persistence. Two deliberate rule mutations were each caught. |
 | End-to-end | `npm run smoke` plays a full night in headless Chromium at 360×800 with the production CSP. It covers setup through recap, including refresh restore, Undo, swipe-to-flip, and the adult opt-in. There are no console errors, and it passed on repeated runs. |
-| JS budget (D-18) | 102.2 KB gzipped on first load, out of 150 KB. Animation features (30.8 KB) and info pages (1.4 KB) load lazily. |
+| JS budget (D-18) | 102.2 KB gzipped on first load, out of 150 KB, with the first 150 cards. It's 107.7 KB with the full 310-card deck. Animation features (30.8 KB) and info pages (1.4 KB) load lazily. |
 | Lighthouse mobile | 97 Performance · 100 Accessibility · 100 Best Practices · 100 SEO, on a local `vite preview` with simulated mobile throttling. FCP 2.0 s, TBT 0 ms, CLS 0.003. |
 | Vercel preview URL | **Not done.** It needs Rhon to connect the repo to a Vercel account. The settings are ready in `vercel.json`. |
 | Budget Android smoke test | **Not done.** It needs a real phone and moves to Phase 4. |
@@ -255,6 +255,24 @@ Tasks:
 
 Exit criteria: 300+ cards pass validation, first card under 20 seconds in testing, no
 open blocking bugs, and the No Filter decision is made.
+
+### Phase 4 progress (2026-10-18)
+
+The parts that don't need people at a table are done. The rest needs Rhon.
+
+| Task | Status |
+| --- | --- |
+| 4. Write the remaining ~160 cards | **Done.** 310 cards pass validation, each deck at its PRD §6 count, and type mix on target. 30 cards were rewritten after a local-context check. See [content-review.md](./content-review.md#batch-2-phase-4-launch-deck-160-cards). |
+| Playtest kit | **Done.** [PLAYTEST.md](./PLAYTEST.md) (protocol, measures, device checklist, No Filter test), [playtest-log.md](./playtest-log.md) (blank results sheet), and `npm run card` to look up a card from its first words. |
+| 6. Time open-to-first-card | **Partly.** The smoke test now runs the fastest path in 0.4 s with names typed instantly. That's a floor; the real number needs a stopwatch with a real group. |
+| 1–2. Run 4–5 sessions and collect notes | **Needs Rhon.** |
+| 3. Rewrite or cut weak cards | **Waiting on the sessions.** |
+| 5. Budget Android test | **Needs a real phone.** |
+| 7. Fix bugs found at the table | **Waiting on the sessions.** |
+| 8. No Filter go/no-go (D-03) | **Waiting on the sessions** (test in PLAYTEST.md §7). |
+
+Per-card skip rates can't be measured by 4–5 sessions (about 150 of 310 cards get seen),
+so card feedback is qualitative until the Phase 5 analytics are live.
 
 ---
 
@@ -336,7 +354,7 @@ Each release gets its own plan and gate when it's picked up.
 | --- | --- | --- | --- |
 | Lighthouse mobile 90+ | 3.1 | 3.5, 5 | 97 / 100 / 100 / 100 locally; re-run on the live site in Phase 5 |
 | WCAG AA contrast | 2 | 5 | 46 color pairs pass (`npm run check:contrast`). Lighthouse a11y 100. Manual screen-reader pass still due in Phase 5 |
-| JS bundle under 150 KB (D-18) | 3.1 | 3.5, 5 | 102.2 KB gzipped, enforced in CI |
+| JS bundle under 150 KB (D-18) | 3.1 | 3.5, 5 | 107.7 KB gzipped with all 310 cards, enforced in CI |
 | Playable on 3G after first load | 3.1 | 5 | Not yet tested |
 | Smooth on budget Android | 2 (motion spec) | 3.5, 4 | Not yet tested on a device |
 

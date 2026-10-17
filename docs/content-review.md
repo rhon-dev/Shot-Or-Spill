@@ -4,9 +4,13 @@ Covers the PRD §15 mitigations "review log per deck" and "Filipino context chec
 card", and Phase 1 tasks 5–6 in [PHASES.md](./PHASES.md#phase-1--content-v1-1-week).
 Rules come from [content-guide.md](./content-guide.md).
 
-**Batch:** Content v1, 150 cards · **Written and self-reviewed:** Kiro, 2026-10-17 ·
+This log has two batches. **Batch 1** is the first 150 cards (Phase 1), below. **Batch 2** is
+the 160 cards that bring the deck to its 310-card launch count (Phase 4); it starts at
+[Batch 2](#batch-2-phase-4-launch-deck-160-cards).
+
+**Batch 1:** Content v1, 150 cards · **Written and self-reviewed:** Kiro, 2026-10-17 ·
 **Owner:** Rhon approved continuing (2026-10-17). The table read and the judgment calls
-move to Phase 4.
+move to Phase 4. (The counts in the sections below are for batch 1 only.)
 
 ## Automated checks
 
@@ -140,3 +144,139 @@ fails.
 - [ ] Table read of the 30 cards above: **deferred to the Phase 4 playtests**
 - [ ] Owner review of the "Cards for Rhon to judge" list: **deferred to Phase 4**. All
       flagged cards stay in the deck until then.
+
+---
+
+# Batch 2: Phase 4 launch deck (160 cards)
+
+**Written and self-reviewed:** Kiro, 2026-10-18 · **Owner review:** pending. Reviewing
+this batch is part of the Phase 4 playtests ([PLAYTEST.md](./PLAYTEST.md)).
+
+This batch takes each deck to its PRD §6 launch count: 310 cards in total.
+
+## Automated checks
+
+`npm run validate:cards` passes on all 310 cards: 0 errors, 1 warning (the same
+`love-026` warning already cleared above).
+
+| Check | Result |
+| --- | --- |
+| Deck counts vs PRD §6 | Warm Up 60 · Barkada Tea 70 · Love Life 70 · Family & Adulting 50 · No Filter 60. All at launch count. |
+| Type mix | Spill or Shot 188 (61%) · Everyone Who 45 (15%) · Most Likely To 30 (10%) · Hot Seat 15 (5%) · Double Down 15 (5%) · Water Break 17 (5%). On target. |
+| Placeholders | `{p1}` 32, `{p2}` 5, `{tanggero}` 2, Tanggero-target cards 11 |
+| Duplicate ids, duplicate text, Tagalog words, brand names | None |
+| Length | Longest is 23 words; average 14.8 |
+
+The validator now also warns when a deck drops below its launch count, which will matter
+once playtests start cutting cards.
+
+## What this batch added
+
+| Deck | New cards | I1 / I2 / I3 | Explicit local reference |
+| --- | --- | --- | --- |
+| Warm Up | 31 | 31 / 0 / 0 | 12 of 28 |
+| Barkada Tea | 36 | 10 / 26 / 0 | 21 of 34 |
+| Love Life | 36 | 3 / 28 / 5 | 23 of 34 |
+| Family & Adulting | 26 | 6 / 20 / 0 | 18 of 25 |
+| No Filter | 31 | 1 / 1 / 29 | 15 of 30 |
+
+"Explicit local reference" counts non-Water-Break cards that name something Filipino, as
+in batch 1.
+
+**The self-review caught a drift.** My first draft of Love Life and No Filter had only
+32% and 26% of cards naming anything local, which is the "generic or Western" risk from
+PRD §15. I rewrote 30 of those cards (16 in Love Life, 14 in No Filter) to bring in
+barkada, titas, videoke nights, church fiestas, debuts, and the province. After the
+rewrite, every deck is at 45% or above, and the whole deck is at 55% (160 of 293).
+
+Cards without an explicit local term can still work at a Filipino table. They just
+carry less of the identity, so the playtests should pay attention to them.
+
+## Playable pools
+
+How many cards a group can draw in typical setups (6 to 8 players, `{p2}` cards included):
+
+| Setup | Cards |
+| --- | --- |
+| Barkada host: Warm Up + Barkada Tea, Spicy | 122 |
+| Old friends: Barkada Tea + Love Life, Spicy | 122 |
+| Office crew: Warm Up + Family + Barkada Tea, Chill | 82 |
+| Office crew, Spicy | 169 |
+| Warm Up alone, Chill | 55 |
+| Everything, No Filter | 293 |
+
+The PRD target is a median of 30+ cards per session, so even the smallest setup lasts a
+full night.
+
+## Originality
+
+I wrote every card new, without using any existing list as a source, and I did **not**
+run a web search for near-matches. Several questions are common party-game topics
+(first love, worst date, biggest lie), so the Filipino framing is what makes them ours.
+Rhon should spot-check the most universal-sounding ones before launch.
+
+## Cards for Rhon to judge (batch 2)
+
+These pass every rule, but they're judgment calls for the owner and the playtests.
+
+| Card | Why it's flagged |
+| --- | --- |
+| `nofilter-031` | Hooking up with a coworker. It's the office-crew persona's most awkward card, though only No Filter ever shows it. |
+| `nofilter-037` | Hooking up with someone you didn't like. Adult but not explicit; may read as judgmental. |
+| `nofilter-042`, `nofilter-058` | About cheating (knowing a friend's partner cheated; having cheated or been cheated on). A real wound for some tables. |
+| `love-043` | Being attracted to a friend's partner. It can put one person at the table on the spot. |
+| `love-067`, `love-068` | Double Downs on cruelty in a fight and staying after falling out of love. Heavy for a Spicy table. |
+| `barkada-067` | "Who is the most two-faced?" Names a person at the table; the harshest Barkada Tea card. |
+| `nofilter-057`, `nofilter-059` | Double Downs on a secret kept from someone at the table and on lifelong regret. |
+| `family-030` | "Your honest opinion of your boss." Safe at a barkada table, risky when the boss's friend is at the table. |
+| `nofilter-044` | "The most inappropriate thing you've said at a family gathering after a few drinks." Mentions drinking in the question itself. |
+
+## Table-read sheet (batch 2)
+
+**Status: pending**, to be done during the Phase 4 playtests. These 32 cards are every 5th
+new card in deck order. Read each one out loud and time it, then mark whether it's
+answerable within 60 seconds. Keep, rewrite, or cut any card that fails.
+
+| Card | Type | I | Text | ≤ 60 s? | Keep / rewrite / cut |
+| --- | --- | --- | --- | --- | --- |
+| warm-034 | spill_or_shot | 1 | What's the weirdest thing you've ever bought from a sari-sari store at midnight? | | |
+| warm-039 | spill_or_shot | 1 | What's the most overdramatic thing you've done because of a bad hair day? | | |
+| warm-044 | spill_or_shot | 1 | What's the most you've ever spent on a single meal, and was it worth it? | | |
+| warm-049 | everyone_who | 1 | Everyone who has eaten rice for breakfast, lunch, and dinner on the same day, drink. | | |
+| warm-054 | most_likely | 1 | Most likely to order too much food and then ask for a take-out container. Point on 3. | | |
+| warm-059 | water_break | 1 | Water Break. Everyone drinks water before anyone sings the next videoke song. | | |
+| barkada-038 | spill_or_shot | 2 | {p1}, what's one thing this barkada misunderstands about you? | | |
+| barkada-043 | spill_or_shot | 2 | What's the longest you've gone without talking to someone in this barkada, and why? | | |
+| barkada-048 | spill_or_shot | 1 | What was the first thing you noticed about this barkada when you joined it? | | |
+| barkada-053 | spill_or_shot | 2 | What's the most random thing you've ever asked a barkada member to lend you? | | |
+| barkada-058 | everyone_who | 1 | Everyone who has complained that the group chat is too noisy and then sent twenty messages, drink. | | |
+| barkada-063 | most_likely | 2 | Most likely to start drama and then act completely innocent. Point on 3. | | |
+| barkada-068 | double_down | 2 | What's the biggest lie you've told this barkada, and do they know yet? Spill, or take 2 shots. | | |
+| love-037 | spill_or_shot | 2 | What's the longest you've waited for a crush to reply, and did the barkada notice you checking? | | |
+| love-042 | spill_or_shot | 2 | What's the best advice a tita or a barkada member gave you after a heartbreak, and did you follow it? | | |
+| love-047 | spill_or_shot | 2 | Have you ever liked someone mainly because your whole barkada approved of them? | | |
+| love-052 | spill_or_shot | 3 | Have you ever lied about your relationship status to avoid an awkward conversation? | | |
+| love-057 | everyone_who | 1 | Everyone who has rewatched a romantic teleserye just to feel something, drink. | | |
+| love-062 | most_likely | 2 | Most likely to marry their first love and invite the whole barkada. Point on 3. | | |
+| love-067 | double_down | 3 | What's the most hurtful thing you've ever said to a partner during a fight? Spill, or take 2 shots. | | |
+| family-026 | spill_or_shot | 2 | Has a relative ever compared you to a cousin? What was the comparison? | | |
+| family-031 | spill_or_shot | 2 | {p1}, which relative's party dish always disappears first, and which one is left on the table? | | |
+| family-036 | spill_or_shot | 2 | Have you ever pretended to have plans just to skip a family gathering? | | |
+| family-041 | everyone_who | 1 | Everyone who has been asked to sing or dance for relatives at a family gathering, drink. | | |
+| family-046 | most_likely | 1 | Most likely to cry at a family reunion. Point on 3. | | |
+| nofilter-030 | spill_or_shot | 3 | What's the most reckless thing you've done for love or attraction, and did anyone in the barkada have to bail you out? | | |
+| nofilter-035 | spill_or_shot | 3 | Have you ever been so jealous that you went through a partner's messages or tracked where they were? | | |
+| nofilter-040 | spill_or_shot | 3 | Have you ever said 'I'm fine' to your family while falling apart? When was the last time? | | |
+| nofilter-045 | spill_or_shot | 3 | Have you ever lied about your age, your job, or your salary to impress someone? | | |
+| nofilter-050 | everyone_who | 3 | Everyone who has deleted old photos of an ex to hide them from a new partner, drink. | | |
+| nofilter-055 | most_likely | 3 | Most likely to go silent in the barkada group chat after tonight's confessions. Point on 3. | | |
+| nofilter-060 | water_break | 1 | Water Break. Everyone drinks water. Whatever is said here stays here, hydrated. | | |
+
+## Phase 4 card checklist
+
+- [x] 310 cards pass `npm run validate:cards`
+- [x] Every new card self-reviewed against the content guide checklist
+- [x] Local-context pass done (30 cards rewritten)
+- [ ] Table reads: the 30 cards in batch 1's sheet and the 32 above (Rhon, in the playtests)
+- [ ] Owner review of both "Cards for Rhon to judge" lists
+- [ ] Cards that fail in playtests are rewritten or cut, and the deck stays at its launch count

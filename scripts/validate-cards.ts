@@ -212,20 +212,22 @@ const total = cards.length;
 
 out.push("Shot or Spill content report");
 out.push("");
-out.push("Deck               Cards  Phase 1  Launch   I1  I2  I3");
+out.push("Deck               Cards  Launch  Short   I1  I2  I3");
+const short: string[] = [];
 for (const id of DECK_IDS) {
   const deck = cards.filter((c) => c.deck === id);
   const byI = [1, 2, 3].map((i) => deck.filter((c) => c.intensity === i).length);
   const meta = DECKS[id];
+  const gap = Math.max(0, meta.launchCount - deck.length);
+  if (gap > 0) short.push(`${meta.name} is ${gap} short of its launch count (${meta.launchCount})`);
   out.push(
-    `${meta.name.padEnd(18)} ${String(deck.length).padStart(5)}  ${String(meta.phase1Count).padStart(7)}  ${String(meta.launchCount).padStart(6)}  ${byI.map((n) => String(n).padStart(3)).join(" ")}`,
+    `${meta.name.padEnd(18)} ${String(deck.length).padStart(5)}  ${String(meta.launchCount).padStart(6)}  ${String(gap || "-").padStart(5)}  ${byI.map((n) => String(n).padStart(3)).join(" ")}`,
   );
 }
-const phase1Total = DECK_IDS.reduce((s, id) => s + DECKS[id].phase1Count, 0);
 const launchTotal = DECK_IDS.reduce((s, id) => s + DECKS[id].launchCount, 0);
-out.push(
-  `${"Total".padEnd(18)} ${String(total).padStart(5)}  ${String(phase1Total).padStart(7)}  ${String(launchTotal).padStart(6)}`,
-);
+out.push(`${"Total".padEnd(18)} ${String(total).padStart(5)}  ${String(launchTotal).padStart(6)}`);
+// Cutting weak cards after playtests can drop a deck below its PRD §6 count: warn, don't fail.
+for (const msg of short) warnings.push({ where: "launch", message: msg });
 
 out.push("");
 out.push("Type mix           Count  Share  Target");

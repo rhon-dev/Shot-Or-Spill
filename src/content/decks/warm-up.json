@@ -288,5 +288,315 @@
     "text": "Water Break. {tanggero} pours water for everyone this round, and everyone drinks it.",
     "shots": 1,
     "tags": ["pacing"]
+  },
+  {
+    "id": "warm-030",
+    "deck": "warm-up",
+    "type": "spill_or_shot",
+    "intensity": 1,
+    "target": "current",
+    "text": "What's the most embarrassing thing you've said to a stranger because you thought they were someone you knew?",
+    "shots": 1,
+    "tags": ["embarrassing", "strangers"]
+  },
+  {
+    "id": "warm-031",
+    "deck": "warm-up",
+    "type": "spill_or_shot",
+    "intensity": 1,
+    "target": "current",
+    "text": "Which childhood merienda would you pay good money to eat again today?",
+    "shots": 1,
+    "tags": ["food", "childhood"]
+  },
+  {
+    "id": "warm-032",
+    "deck": "warm-up",
+    "type": "spill_or_shot",
+    "intensity": 1,
+    "target": "current",
+    "text": "What's your go-to excuse when the barkada invites you out and you'd rather stay home?",
+    "shots": 1,
+    "tags": ["excuses", "barkada"]
+  },
+  {
+    "id": "warm-033",
+    "deck": "warm-up",
+    "type": "spill_or_shot",
+    "intensity": 1,
+    "target": "current",
+    "text": "What song makes you grab the videoke mic no matter who is already singing?",
+    "shots": 1,
+    "tags": ["videoke", "music"]
+  },
+  {
+    "id": "warm-034",
+    "deck": "warm-up",
+    "type": "spill_or_shot",
+    "intensity": 1,
+    "target": "current",
+    "text": "What's the weirdest thing you've ever bought from a sari-sari store at midnight?",
+    "shots": 1,
+    "tags": ["sari-sari", "food"]
+  },
+  {
+    "id": "warm-035",
+    "deck": "warm-up",
+    "type": "spill_or_shot",
+    "intensity": 1,
+    "target": "current",
+    "text": "What's the one thing in your home that has been broken for years but nobody fixes?",
+    "shots": 1,
+    "tags": ["home", "family"]
+  },
+  {
+    "id": "warm-036",
+    "deck": "warm-up",
+    "type": "spill_or_shot",
+    "intensity": 1,
+    "target": "current",
+    "text": "What's the longest you've ever waited for a jeepney or a ride, and what did you do to pass the time?",
+    "shots": 1,
+    "tags": ["jeepney", "commute"]
+  },
+  {
+    "id": "warm-037",
+    "deck": "warm-up",
+    "type": "spill_or_shot",
+    "intensity": 1,
+    "target": "p1",
+    "text": "{p1}, what's the one dish you'd cook to impress someone, and does it actually taste good?",
+    "shots": 1,
+    "tags": ["food", "cooking"]
+  },
+  {
+    "id": "warm-038",
+    "deck": "warm-up",
+    "type": "spill_or_shot",
+    "intensity": 1,
+    "target": "current",
+    "text": "What's your most-used emoji or sticker, and what does it say about you?",
+    "shots": 1,
+    "tags": ["chat", "habits"]
+  },
+  {
+    "id": "warm-039",
+    "deck": "warm-up",
+    "type": "spill_or_shot",
+    "intensity": 1,
+    "target": "current",
+    "text": "What's the most overdramatic thing you've done because of a bad hair day?",
+    "shots": 1,
+    "tags": ["hair", "embarrassing"]
+  },
+  {
+    "id": "warm-040",
+    "deck": "warm-up",
+    "type": "spill_or_shot",
+    "intensity": 1,
+    "target": "current",
+    "text": "Which Filipino food do you secretly not like, even though everyone expects you to?",
+    "shots": 1,
+    "tags": ["food", "culture"]
+  },
+  {
+    "id": "warm-041",
+    "deck": "warm-up",
+    "type": "spill_or_shot",
+    "intensity": 1,
+    "target": "current",
+    "text": "What was the first event you begged your parents to let you go to?",
+    "shots": 1,
+    "tags": ["childhood", "family"]
+  },
+  {
+    "id": "warm-042",
+    "deck": "warm-up",
+    "type": "spill_or_shot",
+    "intensity": 1,
+    "target": "tanggero",
+    "text": "The Tanggero picks someone to answer: what's the funniest nickname you've ever had?",
+    "shots": 1,
+    "tags": ["nicknames"]
+  },
+  {
+    "id": "warm-043",
+    "deck": "warm-up",
+    "type": "spill_or_shot",
+    "intensity": 1,
+    "target": "current",
+    "text": "What's a lie you told as a kid that you're still a little proud of?",
+    "shots": 1,
+    "tags": ["childhood", "lies"]
+  },
+  {
+    "id": "warm-044",
+    "deck": "warm-up",
+    "type": "spill_or_shot",
+    "intensity": 1,
+    "target": "current",
+    "text": "What's the most you've ever spent on a single meal, and was it worth it?",
+    "shots": 1,
+    "tags": ["food", "money"]
+  },
+  {
+    "id": "warm-045",
+    "deck": "warm-up",
+    "type": "spill_or_shot",
+    "intensity": 1,
+    "target": "current",
+    "text": "What's something you pretend to understand but honestly have no idea about?",
+    "shots": 1,
+    "tags": ["honesty", "habits"]
+  },
+  {
+    "id": "warm-046",
+    "deck": "warm-up",
+    "type": "spill_or_shot",
+    "intensity": 1,
+    "target": "p1",
+    "text": "{p1}, which song would you sing at a wedding videoke, and who gets stuck with the harmony?",
+    "shots": 1,
+    "tags": ["videoke", "music"]
+  },
+  {
+    "id": "warm-047",
+    "deck": "warm-up",
+    "type": "spill_or_shot",
+    "intensity": 1,
+    "target": "current",
+    "text": "What's your most irrational fear, and does it make sense to anyone but you?",
+    "shots": 1,
+    "tags": ["fears"]
+  },
+  {
+    "id": "warm-048",
+    "deck": "warm-up",
+    "type": "spill_or_shot",
+    "intensity": 1,
+    "target": "current",
+    "text": "What's the last thing you laughed at so hard that it embarrassed you in public?",
+    "shots": 1,
+    "tags": ["embarrassing", "laughing"]
+  },
+  {
+    "id": "warm-049",
+    "deck": "warm-up",
+    "type": "everyone_who",
+    "intensity": 1,
+    "target": "group",
+    "text": "Everyone who has eaten rice for breakfast, lunch, and dinner on the same day, drink.",
+    "shots": 1,
+    "tags": ["food", "rice"]
+  },
+  {
+    "id": "warm-050",
+    "deck": "warm-up",
+    "type": "everyone_who",
+    "intensity": 1,
+    "target": "group",
+    "text": "Everyone who has hidden the good snacks from their siblings or cousins, drink.",
+    "shots": 1,
+    "tags": ["food", "family"]
+  },
+  {
+    "id": "warm-051",
+    "deck": "warm-up",
+    "type": "everyone_who",
+    "intensity": 1,
+    "target": "group",
+    "text": "Everyone who has sung along in a car and stopped the moment someone looked over, drink.",
+    "shots": 1,
+    "tags": ["music", "embarrassing"]
+  },
+  {
+    "id": "warm-052",
+    "deck": "warm-up",
+    "type": "everyone_who",
+    "intensity": 1,
+    "target": "group",
+    "text": "Everyone who has said 'let's hang out soon' with zero plans to, drink.",
+    "shots": 1,
+    "tags": ["plans", "habits"]
+  },
+  {
+    "id": "warm-053",
+    "deck": "warm-up",
+    "type": "everyone_who",
+    "intensity": 1,
+    "target": "group",
+    "text": "Everyone who can still recite their childhood landline number from memory, drink.",
+    "shots": 1,
+    "tags": ["childhood"]
+  },
+  {
+    "id": "warm-054",
+    "deck": "warm-up",
+    "type": "most_likely",
+    "intensity": 1,
+    "target": "group",
+    "text": "Most likely to order too much food and then ask for a take-out container. Point on 3.",
+    "shots": 1,
+    "tags": ["food"]
+  },
+  {
+    "id": "warm-055",
+    "deck": "warm-up",
+    "type": "most_likely",
+    "intensity": 1,
+    "target": "group",
+    "text": "Most likely to argue about who gets the crispy skin of the lechon. Point on 3.",
+    "shots": 1,
+    "tags": ["food", "lechon"]
+  },
+  {
+    "id": "warm-056",
+    "deck": "warm-up",
+    "type": "most_likely",
+    "intensity": 1,
+    "target": "group",
+    "text": "Most likely to get lost even with a map app open. Point on 3.",
+    "shots": 1,
+    "tags": ["travel"]
+  },
+  {
+    "id": "warm-057",
+    "deck": "warm-up",
+    "type": "hot_seat",
+    "intensity": 1,
+    "target": "p1",
+    "text": "Hot Seat: {p1} answers three questions from the group about their first job or first allowance. One shot skips one.",
+    "shots": 1,
+    "tags": ["hot-seat", "money"]
+  },
+  {
+    "id": "warm-058",
+    "deck": "warm-up",
+    "type": "water_break",
+    "intensity": 1,
+    "target": "group",
+    "text": "Water Break. Everyone drinks water. Pulutan tastes better when the table is hydrated.",
+    "shots": 1,
+    "tags": ["pacing"]
+  },
+  {
+    "id": "warm-059",
+    "deck": "warm-up",
+    "type": "water_break",
+    "intensity": 1,
+    "target": "group",
+    "text": "Water Break. Everyone drinks water before anyone sings the next videoke song.",
+    "shots": 1,
+    "tags": ["pacing", "videoke"]
+  },
+  {
+    "id": "warm-060",
+    "deck": "warm-up",
+    "type": "water_break",
+    "intensity": 1,
+    "target": "group",
+    "text": "Water Break. Everyone drinks water. First to finish gets bragging rights until the next card.",
+    "shots": 1,
+    "tags": ["pacing"]
   }
 ]
