@@ -207,6 +207,31 @@ Exit criteria: every Must requirement passes its acceptance criterion (see the
 traceability table), engine unit tests pass, Lighthouse mobile scores 90+ on the
 preview, and the JS budget is met.
 
+### Phase 3 result (2026-10-18): in review
+
+| Exit criterion | Result |
+| --- | --- |
+| Every Must requirement | Built. Each one is checked by unit tests and/or the browser smoke test (see the traceability table). |
+| Unit tests | 41 pass (`npm test`): 27 engine, 14 store and persistence. Two deliberate rule mutations were each caught. |
+| End-to-end | `npm run smoke` plays a full night in headless Chromium at 360×800 with the production CSP. It covers setup through recap, including refresh restore, Undo, swipe-to-flip, and the adult opt-in. There are no console errors, and it passed on repeated runs. |
+| JS budget (D-18) | 102.2 KB gzipped on first load, out of 150 KB. Animation features (30.8 KB) and info pages (1.4 KB) load lazily. |
+| Lighthouse mobile | 97 Performance · 100 Accessibility · 100 Best Practices · 100 SEO, on a local `vite preview` with simulated mobile throttling. FCP 2.0 s, TBT 0 ms, CLS 0.003. |
+| Vercel preview URL | **Not done.** It needs Rhon to connect the repo to a Vercel account. The settings are ready in `vercel.json`. |
+| Budget Android smoke test | **Not done.** It needs a real phone and moves to Phase 4. |
+
+**Rules the build settled.** None of these change a decision; they fill gaps the
+decisions didn't cover.
+
+- **Water Breaks and turns:** a Water Break doesn't use up a turn. Whoever is holding the
+  phone taps Done, and the turn order carries on.
+- **Skips:** a skipped card is replaced face up, because the same reader is still holding
+  the phone.
+- **Undo after a Water Break:** it goes back past the Water Break to the last real card.
+- **Changing decks mid-night:** this keeps players and scores and rebuilds the deck. Undo
+  history is cleared.
+- **Help links:** the scoreboard sheet links to How to Play, Drink Responsibly, and Terms,
+  so they can be reached mid-game. The mocks didn't show these links.
+
 ---
 
 ## Phase 4 — Playtest (1 week)
@@ -287,33 +312,33 @@ Each release gets its own plan and gate when it's picked up.
 
 ## Requirements traceability
 
-| ID | Requirement | Priority | Built in | Notes |
-| --- | --- | --- | --- | --- |
-| F1 | Age gate | Must | 3.2 | 30-day memory |
-| F2 | Player setup | Must | 3.2 | 2–12, no duplicates |
-| F3 | Tanggero | Must | 3.3 | D-13 for counting |
-| F4 | Deck select | Must | 3.2 | D-14 for the opt-in trigger |
-| F5 | Intensity filter | Must | 3.2 (UI), 3.3 (engine) | D-15 for the minimum pool |
-| F6 | Turn order | Must | 3.3 | |
-| F7 | Card draw | Must | 3.3 | Motion spec from Phase 2 |
-| F8 | Name substitution | Must | 3.3 | D-08 |
-| F9 | Shuffle | Must | 3.3 | |
-| F10 | Spill / Shot | Must | 3.3 | D-09, D-10, D-11 |
-| F11 | Skip | Must | 3.3 | D-13 |
-| F12 | Pacing | Must | 3.4 | D-12 |
-| F13 | Scoreboard | Must | 3.4 | |
-| F14 | Recap | Should | 3.4 | D-19 |
-| F15 | Persistence | Must | 3.1 (store), 3.4 (restore check) | |
-| F16 | Undo | Should | 3.4 | |
-| F17 | Custom cards | v1.1 | 6 | Out of MVP |
+| ID | Requirement | Priority | Built in | Notes | Verified by (Phase 3) |
+| --- | --- | --- | --- | --- | --- |
+| F1 | Age gate | Must | 3.2 | 30-day memory | Store tests (30-day expiry, under-18 not saved), smoke |
+| F2 | Player setup | Must | 3.2 | 2–12, no duplicates | Store tests (limits, duplicates, rename), smoke |
+| F3 | Tanggero | Must | 3.3 | D-13 for counting | Engine test (rotation every 10 completed cards, skips ignored), smoke (badge) |
+| F4 | Deck select | Must | 3.2 | D-14 for the opt-in trigger | Store test, smoke (No Filter confirmation) |
+| F5 | Intensity filter | Must | 3.2 (UI), 3.3 (engine) | D-15 for the minimum pool | Engine test (never above filter), smoke (Start disabled under 10) |
+| F6 | Turn order | Must | 3.3 | | Engine test, smoke |
+| F7 | Card draw | Must | 3.3 | Motion spec from Phase 2 | Smoke (tap and swipe flip). 320 ms flip in tokens; not timed on a real device |
+| F8 | Name substitution | Must | 3.3 | D-08 | Engine tests ({p1} ≠ {p2} ≠ reader over 200 seeds, resolved once), smoke (same text after reload) |
+| F9 | Shuffle | Must | 3.3 | | Engine test (every card once, then reshuffle) |
+| F10 | Spill / Shot | Must | 3.3 | D-09, D-10, D-11 | Engine tests for every card type, smoke |
+| F11 | Skip | Must | 3.3 | D-13 | Engine test, smoke |
+| F12 | Pacing | Must | 3.4 | D-12 | Engine tests (12–15 cadence, soft cap once, re-fires after Undo), smoke |
+| F13 | Scoreboard | Must | 3.4 | | Smoke |
+| F14 | Recap | Should | 3.4 | D-19 | Engine tests (awards, ties, hidden when empty), smoke |
+| F15 | Persistence | Must | 3.1 (store), 3.4 (restore check) | | Store tests (round trip, stale cards, corrupt data, old versions), smoke (reload mid-game) |
+| F16 | Undo | Should | 3.4 | | Engine tests (full restore, across a Water Break), smoke |
+| F17 | Custom cards | v1.1 | 6 | Out of MVP | Not built |
 
-| Quality bar (PRD §11) | Planned in | Verified in |
-| --- | --- | --- |
-| Lighthouse mobile 90+ | 3.1 | 3.5, 5 |
-| WCAG AA contrast | 2 | 5 |
-| JS bundle under 150 KB (D-18) | 3.1 | 3.5, 5 |
-| Playable on 3G after first load | 3.1 | 5 |
-| Smooth on budget Android | 2 (motion spec) | 3.5, 4 |
+| Quality bar (PRD §11) | Planned in | Verified in | Phase 3 result |
+| --- | --- | --- | --- |
+| Lighthouse mobile 90+ | 3.1 | 3.5, 5 | 97 / 100 / 100 / 100 locally; re-run on the live site in Phase 5 |
+| WCAG AA contrast | 2 | 5 | 46 color pairs pass (`npm run check:contrast`). Lighthouse a11y 100. Manual screen-reader pass still due in Phase 5 |
+| JS bundle under 150 KB (D-18) | 3.1 | 3.5, 5 | 102.2 KB gzipped, enforced in CI |
+| Playable on 3G after first load | 3.1 | 5 | Not yet tested |
+| Smooth on budget Android | 2 (motion spec) | 3.5, 4 | Not yet tested on a device |
 
 ## Risk coverage (PRD §15)
 

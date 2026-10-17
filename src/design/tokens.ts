@@ -55,8 +55,8 @@ export const deckAccent: Record<DeckId, string> = {
 export const font = {
   /** Chunky display face: titles, buttons, labels, wordmark. SIL OFL. */
   display: "Anton, Impact, 'Arial Narrow Bold', sans-serif",
-  /** Clean sans: UI text and card questions. SIL OFL. */
-  sans: "Inter, 'Helvetica Neue', Arial, sans-serif",
+  /** Clean sans: UI text and card questions. SIL OFL. ("Inter Variable" is the self-hosted file.) */
+  sans: "'Inter Variable', Inter, 'Helvetica Neue', Arial, sans-serif",
 } as const;
 
 /** Type scale in px. Nothing essential goes below `small`. */

@@ -5,9 +5,9 @@ implements [PRD §10](./PRD.md#10-ux-and-design) (v0.3).
 
 | | |
 | --- | --- |
-| **Status** | In review, waiting on Rhon's sign-off |
-| **Format** | SVG mocks in the repo instead of Figma (D-20, proposed) |
-| **Still open** | D-17: whether Recap gets a Share button. Social handles also need a manual check before the brand is final. |
+| **Status** | Approved by Rhon (Phase 2 gate, 2026-10-17) |
+| **Format** | SVG mocks in the repo instead of Figma (D-20, accepted) |
+| **Still open** | D-17 (Share button), deferred to Phase 5: the MVP Recap ships without one. Social handles still need a manual check before the brand is final. |
 
 Everything visual comes from one file, [`src/design/tokens.ts`](../src/design/tokens.ts),
 which covers color, type, spacing, card-text sizing, and motion. The mocks are generated
@@ -242,6 +242,7 @@ These go a step beyond what the PRD spells out.
 - [x] Card text sizing rules, checked against the real cards
 - [x] Motion spec with a reduced-motion fallback
 - [x] WCAG AA contrast check passes (46 pairs)
-- [ ] D-17 decided (the Share button on Recap stays a placeholder until then)
-- [ ] D-20 approved (SVG mocks instead of Figma)
-- [ ] Rhon approves the designs and the §7 design calls
+- [x] D-20 approved (SVG mocks instead of Figma)
+- [x] Rhon approved the designs and the §7 design calls ("approve all", 2026-10-17)
+- [ ] D-17 is still open and now deferred to Phase 5. The MVP Recap has no Share button;
+      the dashed button in mock 06 is a placeholder only.

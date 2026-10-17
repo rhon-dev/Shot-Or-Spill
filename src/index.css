@@ -1,0 +1,52 @@
+@import "tailwindcss";
+@config "../tailwind.config.ts";
+
+/*
+ * Use @apply (not var(--…)) for theme values here: Tailwind v4 only emits a
+ * theme variable when a utility uses it.
+ */
+@layer base {
+  html {
+    @apply bg-bg font-sans text-ink;
+    -webkit-tap-highlight-color: transparent;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    min-height: 100dvh;
+    overscroll-behavior-y: none;
+  }
+
+  /* One visible focus style everywhere (DESIGN.md §6): 2px white ring, 2px out. */
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-focus outline-solid;
+  }
+
+  /* Headings and card faces get focus programmatically for screen readers; they aren't controls. */
+  [tabindex="-1"]:focus {
+    outline: none;
+  }
+
+  button {
+    cursor: pointer;
+    touch-action: manipulation;
+  }
+
+  button:disabled {
+    cursor: not-allowed;
+  }
+}
+
+@layer utilities {
+  .neon-glow {
+    filter: drop-shadow(0 0 6px currentColor) drop-shadow(0 0 14px currentColor);
+  }
+
+  .text-label {
+    @apply font-display text-[15px] leading-[1.2] tracking-[1.2px] uppercase;
+  }
+
+  .pad-safe-bottom {
+    padding-bottom: max(20px, env(safe-area-inset-bottom));
+  }
+}

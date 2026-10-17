@@ -1,9 +1,19 @@
-# Technical Architecture (planned)
+# Technical Architecture
 
-Status: planned for Phase 3. Implements [PRD §11](./PRD.md#11-technical-approach) (v0.3).
-Items tagged D-xx refer to decisions in [DECISIONS.md](./DECISIONS.md). All of them are
-accepted except D-17, which is deferred. The app code doesn't exist yet. The content
-schema and validator are built in Phase 1.
+Status: built in Phase 3, which is now in review. Implements
+[PRD §11](./PRD.md#11-technical-approach) (v0.3). Items tagged D-xx refer to decisions in
+[DECISIONS.md](./DECISIONS.md). All of them are accepted except D-17, which is deferred.
+
+The build follows this plan. A few details differ:
+
+- **Store key:** the localStorage key is `shot-or-spill`, and the version (1) is saved
+  with the data.
+- **Info pages:** they're hash routes (`#about`, `#drink-responsibly`, `#terms`), so the
+  phone's back button closes them.
+- **Animation loading:** Motion's animation features load after first paint, which
+  keeps the first-load JS at 102 KB.
+- **Turn rules:** the PHASES.md "Phase 3 result" section lists the turn rules the build
+  settled.
 
 ## Stack
 
@@ -11,10 +21,10 @@ schema and validator are built in Phase 1.
 | --- | --- | --- |
 | Framework | Vite + React + TypeScript | D-06; static build, no server |
 | Styling | Tailwind CSS | Tokens from Phase 2 |
-| Animation | Framer Motion | Load only the features in use, to stay in budget (D-18) |
+| Animation | Motion (formerly Framer Motion) | `LazyMotion` with features loaded async, to stay in budget (D-18) |
 | State | Zustand + `persist` (localStorage) | Versioned, with migrations |
 | Content | One JSON file per deck, validated with Zod | Validator runs before every build |
-| Tests | Vitest | Engine and store unit tests |
+| Tests | Vitest, Playwright Core | Engine and store unit tests; browser smoke test with a local Chromium |
 | Hosting | Vercel (static) | Preview deploys per branch |
 | Analytics | Plausible or Umami | D-16; anonymous events only |
 | v2 backend | Supabase Realtime | Rooms only; nothing in v1 |
@@ -36,37 +46,44 @@ The Game screen also opens the Scoreboard, the soft-cap warning, the reshuffle p
 and the per-type pickers (D-09, D-10, D-11). About, Drink Responsibly, and Terms can be
 reached from any screen.
 
-## Planned folder structure
+## Folder structure
 
 ```text
 shot-or-spill/
+├─ .github/workflows/ci.yml  # check + build + JS budget on every push
 ├─ docs/                     # PRD, phases, architecture, decisions, content guide, design spec
 │  └─ design/                # generated SVG brand marks and screen mocks (Phase 2)
-├─ public/fonts/             # self-hosted display + UI fonts
+├─ public/                   # favicon, robots.txt
 ├─ scripts/
 │  ├─ validate-cards.ts      # Zod content validation, runs before build
 │  ├─ check-contrast.ts      # WCAG AA check of the design tokens
+│  ├─ check-size.ts          # first-load JS budget (D-18)
+│  ├─ smoke.ts               # end-to-end run in headless Chromium with the production CSP
 │  └─ render-mocks.ts        # regenerates docs/design from tokens + real cards
 ├─ src/
 │  ├─ content/
 │  │  ├─ meta.ts             # deck metadata + Card type, no dependencies (app-safe)
 │  │  ├─ schema.ts           # Zod schema, build-time only (keeps Zod out of the bundle)
+│  │  ├─ cards.ts            # bundles the deck JSON for the app
 │  │  └─ decks/*.json        # one file per deck
 │  ├─ design/
 │  │  └─ tokens.ts           # colors, type, spacing, motion; Tailwind imports these
 │  ├─ game/
-│  │  ├─ engine.ts           # pure rules: pool, shuffle, turns, pacing, names
+│  │  ├─ engine.ts           # pure rules: pool, shuffle, turns, pacing, names, awards
 │  │  ├─ engine.test.ts
-│  │  ├─ store.ts            # Zustand store + persistence
+│  │  ├─ store.ts            # Zustand store + persistence, sanitize on load
+│  │  ├─ store.test.ts
+│  │  ├─ useApp.ts           # the app's store instance + reduced-motion hook
 │  │  └─ types.ts
-│  ├─ screens/               # AgeGate, Players, Decks, HowToPlay, Game, Recap
-│  ├─ components/            # Card, ChoiceButtons, Scoreboard, pickers, sheets
-│  ├─ pages/                 # About, DrinkResponsibly, Terms
-│  ├─ lib/analytics.ts       # anonymous event wrapper (D-16)
+│  ├─ screens/               # Setup (age gate, players, decks, how to play), Game, Recap
+│  ├─ components/            # Card, controls (ui), dialogs and sheets (overlays), art
+│  ├─ pages/Info.tsx         # About, Drink Responsibly, Terms (lazy)
+│  ├─ lib/                   # analytics wrapper (D-16), lazy Motion features
 │  ├─ App.tsx
-│  └─ main.tsx
+│  └─ main.tsx               # fonts, styles, root
 ├─ index.html
-├─ vercel.json               # security headers
+├─ tailwind.config.ts        # theme from tokens, loaded via @config
+├─ vercel.json               # build settings + security headers
 └─ package.json
 ```
 
@@ -106,7 +123,9 @@ The build fails if any card breaks one of these rules:
 
 ## Game state
 
-Saved to localStorage under a versioned key (for example, `shot-or-spill:v1`):
+Saved to localStorage under the key `shot-or-spill`, with the store version saved
+alongside it. The table is the original plan; the fields as built are listed in `AppData`
+and `Session` in `src/game/store.ts` and `src/game/types.ts`.
 
 | Field | Purpose |
 | --- | --- |
@@ -175,8 +194,9 @@ Targets come from the PRD §11 quality bar.
 - Animate only `transform` and `opacity`. The flip stays at 400 ms or less (F7).
 - Respect `prefers-reduced-motion`, and add an in-app toggle. With reduced motion on, a
   crossfade replaces the flip.
-- Self-host fonts, subset to Latin, with `font-display: swap`. The page makes no
-  third-party requests on load.
+- Self-host fonts with `font-display: swap`. Anton is Latin only. Inter ships several
+  `unicode-range` subsets, so browsers download only the Latin file for English text. The
+  page makes no third-party requests on load.
 - Bundle the card JSON. About 310 cards is small, so there's no fetch.
 - Split info pages out of the first load. A CI size check enforces the JS budget (D-18).
 - Test on a budget Android phone in Phase 3.5 and Phase 4.

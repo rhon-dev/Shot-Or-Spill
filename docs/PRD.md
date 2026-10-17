@@ -350,7 +350,7 @@ anonymous events (card drawn, spill or shot, skip) to find weak cards.
 | Spill rate | 60%+ (people want to answer) |
 | Skip rate per card | < 15% (higher means the card gets rewritten) |
 | 14-day return rate | 25%+ |
-| Organic shares (link copies) | 1 in 5 sessions (needs a share action; pending D-17) |
+| Organic shares (link copies) | 1 in 5 sessions (needs a share action, which isn't in the MVP; D-17 deferred to Phase 5) |
 
 ## 14. Milestones
 
