@@ -46,7 +46,8 @@ shot-or-spill/
 │  └─ validate-cards.ts      # Zod content validation, runs before build
 ├─ src/
 │  ├─ content/
-│  │  ├─ schema.ts           # card schema + deck metadata
+│  │  ├─ meta.ts             # deck metadata + Card type, no dependencies (app-safe)
+│  │  ├─ schema.ts           # Zod schema, build-time only (keeps Zod out of the bundle)
 │  │  └─ decks/*.json        # one file per deck
 │  ├─ game/
 │  │  ├─ engine.ts           # pure rules: pool, shuffle, turns, pacing, names

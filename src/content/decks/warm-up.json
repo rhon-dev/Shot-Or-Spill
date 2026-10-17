@@ -1,0 +1,292 @@
+[
+  {
+    "id": "warm-001",
+    "deck": "warm-up",
+    "type": "spill_or_shot",
+    "intensity": 1,
+    "target": "current",
+    "text": "What's your most embarrassing videoke song choice, and did you finish it?",
+    "shots": 1,
+    "tags": ["videoke", "embarrassing"]
+  },
+  {
+    "id": "warm-002",
+    "deck": "warm-up",
+    "type": "spill_or_shot",
+    "intensity": 1,
+    "target": "current",
+    "text": "What pulutan would you defend to the end, even if everyone at this table hates it?",
+    "shots": 1,
+    "tags": ["pulutan", "food"]
+  },
+  {
+    "id": "warm-003",
+    "deck": "warm-up",
+    "type": "spill_or_shot",
+    "intensity": 1,
+    "target": "current",
+    "text": "What's a Filipino habit you didn't know was Filipino until someone from abroad pointed it out?",
+    "shots": 1,
+    "tags": ["habits", "culture"]
+  },
+  {
+    "id": "warm-004",
+    "deck": "warm-up",
+    "type": "spill_or_shot",
+    "intensity": 1,
+    "target": "current",
+    "text": "What did you collect as a kid that you'd be embarrassed to admit you still keep?",
+    "shots": 1,
+    "tags": ["childhood"]
+  },
+  {
+    "id": "warm-005",
+    "deck": "warm-up",
+    "type": "spill_or_shot",
+    "intensity": 1,
+    "target": "current",
+    "text": "What's the strangest merienda combination you've eaten and secretly loved?",
+    "shots": 1,
+    "tags": ["food", "merienda"]
+  },
+  {
+    "id": "warm-006",
+    "deck": "warm-up",
+    "type": "spill_or_shot",
+    "intensity": 1,
+    "target": "p1",
+    "text": "{p1}, what's your go-to excuse for being late, and how many times has this barkada heard it?",
+    "shots": 1,
+    "tags": ["late", "barkada"]
+  },
+  {
+    "id": "warm-007",
+    "deck": "warm-up",
+    "type": "spill_or_shot",
+    "intensity": 1,
+    "target": "current",
+    "text": "What childhood game were you weirdly competitive at, and are you still a sore loser about it?",
+    "shots": 1,
+    "tags": ["childhood", "games"]
+  },
+  {
+    "id": "warm-008",
+    "deck": "warm-up",
+    "type": "spill_or_shot",
+    "intensity": 1,
+    "target": "current",
+    "text": "Which teleserye plot twist made you actually yell at the TV?",
+    "shots": 1,
+    "tags": ["teleserye", "tv"]
+  },
+  {
+    "id": "warm-009",
+    "deck": "warm-up",
+    "type": "spill_or_shot",
+    "intensity": 1,
+    "target": "current",
+    "text": "What's the weirdest thing a relative ever packed for you in a balikbayan box?",
+    "shots": 1,
+    "tags": ["balikbayan", "family"]
+  },
+  {
+    "id": "warm-010",
+    "deck": "warm-up",
+    "type": "spill_or_shot",
+    "intensity": 1,
+    "target": "tanggero",
+    "text": "Tanggero {tanggero} picks someone to answer: what's the most cups of rice you've eaten in one sitting?",
+    "shots": 1,
+    "tags": ["food", "rice"]
+  },
+  {
+    "id": "warm-011",
+    "deck": "warm-up",
+    "type": "spill_or_shot",
+    "intensity": 1,
+    "target": "current",
+    "text": "What dish did your lola make that no restaurant has ever matched?",
+    "shots": 1,
+    "tags": ["food", "family"]
+  },
+  {
+    "id": "warm-012",
+    "deck": "warm-up",
+    "type": "spill_or_shot",
+    "intensity": 1,
+    "target": "current",
+    "text": "What's your most-used excuse for leaving a party early, and does anyone still believe it?",
+    "shots": 1,
+    "tags": ["excuses", "party"]
+  },
+  {
+    "id": "warm-013",
+    "deck": "warm-up",
+    "type": "spill_or_shot",
+    "intensity": 1,
+    "target": "current",
+    "text": "What's the longest you've ever lined up for food, and was it worth it?",
+    "shots": 1,
+    "tags": ["food"]
+  },
+  {
+    "id": "warm-014",
+    "deck": "warm-up",
+    "type": "spill_or_shot",
+    "intensity": 1,
+    "target": "current",
+    "text": "What song do you know every word to but would never admit to liking in public?",
+    "shots": 1,
+    "tags": ["music", "embarrassing"]
+  },
+  {
+    "id": "warm-015",
+    "deck": "warm-up",
+    "type": "spill_or_shot",
+    "intensity": 1,
+    "target": "p1",
+    "text": "{p1}, if {p2} had to cook for this whole table tonight, what would we end up eating?",
+    "shots": 1,
+    "tags": ["food", "barkada"]
+  },
+  {
+    "id": "warm-016",
+    "deck": "warm-up",
+    "type": "spill_or_shot",
+    "intensity": 1,
+    "target": "current",
+    "text": "What's the most embarrassing thing that's ever happened to you on a jeepney ride?",
+    "shots": 1,
+    "tags": ["jeepney", "embarrassing"]
+  },
+  {
+    "id": "warm-017",
+    "deck": "warm-up",
+    "type": "spill_or_shot",
+    "intensity": 1,
+    "target": "current",
+    "text": "What's the worst haircut you've ever had, and who did you blame for it?",
+    "shots": 1,
+    "tags": ["childhood", "embarrassing"]
+  },
+  {
+    "id": "warm-018",
+    "deck": "warm-up",
+    "type": "everyone_who",
+    "intensity": 1,
+    "target": "group",
+    "text": "Everyone who has secretly eaten the last piece of pulutan and blamed someone else, drink.",
+    "shots": 1,
+    "tags": ["pulutan", "food"]
+  },
+  {
+    "id": "warm-019",
+    "deck": "warm-up",
+    "type": "everyone_who",
+    "intensity": 1,
+    "target": "group",
+    "text": "Everyone who has pretended to be asleep to get out of cleaning up after a party, drink.",
+    "shots": 1,
+    "tags": ["party", "habits"]
+  },
+  {
+    "id": "warm-020",
+    "deck": "warm-up",
+    "type": "everyone_who",
+    "intensity": 1,
+    "target": "group",
+    "text": "Everyone who has sung the wrong lyrics at videoke with full confidence, drink.",
+    "shots": 1,
+    "tags": ["videoke"]
+  },
+  {
+    "id": "warm-021",
+    "deck": "warm-up",
+    "type": "everyone_who",
+    "intensity": 1,
+    "target": "group",
+    "text": "Everyone who has said they were on the way while still at home, drink.",
+    "shots": 1,
+    "tags": ["late", "habits"]
+  },
+  {
+    "id": "warm-022",
+    "deck": "warm-up",
+    "type": "everyone_who",
+    "intensity": 1,
+    "target": "group",
+    "text": "Everyone who keeps a plastic bag full of plastic bags at home, drink.",
+    "shots": 1,
+    "tags": ["home", "habits"]
+  },
+  {
+    "id": "warm-023",
+    "deck": "warm-up",
+    "type": "everyone_who",
+    "intensity": 1,
+    "target": "group",
+    "text": "Everyone who has opened an ice cream tub in the freezer and found leftover ulam inside, drink.",
+    "shots": 1,
+    "tags": ["home", "food"]
+  },
+  {
+    "id": "warm-024",
+    "deck": "warm-up",
+    "type": "most_likely",
+    "intensity": 1,
+    "target": "group",
+    "text": "Most likely to fall asleep first at an inuman. Point on 3.",
+    "shots": 1,
+    "tags": ["inuman"]
+  },
+  {
+    "id": "warm-025",
+    "deck": "warm-up",
+    "type": "most_likely",
+    "intensity": 1,
+    "target": "group",
+    "text": "Most likely to grab the videoke mic and refuse to give it back. Point on 3.",
+    "shots": 1,
+    "tags": ["videoke"]
+  },
+  {
+    "id": "warm-026",
+    "deck": "warm-up",
+    "type": "most_likely",
+    "intensity": 1,
+    "target": "group",
+    "text": "Most likely to bring their own containers to take party leftovers home. Point on 3.",
+    "shots": 1,
+    "tags": ["food", "party"]
+  },
+  {
+    "id": "warm-027",
+    "deck": "warm-up",
+    "type": "hot_seat",
+    "intensity": 1,
+    "target": "p1",
+    "text": "Hot Seat: {p1} answers three quick questions from the group about their childhood. One shot skips one.",
+    "shots": 1,
+    "tags": ["hot-seat", "childhood"]
+  },
+  {
+    "id": "warm-028",
+    "deck": "warm-up",
+    "type": "water_break",
+    "intensity": 1,
+    "target": "group",
+    "text": "Water Break. Everyone drinks a glass of water before the next card. The night is still young.",
+    "shots": 1,
+    "tags": ["pacing"]
+  },
+  {
+    "id": "warm-029",
+    "deck": "warm-up",
+    "type": "water_break",
+    "intensity": 1,
+    "target": "group",
+    "text": "Water Break. {tanggero} pours water for everyone this round, and everyone drinks it.",
+    "shots": 1,
+    "tags": ["pacing"]
+  }
+]

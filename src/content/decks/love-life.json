@@ -1,0 +1,342 @@
+[
+  {
+    "id": "love-001",
+    "deck": "love-life",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "Have you ever stayed in a situationship longer than a real relationship?",
+    "shots": 1,
+    "tags": ["situationship"]
+  },
+  {
+    "id": "love-002",
+    "deck": "love-life",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "p1",
+    "text": "{p1}, what's the most 'delulu' thing you've done for a crush?",
+    "shots": 1,
+    "tags": ["crush", "delulu"]
+  },
+  {
+    "id": "love-003",
+    "deck": "love-life",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "Have you ever gone back to an ex after swearing to the whole barkada you wouldn't?",
+    "shots": 1,
+    "tags": ["exes", "barkada"]
+  },
+  {
+    "id": "love-004",
+    "deck": "love-life",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "What's the longest talking stage you've had that the whole barkada was already shipping, and it still went nowhere?",
+    "shots": 1,
+    "tags": ["talking-stage"]
+  },
+  {
+    "id": "love-005",
+    "deck": "love-life",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "Have you ever ghosted someone? What was the real reason?",
+    "shots": 1,
+    "tags": ["ghosting"]
+  },
+  {
+    "id": "love-006",
+    "deck": "love-life",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "What red flag did you ignore even after your barkada warned you about it?",
+    "shots": 1,
+    "tags": ["red-flags"]
+  },
+  {
+    "id": "love-007",
+    "deck": "love-life",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "Have you ever kept going to Simbang Gabi mostly to see a crush?",
+    "shots": 1,
+    "tags": ["crush", "christmas"]
+  },
+  {
+    "id": "love-008",
+    "deck": "love-life",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "What's the pettiest reason you lost interest in someone, like how they ate or how they sang at videoke?",
+    "shots": 1,
+    "tags": ["dating", "petty"]
+  },
+  {
+    "id": "love-009",
+    "deck": "love-life",
+    "type": "spill_or_shot",
+    "intensity": 3,
+    "target": "current",
+    "text": "Have you ever been the third party in someone else's relationship, knowingly or not?",
+    "shots": 1,
+    "tags": ["cheating"]
+  },
+  {
+    "id": "love-010",
+    "deck": "love-life",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "tanggero",
+    "text": "The Tanggero picks someone to answer: who was your first real crush, and do they know?",
+    "shots": 1,
+    "tags": ["crush"]
+  },
+  {
+    "id": "love-011",
+    "deck": "love-life",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "What's something an ex did that you still compare every new person to?",
+    "shots": 1,
+    "tags": ["exes"]
+  },
+  {
+    "id": "love-012",
+    "deck": "love-life",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "What's the most embarrassing thing you've done to get an ex's attention after the breakup?",
+    "shots": 1,
+    "tags": ["exes", "embarrassing"]
+  },
+  {
+    "id": "love-013",
+    "deck": "love-life",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "Have you ever met someone's whole family before you were even official?",
+    "shots": 1,
+    "tags": ["family", "dating"]
+  },
+  {
+    "id": "love-014",
+    "deck": "love-life",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "What's the biggest lie you've told a date's parents to make a good first impression?",
+    "shots": 1,
+    "tags": ["lies", "family"]
+  },
+  {
+    "id": "love-015",
+    "deck": "love-life",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "p1",
+    "text": "{p1}, what would your ex say is your worst habit in a relationship?",
+    "shots": 1,
+    "tags": ["exes", "habits"]
+  },
+  {
+    "id": "love-016",
+    "deck": "love-life",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "Have you ever ended up liking someone mostly because the barkada kept teasing you two?",
+    "shots": 1,
+    "tags": ["crush", "barkada"]
+  },
+  {
+    "id": "love-017",
+    "deck": "love-life",
+    "type": "spill_or_shot",
+    "intensity": 3,
+    "target": "current",
+    "text": "Have you ever stayed in a relationship only because you were scared to be alone?",
+    "shots": 1,
+    "tags": ["relationship", "regret"]
+  },
+  {
+    "id": "love-018",
+    "deck": "love-life",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "p1",
+    "text": "{p1}, would {p2} be a green flag or a red flag as a partner? Explain.",
+    "shots": 1,
+    "tags": ["red-flags", "barkada"]
+  },
+  {
+    "id": "love-019",
+    "deck": "love-life",
+    "type": "spill_or_shot",
+    "intensity": 3,
+    "target": "current",
+    "text": "Have you ever cheated, or come very close to it? Spill or shot.",
+    "shots": 1,
+    "tags": ["cheating"]
+  },
+  {
+    "id": "love-020",
+    "deck": "love-life",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "What's the most you've spent on someone who wasn't even your partner, pasalubong and dates included?",
+    "shots": 1,
+    "tags": ["money", "crush"]
+  },
+  {
+    "id": "love-021",
+    "deck": "love-life",
+    "type": "everyone_who",
+    "intensity": 2,
+    "target": "group",
+    "text": "Everyone who has stalked an ex's new partner online, drink.",
+    "shots": 1,
+    "tags": ["exes", "stalking"]
+  },
+  {
+    "id": "love-022",
+    "deck": "love-life",
+    "type": "everyone_who",
+    "intensity": 2,
+    "target": "group",
+    "text": "Everyone who has been left on read by a crush and kept the conversation going anyway, drink.",
+    "shots": 1,
+    "tags": ["crush"]
+  },
+  {
+    "id": "love-023",
+    "deck": "love-life",
+    "type": "everyone_who",
+    "intensity": 2,
+    "target": "group",
+    "text": "Everyone who has agreed to 'just friends' while secretly hoping for more, drink.",
+    "shots": 1,
+    "tags": ["friend-zone"]
+  },
+  {
+    "id": "love-024",
+    "deck": "love-life",
+    "type": "everyone_who",
+    "intensity": 2,
+    "target": "group",
+    "text": "Everyone who has used 'my mom is looking for me' to escape a bad date, drink.",
+    "shots": 1,
+    "tags": ["dating"]
+  },
+  {
+    "id": "love-025",
+    "deck": "love-life",
+    "type": "everyone_who",
+    "intensity": 3,
+    "target": "group",
+    "text": "Everyone who has kissed someone they regretted the very next morning, drink.",
+    "shots": 1,
+    "tags": ["regret"]
+  },
+  {
+    "id": "love-026",
+    "deck": "love-life",
+    "type": "most_likely",
+    "intensity": 2,
+    "target": "group",
+    "text": "Most likely to drunk-text an ex after tonight's inuman. Point on 3.",
+    "shots": 1,
+    "tags": ["exes"]
+  },
+  {
+    "id": "love-027",
+    "deck": "love-life",
+    "type": "most_likely",
+    "intensity": 2,
+    "target": "group",
+    "text": "Most likely to bring a date to a family gathering by the second week. Point on 3.",
+    "shots": 1,
+    "tags": ["dating"]
+  },
+  {
+    "id": "love-028",
+    "deck": "love-life",
+    "type": "most_likely",
+    "intensity": 2,
+    "target": "group",
+    "text": "Most likely to get back with an ex once the ber months start. Point on 3.",
+    "shots": 1,
+    "tags": ["exes"]
+  },
+  {
+    "id": "love-029",
+    "deck": "love-life",
+    "type": "hot_seat",
+    "intensity": 2,
+    "target": "p1",
+    "text": "Hot Seat: {p1} answers three questions from the group about their current crush or partner. One shot skips one.",
+    "shots": 1,
+    "tags": ["hot-seat", "crush"]
+  },
+  {
+    "id": "love-030",
+    "deck": "love-life",
+    "type": "hot_seat",
+    "intensity": 2,
+    "target": "current",
+    "text": "Hot Seat: you take three questions from the group about your worst date ever. One shot skips one.",
+    "shots": 1,
+    "tags": ["hot-seat", "dating"]
+  },
+  {
+    "id": "love-031",
+    "deck": "love-life",
+    "type": "double_down",
+    "intensity": 3,
+    "target": "current",
+    "text": "What's the most embarrassing thing you've ever done out of jealousy? Spill, or take 2 shots.",
+    "shots": 2,
+    "tags": ["jealousy"]
+  },
+  {
+    "id": "love-032",
+    "deck": "love-life",
+    "type": "double_down",
+    "intensity": 3,
+    "target": "current",
+    "text": "Which ex would you take back if they asked tonight? Say the name, or take 2 shots.",
+    "shots": 2,
+    "tags": ["exes"]
+  },
+  {
+    "id": "love-033",
+    "deck": "love-life",
+    "type": "water_break",
+    "intensity": 1,
+    "target": "group",
+    "text": "Water Break. Everyone drinks water. Heartbreak hits harder when you're dehydrated.",
+    "shots": 1,
+    "tags": ["pacing"]
+  },
+  {
+    "id": "love-034",
+    "deck": "love-life",
+    "type": "water_break",
+    "intensity": 1,
+    "target": "group",
+    "text": "Water Break. Everyone drinks water before anyone gets sentimental about an ex.",
+    "shots": 1,
+    "tags": ["pacing"]
+  }
+]

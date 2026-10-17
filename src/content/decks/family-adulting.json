@@ -1,0 +1,242 @@
+[
+  {
+    "id": "family-001",
+    "deck": "family-adulting",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "What's the most awkward question a tita asked you at a family reunion, and how did you answer?",
+    "shots": 1,
+    "tags": ["tita", "reunion"]
+  },
+  {
+    "id": "family-002",
+    "deck": "family-adulting",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "Would you tell this group your actual monthly salary? Spill or shot.",
+    "shots": 1,
+    "tags": ["salary", "money"]
+  },
+  {
+    "id": "family-003",
+    "deck": "family-adulting",
+    "type": "spill_or_shot",
+    "intensity": 1,
+    "target": "current",
+    "text": "What career did your family plan for you, and how far did you end up from it?",
+    "shots": 1,
+    "tags": ["career", "family"]
+  },
+  {
+    "id": "family-004",
+    "deck": "family-adulting",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "What's something you bought that you still hide from your parents?",
+    "shots": 1,
+    "tags": ["money", "family"]
+  },
+  {
+    "id": "family-005",
+    "deck": "family-adulting",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "How much of your monthly pay goes to family? Spill the number or take a shot.",
+    "shots": 1,
+    "tags": ["money", "family"]
+  },
+  {
+    "id": "family-006",
+    "deck": "family-adulting",
+    "type": "spill_or_shot",
+    "intensity": 1,
+    "target": "current",
+    "text": "What's the weirdest pasalubong a relative has ever asked you to bring home?",
+    "shots": 1,
+    "tags": ["pasalubong", "family"]
+  },
+  {
+    "id": "family-007",
+    "deck": "family-adulting",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "p1",
+    "text": "{p1}, which relative would you least want to sit next to at Noche Buena, and why?",
+    "shots": 1,
+    "tags": ["christmas", "family"]
+  },
+  {
+    "id": "family-008",
+    "deck": "family-adulting",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "What's the biggest lie you've told your parents that they still believe?",
+    "shots": 1,
+    "tags": ["lies", "family"]
+  },
+  {
+    "id": "family-009",
+    "deck": "family-adulting",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "Have you ever hidden from a godchild at Christmas so you wouldn't have to give a gift?",
+    "shots": 1,
+    "tags": ["ninong", "christmas"]
+  },
+  {
+    "id": "family-010",
+    "deck": "family-adulting",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "What's the worst thing you've done at work that your boss never found out about?",
+    "shots": 1,
+    "tags": ["work"]
+  },
+  {
+    "id": "family-011",
+    "deck": "family-adulting",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "Which coworker would you never invite to an inuman, and why?",
+    "shots": 1,
+    "tags": ["work", "inuman"]
+  },
+  {
+    "id": "family-012",
+    "deck": "family-adulting",
+    "type": "spill_or_shot",
+    "intensity": 1,
+    "target": "current",
+    "text": "What adult skill did you fake until you finally figured it out?",
+    "shots": 1,
+    "tags": ["adulting"]
+  },
+  {
+    "id": "family-013",
+    "deck": "family-adulting",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "tanggero",
+    "text": "The Tanggero picks someone to answer: what's the most you've ever lent a relative, and did you get it back?",
+    "shots": 1,
+    "tags": ["utang", "family"]
+  },
+  {
+    "id": "family-014",
+    "deck": "family-adulting",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "Which family tradition will you quietly drop once you have your own household?",
+    "shots": 1,
+    "tags": ["traditions", "family"]
+  },
+  {
+    "id": "family-015",
+    "deck": "family-adulting",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "Have you ever called in sick to work just to recover from an inuman? Spill or shot.",
+    "shots": 1,
+    "tags": ["work", "inuman"]
+  },
+  {
+    "id": "family-016",
+    "deck": "family-adulting",
+    "type": "everyone_who",
+    "intensity": 1,
+    "target": "group",
+    "text": "Everyone who has left the family group chat on read for more than a week, drink.",
+    "shots": 1,
+    "tags": ["group-chat", "family"]
+  },
+  {
+    "id": "family-017",
+    "deck": "family-adulting",
+    "type": "everyone_who",
+    "intensity": 1,
+    "target": "group",
+    "text": "Everyone who has been asked 'when are you getting married?' at a family gathering this year, drink.",
+    "shots": 1,
+    "tags": ["tita", "family"]
+  },
+  {
+    "id": "family-018",
+    "deck": "family-adulting",
+    "type": "everyone_who",
+    "intensity": 2,
+    "target": "group",
+    "text": "Everyone who was already broke within three days of their last payday, drink.",
+    "shots": 1,
+    "tags": ["money"]
+  },
+  {
+    "id": "family-019",
+    "deck": "family-adulting",
+    "type": "most_likely",
+    "intensity": 1,
+    "target": "group",
+    "text": "Most likely to become the tita or tito who asks everyone about their love life. Point on 3.",
+    "shots": 1,
+    "tags": ["tita"]
+  },
+  {
+    "id": "family-020",
+    "deck": "family-adulting",
+    "type": "most_likely",
+    "intensity": 1,
+    "target": "group",
+    "text": "Most likely to quit their job dramatically and tell everyone about it. Point on 3.",
+    "shots": 1,
+    "tags": ["work"]
+  },
+  {
+    "id": "family-021",
+    "deck": "family-adulting",
+    "type": "hot_seat",
+    "intensity": 2,
+    "target": "p1",
+    "text": "Hot Seat: {p1} answers three questions from the group about money: salary, savings, and debts. One shot skips one.",
+    "shots": 1,
+    "tags": ["hot-seat", "money"]
+  },
+  {
+    "id": "family-022",
+    "deck": "family-adulting",
+    "type": "double_down",
+    "intensity": 2,
+    "target": "current",
+    "text": "What's the biggest money mistake you've hidden from your family? Spill, or take 2 shots.",
+    "shots": 2,
+    "tags": ["money", "family"]
+  },
+  {
+    "id": "family-023",
+    "deck": "family-adulting",
+    "type": "water_break",
+    "intensity": 1,
+    "target": "group",
+    "text": "Water Break. Everyone drinks water. Adulting is hard enough without a hangover tomorrow.",
+    "shots": 1,
+    "tags": ["pacing"]
+  },
+  {
+    "id": "family-024",
+    "deck": "family-adulting",
+    "type": "water_break",
+    "intensity": 1,
+    "target": "group",
+    "text": "Water Break. Everyone drinks water. Your lola would want you hydrated.",
+    "shots": 1,
+    "tags": ["pacing"]
+  }
+]

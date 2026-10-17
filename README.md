@@ -8,8 +8,8 @@ and the player answers honestly (spill) or takes a shot.
 
 It's a mobile-first web app with no install, no account, and no ads.
 
-> **Status:** Phase 0 is done (decisions locked, PRD v0.3). Phase 1 (Content v1) is in
-> progress. There's no app code yet.
+> **Status:** Phase 1 (Content v1) is written and waiting for owner review: 150 cards,
+> all passing validation. The app itself isn't built yet (Phase 3).
 
 Repo: [github.com/rhon-dev/Spill-Or-Shot](https://github.com/rhon-dev/Spill-Or-Shot)
 
@@ -21,13 +21,34 @@ Repo: [github.com/rhon-dev/Spill-Or-Shot](https://github.com/rhon-dev/Spill-Or-S
 | [docs/PHASES.md](docs/PHASES.md) | Phase-by-phase plan with gates, tasks, and requirement traceability |
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Planned technical design for the MVP build |
 | [docs/DECISIONS.md](docs/DECISIONS.md) | Phase 0 decisions log (D-01 to D-19) |
+| [docs/content-guide.md](docs/content-guide.md) | Rules for writing cards |
+| [docs/content-review.md](docs/content-review.md) | Review log for the current card batch, plus the table-read sheet |
+
+## Cards
+
+Cards live in `src/content/decks/`, one JSON file per deck. To validate them, run:
+
+```sh
+npm install
+npm run check   # typecheck + card validation
+```
+
+The validator checks every rule in the content guide it can check automatically:
+
+- schema, ids, and deck ceilings
+- placeholders and targets
+- shots
+- duplicate text
+- Tagalog text and alcohol brand names
+
+It prints a deck and type-mix report, and the run fails if any card breaks a rule.
 
 ## Roadmap
 
 | Phase | Output | Time | Status |
 | --- | --- | --- | --- |
 | 0. Lock decisions | Open questions and PRD gaps resolved, PRD v0.3 | 2 days | Done |
-| 1. Content v1 | Writing guide + 150 validated cards | 1 week | In progress |
+| 1. Content v1 | Writing guide + 150 validated cards | 1 week | In review |
 | 2. Design | Brand, card back, 6 key screens in Figma | 1 week | Not started |
 | 3. Build MVP | Setup, game loop, counters, recap | 2 weeks | Not started |
 | 4. Playtest | 4–5 real inuman sessions, reach 300+ cards | 1 week | Not started |
@@ -53,7 +74,8 @@ alcohol brand partnerships, and explicit sexual content. The full list is in
 
 Vite + React + TypeScript, Tailwind CSS, Framer Motion, Zustand persisted to
 localStorage, Zod-validated JSON content, and Vercel hosting. Details are in
-[ARCHITECTURE.md](docs/ARCHITECTURE.md).
+[ARCHITECTURE.md](docs/ARCHITECTURE.md). Phase 1 only uses TypeScript, Zod, and tsx for
+the card validator.
 
 ## Drink responsibly
 

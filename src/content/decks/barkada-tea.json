@@ -1,0 +1,342 @@
+[
+  {
+    "id": "barkada-001",
+    "deck": "barkada-tea",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "Who in this group would you NOT trust to keep a secret? Say it or take a shot.",
+    "shots": 1,
+    "tags": ["secrets", "trust"]
+  },
+  {
+    "id": "barkada-002",
+    "deck": "barkada-tea",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "What's something you told only one person in this barkada and never told the rest?",
+    "shots": 1,
+    "tags": ["secrets"]
+  },
+  {
+    "id": "barkada-003",
+    "deck": "barkada-tea",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "Who here did you not like when you first met, and what changed your mind?",
+    "shots": 1,
+    "tags": ["first-impressions"]
+  },
+  {
+    "id": "barkada-004",
+    "deck": "barkada-tea",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "p1",
+    "text": "{p1}, if you got arrested tonight, who here would bail you out first, and who would just laugh?",
+    "shots": 1,
+    "tags": ["trust", "hypothetical"]
+  },
+  {
+    "id": "barkada-005",
+    "deck": "barkada-tea",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "What's the pettiest reason you've ever been annoyed at someone at this table?",
+    "shots": 1,
+    "tags": ["petty"]
+  },
+  {
+    "id": "barkada-006",
+    "deck": "barkada-tea",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "Have you ever had a crush on someone in this barkada? You don't have to say who.",
+    "shots": 1,
+    "tags": ["crush", "barkada"]
+  },
+  {
+    "id": "barkada-007",
+    "deck": "barkada-tea",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "What's the biggest utang someone in this group owes you, and do you think you'll ever see it again?",
+    "shots": 1,
+    "tags": ["utang", "money"]
+  },
+  {
+    "id": "barkada-008",
+    "deck": "barkada-tea",
+    "type": "spill_or_shot",
+    "intensity": 1,
+    "target": "current",
+    "text": "Which barkada trip or night out do you still think about the most, and why?",
+    "shots": 1,
+    "tags": ["memories"]
+  },
+  {
+    "id": "barkada-009",
+    "deck": "barkada-tea",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "What's a message you sent to the group chat that you still regret?",
+    "shots": 1,
+    "tags": ["group-chat", "regret"]
+  },
+  {
+    "id": "barkada-010",
+    "deck": "barkada-tea",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "tanggero",
+    "text": "The Tanggero picks someone to answer: who in this group gives the worst advice with the most confidence?",
+    "shots": 1,
+    "tags": ["advice"]
+  },
+  {
+    "id": "barkada-011",
+    "deck": "barkada-tea",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "Have you ever made up an excuse to skip a barkada hangout? What was the real reason?",
+    "shots": 1,
+    "tags": ["excuses"]
+  },
+  {
+    "id": "barkada-012",
+    "deck": "barkada-tea",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "p1",
+    "text": "{p1}, what's one thing this barkada always does that you secretly can't stand?",
+    "shots": 1,
+    "tags": ["honesty"]
+  },
+  {
+    "id": "barkada-013",
+    "deck": "barkada-tea",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "Who here have you talked about behind their back, and was it good or bad?",
+    "shots": 1,
+    "tags": ["gossip"]
+  },
+  {
+    "id": "barkada-014",
+    "deck": "barkada-tea",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "What's a friendship you let fade on purpose, and would you fix it if you could?",
+    "shots": 1,
+    "tags": ["friendship", "regret"]
+  },
+  {
+    "id": "barkada-015",
+    "deck": "barkada-tea",
+    "type": "spill_or_shot",
+    "intensity": 1,
+    "target": "current",
+    "text": "If this barkada got stranded on an island in Palawan, who survives the longest, and who goes first?",
+    "shots": 1,
+    "tags": ["hypothetical"]
+  },
+  {
+    "id": "barkada-016",
+    "deck": "barkada-tea",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "Have you ever been jealous of a friend's success? Spill or shot.",
+    "shots": 1,
+    "tags": ["jealousy"]
+  },
+  {
+    "id": "barkada-017",
+    "deck": "barkada-tea",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "p1",
+    "text": "{p1}, would you trust {p2} with your phone password? Why or why not?",
+    "shots": 1,
+    "tags": ["trust"]
+  },
+  {
+    "id": "barkada-018",
+    "deck": "barkada-tea",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "What's the worst thing you've done at a friend's debut or birthday that nobody here knows about?",
+    "shots": 1,
+    "tags": ["party", "secrets"]
+  },
+  {
+    "id": "barkada-019",
+    "deck": "barkada-tea",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "Which friend's ex did you secretly like better than the person they're with now?",
+    "shots": 1,
+    "tags": ["exes", "honesty"]
+  },
+  {
+    "id": "barkada-020",
+    "deck": "barkada-tea",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "tanggero",
+    "text": "The Tanggero picks someone to answer: what's the most dramatic thing you've done after a fight with a friend?",
+    "shots": 1,
+    "tags": ["drama"]
+  },
+  {
+    "id": "barkada-021",
+    "deck": "barkada-tea",
+    "type": "everyone_who",
+    "intensity": 1,
+    "target": "group",
+    "text": "Everyone who has muted this barkada's group chat at least once, drink.",
+    "shots": 1,
+    "tags": ["group-chat"]
+  },
+  {
+    "id": "barkada-022",
+    "deck": "barkada-tea",
+    "type": "everyone_who",
+    "intensity": 2,
+    "target": "group",
+    "text": "Everyone who has screenshotted something from this group and shared it outside the group, drink.",
+    "shots": 1,
+    "tags": ["group-chat", "secrets"]
+  },
+  {
+    "id": "barkada-023",
+    "deck": "barkada-tea",
+    "type": "everyone_who",
+    "intensity": 2,
+    "target": "group",
+    "text": "Everyone who has borrowed money from someone at this table and still hasn't paid it back, drink.",
+    "shots": 1,
+    "tags": ["utang", "money"]
+  },
+  {
+    "id": "barkada-024",
+    "deck": "barkada-tea",
+    "type": "everyone_who",
+    "intensity": 2,
+    "target": "group",
+    "text": "Everyone who is in a side group chat that leaves out someone in this room, drink.",
+    "shots": 1,
+    "tags": ["group-chat", "secrets"]
+  },
+  {
+    "id": "barkada-025",
+    "deck": "barkada-tea",
+    "type": "everyone_who",
+    "intensity": 2,
+    "target": "group",
+    "text": "Everyone who has pretended to like a friend's partner just to keep the peace, drink.",
+    "shots": 1,
+    "tags": ["partners", "honesty"]
+  },
+  {
+    "id": "barkada-026",
+    "deck": "barkada-tea",
+    "type": "most_likely",
+    "intensity": 1,
+    "target": "group",
+    "text": "Most likely to leave the group chat on 'seen' for three days. Point on 3.",
+    "shots": 1,
+    "tags": ["group-chat"]
+  },
+  {
+    "id": "barkada-027",
+    "deck": "barkada-tea",
+    "type": "most_likely",
+    "intensity": 1,
+    "target": "group",
+    "text": "Most likely to cancel plans five minutes before the meetup. Point on 3.",
+    "shots": 1,
+    "tags": ["plans"]
+  },
+  {
+    "id": "barkada-028",
+    "deck": "barkada-tea",
+    "type": "most_likely",
+    "intensity": 1,
+    "target": "group",
+    "text": "Most likely to cry first at a barkada despedida. Point on 3.",
+    "shots": 1,
+    "tags": ["despedida"]
+  },
+  {
+    "id": "barkada-029",
+    "deck": "barkada-tea",
+    "type": "most_likely",
+    "intensity": 1,
+    "target": "group",
+    "text": "Most likely to still be in this exact barkada twenty years from now. Point on 3.",
+    "shots": 1,
+    "tags": ["friendship"]
+  },
+  {
+    "id": "barkada-030",
+    "deck": "barkada-tea",
+    "type": "hot_seat",
+    "intensity": 2,
+    "target": "p1",
+    "text": "Hot Seat: {p1} answers three questions from the group about their oldest friendship. One shot skips one.",
+    "shots": 1,
+    "tags": ["hot-seat", "friendship"]
+  },
+  {
+    "id": "barkada-031",
+    "deck": "barkada-tea",
+    "type": "hot_seat",
+    "intensity": 2,
+    "target": "current",
+    "text": "Hot Seat: you take three questions from the group about the worst barkada fight you've been part of. One shot skips one.",
+    "shots": 1,
+    "tags": ["hot-seat", "drama"]
+  },
+  {
+    "id": "barkada-032",
+    "deck": "barkada-tea",
+    "type": "double_down",
+    "intensity": 2,
+    "target": "current",
+    "text": "If you had to cut one person at this table from your life, who goes? Say it, or take 2 shots.",
+    "shots": 2,
+    "tags": ["honesty"]
+  },
+  {
+    "id": "barkada-033",
+    "deck": "barkada-tea",
+    "type": "double_down",
+    "intensity": 2,
+    "target": "current",
+    "text": "What's the meanest thing you've said about someone here when they weren't around? Spill, or take 2 shots.",
+    "shots": 2,
+    "tags": ["gossip"]
+  },
+  {
+    "id": "barkada-034",
+    "deck": "barkada-tea",
+    "type": "water_break",
+    "intensity": 1,
+    "target": "group",
+    "text": "Water Break. Everyone drinks water. Real friends make sure the whole barkada gets home safe.",
+    "shots": 1,
+    "tags": ["pacing"]
+  }
+]
