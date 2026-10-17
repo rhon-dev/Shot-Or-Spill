@@ -8,7 +8,8 @@ and the player answers honestly (spill) or takes a shot.
 
 It's a mobile-first web app with no install, no account, and no ads.
 
-> **Status:** Planning. There's no app code yet. Next up is Phase 0, locking decisions.
+> **Status:** Phase 0 is done (decisions locked, PRD v0.3). Phase 1 (Content v1) is in
+> progress. There's no app code yet.
 
 Repo: [github.com/rhon-dev/Spill-Or-Shot](https://github.com/rhon-dev/Spill-Or-Shot)
 
@@ -16,17 +17,17 @@ Repo: [github.com/rhon-dev/Spill-Or-Shot](https://github.com/rhon-dev/Spill-Or-S
 
 | Doc | What's in it |
 | --- | --- |
-| [docs/PRD.md](docs/PRD.md) | Product requirements v0.2 (source of truth) |
+| [docs/PRD.md](docs/PRD.md) | Product requirements v0.3 (source of truth) |
 | [docs/PHASES.md](docs/PHASES.md) | Phase-by-phase plan with gates, tasks, and requirement traceability |
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Planned technical design for the MVP build |
-| [docs/DECISIONS.md](docs/DECISIONS.md) | Open questions and PRD gaps to lock in Phase 0 |
+| [docs/DECISIONS.md](docs/DECISIONS.md) | Phase 0 decisions log (D-01 to D-19) |
 
 ## Roadmap
 
 | Phase | Output | Time | Status |
 | --- | --- | --- | --- |
-| 0. Lock decisions | Open questions and PRD gaps resolved, PRD v0.3 | 2 days | Next |
-| 1. Content v1 | Writing guide + 150 validated cards | 1 week | Not started |
+| 0. Lock decisions | Open questions and PRD gaps resolved, PRD v0.3 | 2 days | Done |
+| 1. Content v1 | Writing guide + 150 validated cards | 1 week | In progress |
 | 2. Design | Brand, card back, 6 key screens in Figma | 1 week | Not started |
 | 3. Build MVP | Setup, game loop, counters, recap | 2 weeks | Not started |
 | 4. Playtest | 4–5 real inuman sessions, reach 300+ cards | 1 week | Not started |

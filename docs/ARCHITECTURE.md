@@ -1,8 +1,9 @@
 # Technical Architecture (planned)
 
-Status: draft for Phase 3. Implements [PRD §11](./PRD.md#11-technical-approach). Items
-tagged D-xx depend on [DECISIONS.md](./DECISIONS.md) and may change when they're
-resolved. No code exists yet.
+Status: planned for Phase 3. Implements [PRD §11](./PRD.md#11-technical-approach) (v0.3).
+Items tagged D-xx refer to decisions in [DECISIONS.md](./DECISIONS.md). All of them are
+accepted except D-17, which is deferred. The app code doesn't exist yet. The content
+schema and validator are built in Phase 1.
 
 ## Stack
 

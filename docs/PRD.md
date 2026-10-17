@@ -2,11 +2,11 @@
 
 A Filipino barkada drinking card game for adults (18+)
 
-Draft v0.2 | Owner: Rhon | Status: For review
+Draft v0.3 | Owner: Rhon | Status: Decisions locked (Phase 0)
 
 > This file is the source of truth for scope. The phase plan, architecture, and decisions
 > log all follow it. If something here changes, bump the version and log why in
-> [DECISIONS.md](./DECISIONS.md).
+> [DECISIONS.md](./DECISIONS.md). Decision IDs (D-xx) point to entries in that log.
 
 ---
 
@@ -33,6 +33,22 @@ no ads.
 | Mild to wild, mixed ages | 18+ only, with adult themes on purpose |
 | 4 loosely defined packs | 5 decks with a clear intensity ladder |
 | No drink tracking | Shot counter, pacing, and water-break cards |
+
+### What changed from v0.2
+
+| v0.2 | v0.3 |
+| --- | --- |
+| Five open questions | All answered (§16) |
+| Next.js or Vite | Vite + React + TypeScript (D-06) |
+| `{p2}` and `{tanggero}` listed but undefined | All three placeholders defined; `{p2}` cards need 3+ players (D-08) |
+| Unclear who is logged on named, Tanggero, group, and Hot Seat cards | Logging rules for every card type (§5, D-09, D-10, D-11) |
+| Water Break was both a deck share and an automatic cadence | Inserted automatically, not shuffled into decks (D-12) |
+| Skip behavior undefined | Same player gets a new card; skips don't count toward rotation or pacing (D-13) |
+| Adult opt-in only on the No Filter deck | Opt-in on the No Filter deck or the No Filter intensity (D-14) |
+| No minimum card pool | Start needs at least 10 eligible cards (D-15) |
+| Analytics not in MVP scope | Anonymous, cookie-free analytics in v1 (D-16) |
+| "Under 150 KB" | 150 KB gzipped, first-load JS (D-18) |
+| Recap awards named only | Recap awards defined (D-19) |
 
 ## 2. Problem and Opportunity
 
@@ -89,8 +105,9 @@ on any phone.
 ### The Tanggero
 
 To match the real inuman ritual, the app picks a Tanggero (the one who pours) at the
-start of the game and rotates the role every 10 cards. The Tanggero shows up in some
-cards ("The Tanggero picks who answers next").
+start of the game and rotates the role every 10 completed cards. Skips and Water Breaks
+don't count (D-13). The Tanggero shows up in some cards ("The Tanggero picks who answers
+next").
 
 ### Card types
 
@@ -101,7 +118,24 @@ cards ("The Tanggero picks who answers next").
 | Most Likely To | Everyone points on 3; whoever gets the most votes drinks or explains | ~10% |
 | Hot Seat | Group asks one player 3 questions in a row; one shot covers a skip | ~5% |
 | Double Down | Answer, or take 2 shots instead of 1 (rare, high-tea questions) | ~5% |
-| Water Break | Everyone drinks water, no exceptions (pacing card) | ~5% |
+| Water Break | Everyone drinks water, no exceptions (pacing card) | ~5% of written cards |
+
+Water Break cards are not shuffled into the deck. The app inserts one after every 12–15
+completed cards and picks its text from the Water Break cards in the selected decks
+(D-12).
+
+### How choices are logged
+
+| Card | What the app asks after the card | What gets logged |
+| --- | --- | --- |
+| Spill or Shot, Double Down | SPILL or SHOT | One spill, or the card's shots (1, or 2 for Double Down), for whoever answers: the reader, or the player named by `{p1}` (D-09) |
+| Tanggero picks who answers | A player picker, then SPILL or SHOT | Logged to the picked player (D-09) |
+| Everyone Who, Most Likely To | "Who drank?" player chips | 1 shot for each selected player, no spill (D-10) |
+| Hot Seat | "Shots taken: 0–3" stepper | That many shots, plus one spill for each answered question (D-11) |
+| Water Break | Done | Nothing |
+
+The turn passes to the next reader after every completed card. A skip gives the same
+player a new card and logs nothing (D-13).
 
 ## 6. Decks
 
@@ -114,9 +148,11 @@ cards ("The Tanggero picks who answers next").
 | No Filter 🔞 | 3 | Bold adult questions, body count, regrets, confessions | 60 |
 
 - Players can mix decks.
-- No Filter needs a second confirmation ("Everyone here is okay with adult questions").
+- Selecting the No Filter deck **or** the No Filter intensity needs a second
+  confirmation ("Everyone here is okay with adult questions") (D-14).
 - Intensity filter: Chill / Spicy / No Filter. Cards above the selected level never
   appear.
+- Deck select shows a live count of eligible cards. Start is disabled below 10 (D-15).
 
 ## 7. Scope
 
@@ -135,6 +171,7 @@ cards ("The Tanggero picks who answers next").
 - End-of-night recap ("Most Honest," "Most Secretive," "Biggest Tea")
 - How to Play, About, and Drink Responsibly pages
 - Game state saved locally so a refresh doesn't lose progress
+- Anonymous, cookie-free analytics events to measure §13 (no player names) (D-16)
 
 ### v1.1
 
@@ -157,18 +194,18 @@ cards ("The Tanggero picks who answers next").
 | --- | --- | --- | --- |
 | F1 | Age gate | Blocks the app until 18+ is confirmed; remembered for 30 days | Must |
 | F2 | Player setup | Add, edit, and remove 2–12 players; no duplicate names | Must |
-| F3 | Tanggero | Randomly assigned at start; rotates every 10 cards; shown on screen | Must |
-| F4 | Deck select | One or more decks; No Filter needs a second confirmation | Must |
+| F3 | Tanggero | Randomly assigned at start; rotates every 10 completed cards (skips and Water Breaks don't count); shown on screen | Must |
+| F4 | Deck select | One or more decks; the No Filter deck or the No Filter intensity needs a second confirmation (D-14); Start disabled below 10 eligible cards (D-15) | Must |
 | F5 | Intensity filter | No card above the selected intensity is ever drawn | Must |
-| F6 | Turn order | Current player is shown; advances after Spill or Shot | Must |
+| F6 | Turn order | Current player is shown; advances after every completed card | Must |
 | F7 | Card draw | Flip animation under 400 ms; swipe and tap both work | Must |
-| F8 | Name substitution | `{p1}`, `{p2}` filled with different players, never the current reader unless intended | Must |
+| F8 | Name substitution | `{p1}`, `{p2}` filled with two different players, never the current reader; `{tanggero}` filled with the current Tanggero; `{p2}` cards only drawn with 3+ players; text resolved once per draw (D-08) | Must |
 | F9 | Shuffle | No repeats until all eligible cards are drawn, then reshuffle prompt | Must |
-| F10 | Spill / Shot | Logs the choice per player and updates the counter | Must |
-| F11 | Skip | Draws a new card, nothing logged | Must |
-| F12 | Pacing | Water Break every 12–15 cards; soft warning at a configurable shot count (default 6) | Must |
+| F10 | Spill / Shot | Logs the choice to the answering player and updates the counter, following the §5 logging table (D-09, D-10, D-11) | Must |
+| F11 | Skip | Same player gets a new card; nothing logged; skipped card doesn't repeat this cycle (D-13) | Must |
+| F12 | Pacing | Water Break inserted after every 12–15 completed cards (D-12); soft warning at a configurable shot count (default 6) | Must |
 | F13 | Scoreboard | Shot and spill counts per player, open at any time | Must |
-| F14 | Recap | Summary screen with fun awards when the game ends | Should |
+| F14 | Recap | Summary screen with awards when the game ends: Most Honest (most spills), Most Secretive (most shots by choice), Biggest Tea (most spills on intensity-3 or Double Down cards); ties shared (D-19) | Should |
 | F15 | Persistence | Refreshing restores players, deck position, and scores | Must |
 | F16 | Undo | Reverts the last Spill/Shot action | Should |
 | F17 | Custom cards | Create, edit, and delete local cards | v1.1 |
@@ -192,6 +229,9 @@ cards ("The Tanggero picks who answers next").
 
 - `type`: `spill_or_shot` | `everyone_who` | `most_likely` | `hot_seat` | `double_down` | `water_break`
 - `target`: `current` | `p1` | `group` | `tanggero`
+- Placeholders: `{p1}`, `{p2}`, `{tanggero}`. A card that uses `{p1}` sets
+  `target: "p1"`, and `{p2}` is only used together with `{p1}` (D-08).
+- `shots`: 2 only on Double Down cards. Water Break cards log nothing.
 
 ### Writing rules
 
@@ -271,7 +311,7 @@ Recap
 
 | Layer | Choice |
 | --- | --- |
-| Framework | Next.js (static export) or Vite + React |
+| Framework | Vite + React + TypeScript (D-06) |
 | Styling | Tailwind CSS |
 | Animation | Framer Motion (flip, swipe) |
 | State | Zustand, persisted to localStorage |
@@ -280,8 +320,8 @@ Recap
 | Analytics | Plausible or Umami (cookie-free, anonymous) |
 | v2 backend | Supabase Realtime for rooms |
 
-**Quality bar:** Lighthouse mobile 90+, WCAG AA contrast, JS bundle under 150 KB,
-playable on a 3G connection after first load.
+**Quality bar:** Lighthouse mobile 90+, WCAG AA contrast, first-load JS under 150 KB
+gzipped (D-18), playable on a 3G connection after first load.
 
 **Privacy:** No accounts. Player names never leave the device. Analytics only track
 anonymous events (card drawn, spill or shot, skip) to find weak cards.
@@ -310,7 +350,7 @@ anonymous events (card drawn, spill or shot, skip) to find weak cards.
 | Spill rate | 60%+ (people want to answer) |
 | Skip rate per card | < 15% (higher means the card gets rewritten) |
 | 14-day return rate | 25%+ |
-| Organic shares (link copies) | 1 in 5 sessions |
+| Organic shares (link copies) | 1 in 5 sessions (needs a share action; pending D-17) |
 
 ## 14. Milestones
 
@@ -336,14 +376,16 @@ anonymous events (card drawn, spill or shot, skip) to find weak cards.
 | Lag on budget phones | Test on low-end Android, reduced-motion mode |
 | Scope creep | Freeze the MVP list; everything else goes to v1.1 or v2 |
 
-## 16. Open Questions
+## 16. Open Questions (resolved in v0.3)
 
-1. Name: keep Shot or Spill, or other options (Tagay or Tell, Spill the Tagay, Inuman
-   Cards)?
-2. Launch goal: portfolio piece first, or a real launch with social promotion?
-3. No Filter deck: in v1, or held back for v1.1 after playtesting?
-4. Monetization later: always free, or paid seasonal decks?
-5. Domain: .com, .ph, or a .app domain?
+| Question | Answer |
+| --- | --- |
+| Name | **Shot or Spill** (D-01) |
+| Launch goal | A real launch that also works as a portfolio piece (D-02) |
+| No Filter deck | In v1, behind the second opt-in; final go/no-go after the Phase 4 playtests (D-03) |
+| Monetization | Free at launch; paid seasonal decks stay possible later (D-04) |
+| Domain | shotorspill.com, with shotorspill.app as the fallback (D-05) |
 
-Proposed answers, plus gaps found while planning the build, are tracked in
+Still open: D-17 (Share button on Recap, or drop the shares metric), which needs a
+decision before Phase 2. Full reasoning for every decision is in
 [DECISIONS.md](./DECISIONS.md).
