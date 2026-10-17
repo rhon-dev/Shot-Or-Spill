@@ -1,0 +1,218 @@
+# Technical Architecture (planned)
+
+Status: draft for Phase 3. Implements [PRD §11](./PRD.md#11-technical-approach). Items
+tagged D-xx depend on [DECISIONS.md](./DECISIONS.md) and may change when they're
+resolved. No code exists yet.
+
+## Stack
+
+| Layer | Choice | Notes |
+| --- | --- | --- |
+| Framework | Vite + React + TypeScript | D-06; static build, no server |
+| Styling | Tailwind CSS | Tokens from Phase 2 |
+| Animation | Framer Motion | Load only the features in use, to stay in budget (D-18) |
+| State | Zustand + `persist` (localStorage) | Versioned, with migrations |
+| Content | One JSON file per deck, validated with Zod | Validator runs before every build |
+| Tests | Vitest | Engine and store unit tests |
+| Hosting | Vercel (static) | Preview deploys per branch |
+| Analytics | Plausible or Umami | D-16; anonymous events only |
+| v2 backend | Supabase Realtime | Rooms only; nothing in v1 |
+
+## App flow
+
+```mermaid
+flowchart LR
+  A[Age Gate + pledge] --> B[Add Players]
+  B --> C[Pick Decks + Intensity]
+  C -->|first time| D[How to Play]
+  C -->|returning| E[Game]
+  D --> E
+  E --> F[Recap]
+  F -->|play again| C
+```
+
+The Game screen also opens the Scoreboard, the soft-cap warning, the reshuffle prompt,
+and the per-type pickers (D-09, D-10, D-11). About, Drink Responsibly, and Terms can be
+reached from any screen.
+
+## Planned folder structure
+
+```text
+shot-or-spill/
+├─ docs/                     # PRD, phases, architecture, decisions, content guide
+├─ public/fonts/             # self-hosted display + UI fonts
+├─ scripts/
+│  └─ validate-cards.ts      # Zod content validation, runs before build
+├─ src/
+│  ├─ content/
+│  │  ├─ schema.ts           # card schema + deck metadata
+│  │  └─ decks/*.json        # one file per deck
+│  ├─ game/
+│  │  ├─ engine.ts           # pure rules: pool, shuffle, turns, pacing, names
+│  │  ├─ engine.test.ts
+│  │  ├─ store.ts            # Zustand store + persistence
+│  │  └─ types.ts
+│  ├─ screens/               # AgeGate, Players, Decks, HowToPlay, Game, Recap
+│  ├─ components/            # Card, ChoiceButtons, Scoreboard, pickers, sheets
+│  ├─ pages/                 # About, DrinkResponsibly, Terms
+│  ├─ lib/analytics.ts       # anonymous event wrapper (D-16)
+│  ├─ App.tsx
+│  └─ main.tsx
+├─ index.html
+├─ vercel.json               # security headers
+└─ package.json
+```
+
+## Content model
+
+Card shape, from PRD §9 with the D-08 placeholders:
+
+```ts
+type Card = {
+  id: string; // "love-031": deck prefix + 3 digits, unique across all decks
+  deck: "warm-up" | "barkada-tea" | "love-life" | "family-adulting" | "no-filter";
+  type:
+    | "spill_or_shot"
+    | "everyone_who"
+    | "most_likely"
+    | "hot_seat"
+    | "double_down"
+    | "water_break";
+  intensity: 1 | 2 | 3;
+  target: "current" | "p1" | "group" | "tanggero";
+  text: string; // English; placeholders {p1}, {p2}, {tanggero}
+  shots: 1 | 2; // 2 only for double_down
+  tags: string[];
+};
+```
+
+The build fails if any card breaks one of these rules:
+
+- The shape doesn't match, or the card has unknown fields.
+- `shots: 2` appears on any type other than `double_down`.
+- A `water_break` card doesn't target `group`.
+- Text uses `{p1}` or `{p2}` without `target: "p1"`.
+- Intensity is above the deck ceiling: Warm Up 1, Barkada Tea 2, Love Life 3,
+  Family & Adulting 2, No Filter 3.
+- The file name doesn't match the deck, an id is duplicated, or text is duplicated
+  across decks.
+
+## Game state
+
+Saved to localStorage under a versioned key (for example, `shot-or-spill:v1`):
+
+| Field | Purpose |
+| --- | --- |
+| `ageConfirmedAt` | F1. Expires after 30 days |
+| `howToPlaySeen` | Show How to Play only the first time |
+| `players[]` | `{ id, name, spills, shots }` |
+| `config` | Selected decks, intensity, soft cap (default 6) |
+| `session.queue` | Remaining card ids for this cycle |
+| `session.current` | Current card id plus its **resolved text** and answering player |
+| `session.turn` | Index of the current reader |
+| `session.tanggero` | Start index plus count of completed cards |
+| `session.pacing` | Cards since the last Water Break and the next target (12–15) |
+| `session.log[]` | Resolved cards: card id, player ids, spills, shots |
+| `session.previous` | Snapshot before the last resolved card, used by Undo |
+
+Two design points:
+
+- **Resolve placeholders once, at draw time,** and save the resulting text. If
+  substitution ran on every render, a refresh or re-render would pick a new random
+  `{p1}`, and F8 and F15 would both break.
+- **Version the store.** When the shape changes, bump the version and add a migration. A
+  saved state that can't be migrated resets the session but keeps the players.
+
+## Engine rules
+
+The engine is a set of pure functions: state in, state out, with no React. That makes it
+easy to unit test, and it keeps v2 rooms possible, since the same state could be
+broadcast later.
+
+1. **Eligible pool (F5).** A card is eligible when all of these hold:
+   - its deck is selected
+   - its intensity is at or below the filter
+   - it isn't a Water Break card (D-12)
+   - if it uses `{p2}`, there are 3 or more players (D-08)
+2. **Shuffle (F9).** Use a Fisher–Yates shuffle once per cycle and draw from the front
+   of the queue. Nothing repeats until the queue is empty, and then the game shows the
+   reshuffle prompt.
+3. **Draw (F8).** Fill the placeholders. `{p1}` and `{p2}` are different players, and
+   neither is the reader. `{tanggero}` is the current Tanggero.
+4. **Resolve, by card type:**
+   - `spill_or_shot` and `double_down`: Spill or Shot. A shot logs `card.shots` to the
+     answering player: the reader, or the `{p1}` player (D-09).
+   - `hot_seat`: the "Shots taken: 0–3" stepper (D-11).
+   - `everyone_who` and `most_likely`: the "Who drank?" picker, with 1 shot for each
+     selected player (D-10).
+   - `tanggero` target: a player picker for who answers (D-09).
+   - `water_break`: a Done button only. Nothing is logged.
+5. **Turn (F6).** After a card is resolved, the turn moves to the next reader.
+6. **Skip (F11, D-13).** The same reader gets the next card. Nothing is logged, and the
+   skipped card is used up for this cycle.
+7. **Tanggero (F3, D-13).** Chosen at random at the start. Moves to the next player after
+   every 10 completed cards and shows as a badge.
+8. **Water Break (F12, D-12).** After a random 12–15 completed cards, the engine inserts
+   one, then picks a new random target.
+9. **Soft cap (F12).** When a player's shots reach the cap, show the warning once for
+   that player ("Juan, that's 6. Water round for you?"). If Undo drops them back below the
+   cap, the warning can fire again.
+10. **Undo (F16).** Restore `session.previous`. This brings back the scores, turn,
+    Tanggero, pacing counters, and the card itself. One level of undo is enough for F16.
+11. **Recap (F14, D-19).** Work out the awards from `session.log` when the game ends.
+
+## Performance
+
+Targets come from the PRD §11 quality bar.
+
+- Animate only `transform` and `opacity`. The flip stays at 400 ms or less (F7).
+- Respect `prefers-reduced-motion`, and add an in-app toggle. With reduced motion on, a
+  crossfade replaces the flip.
+- Self-host fonts, subset to Latin, with `font-display: swap`. The page makes no
+  third-party requests on load.
+- Bundle the card JSON. About 310 cards is small, so there's no fetch.
+- Split info pages out of the first load. A CI size check enforces the JS budget (D-18).
+- Test on a budget Android phone in Phase 3.5 and Phase 4.
+
+## Accessibility
+
+- WCAG AA contrast for all text and buttons. Pay special attention to pink and amber on
+  near-black, and to text on the bright buttons.
+- Tap targets of 48px or more, with SPILL and SHOT in thumb reach.
+- New card text is announced through an `aria-live` region. Buttons have text labels, so
+  meaning never depends on color alone.
+- Visible focus states, and focus moves to the new card after each draw.
+- Card text auto-resizes but never drops below a minimum size.
+- Full WCAG conformance needs manual testing with assistive technologies and an expert
+  review. That pass is planned for Phase 5.
+
+## Privacy and security
+
+- No accounts and no backend in v1. Player names stay in localStorage on the device.
+- Analytics events carry only card id, deck, type, and choice. They never include names
+  or free text (D-16).
+- Static hosting on Vercel, with security headers set in `vercel.json`:
+  - Content-Security-Policy
+  - Referrer-Policy
+  - X-Content-Type-Options
+- v1 has no secrets in the client, because it needs none.
+- v1 exposes no API endpoints, so there's no authentication surface. That's intentional
+  for a single-phone game. v2 rooms will need access rules and rate limits for room
+  codes, and those get designed then.
+
+## Testing
+
+- **Vitest unit tests for the engine:**
+  - nothing above the intensity filter is drawn (F5)
+  - no repeats within a cycle (F9)
+  - placeholders never pick the reader (F8)
+  - Tanggero rotation (F3)
+  - Water Break cadence (F12)
+  - Undo restores the previous state (F16)
+  - soft-cap warning fires once (F12)
+- **Store tests:** persistence round-trip and migrations (F15).
+- **Content validator:** runs before every build and in CI.
+- **Manual checks:**
+  - device checklist: budget Android with Chrome, iPhone with Safari
+  - readability in a dim room
+  - first card in under 20 seconds
