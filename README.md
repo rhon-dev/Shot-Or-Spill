@@ -8,10 +8,16 @@ and the player answers honestly (spill) or takes a shot.
 
 It's a mobile-first web app with no install, no account, and no ads.
 
-> **Status:** Phase 1 (Content v1) is written and waiting for owner review: 150 cards,
-> all passing validation. The app itself isn't built yet (Phase 3).
+> **Status:** Phase 2 (Design) is in review. The brand, design tokens, and every
+> screen and state are ready as SVG mocks. The app itself isn't built yet (Phase 3).
 
 Repo: [github.com/rhon-dev/Spill-Or-Shot](https://github.com/rhon-dev/Spill-Or-Shot)
+
+<p>
+<img src="docs/design/mocks/01-age-gate.svg" alt="Age gate mock" width="200">
+<img src="docs/design/mocks/05-game.svg" alt="Game screen mock" width="200">
+<img src="docs/design/mocks/06-recap.svg" alt="Recap mock" width="200">
+</p>
 
 ## Docs
 
@@ -20,7 +26,8 @@ Repo: [github.com/rhon-dev/Spill-Or-Shot](https://github.com/rhon-dev/Spill-Or-S
 | [docs/PRD.md](docs/PRD.md) | Product requirements v0.3 (source of truth) |
 | [docs/PHASES.md](docs/PHASES.md) | Phase-by-phase plan with gates, tasks, and requirement traceability |
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Planned technical design for the MVP build |
-| [docs/DECISIONS.md](docs/DECISIONS.md) | Phase 0 decisions log (D-01 to D-19) |
+| [docs/DECISIONS.md](docs/DECISIONS.md) | Decisions log (D-01 to D-21) |
+| [docs/DESIGN.md](docs/DESIGN.md) | Design spec: brand, tokens, screens, motion, accessibility |
 | [docs/content-guide.md](docs/content-guide.md) | Rules for writing cards |
 | [docs/content-review.md](docs/content-review.md) | Review log for the current card batch, plus the table-read sheet |
 
@@ -30,7 +37,8 @@ Cards live in `src/content/decks/`, one JSON file per deck. To validate them, ru
 
 ```sh
 npm install
-npm run check   # typecheck + card validation
+npm run check   # typecheck + card validation + WCAG contrast check
+npm run mocks   # regenerate the design mocks in docs/design/
 ```
 
 The validator checks every rule in the content guide it can check automatically:
@@ -48,8 +56,8 @@ It prints a deck and type-mix report, and the run fails if any card breaks a rul
 | Phase | Output | Time | Status |
 | --- | --- | --- | --- |
 | 0. Lock decisions | Open questions and PRD gaps resolved, PRD v0.3 | 2 days | Done |
-| 1. Content v1 | Writing guide + 150 validated cards | 1 week | In review |
-| 2. Design | Brand, card back, 6 key screens in Figma | 1 week | Not started |
+| 1. Content v1 | Writing guide + 150 validated cards | 1 week | Done (table read moves to Phase 4) |
+| 2. Design | Brand, card back, 6 key screens + all states (SVG mocks) | 1 week | In review |
 | 3. Build MVP | Setup, game loop, counters, recap | 2 weeks | Not started |
 | 4. Playtest | 4–5 real inuman sessions, reach 300+ cards | 1 week | Not started |
 | 5. Launch | Deploy, legal pages, analytics, share | 3–4 days | Not started |
@@ -74,8 +82,8 @@ alcohol brand partnerships, and explicit sexual content. The full list is in
 
 Vite + React + TypeScript, Tailwind CSS, Framer Motion, Zustand persisted to
 localStorage, Zod-validated JSON content, and Vercel hosting. Details are in
-[ARCHITECTURE.md](docs/ARCHITECTURE.md). Phase 1 only uses TypeScript, Zod, and tsx for
-the card validator.
+[ARCHITECTURE.md](docs/ARCHITECTURE.md). So far the repo only uses TypeScript, Zod, and
+tsx, for the card validator, the contrast check, and the mock generator.
 
 ## Drink responsibly
 

@@ -5,7 +5,8 @@ card", and Phase 1 tasks 5–6 in [PHASES.md](./PHASES.md#phase-1--content-v1-1-
 Rules come from [content-guide.md](./content-guide.md).
 
 **Batch:** Content v1, 150 cards · **Written and self-reviewed:** Kiro, 2026-10-17 ·
-**Owner sign-off:** pending (Rhon)
+**Owner:** Rhon approved continuing (2026-10-17). The table read and the judgment calls
+move to Phase 4.
 
 ## Automated checks
 
@@ -135,6 +136,7 @@ fails.
 
 - [x] 150 cards pass `npm run validate:cards`
 - [x] Every card self-reviewed against the content guide checklist
-- [ ] Table read of the 30 cards above (Rhon)
-- [ ] Owner review of the "Cards for Rhon to judge" list
-- [ ] Rhon signs off on Phase 1
+- [x] Rhon approved moving on to Phase 2 (2026-10-17)
+- [ ] Table read of the 30 cards above: **deferred to the Phase 4 playtests**
+- [ ] Owner review of the "Cards for Rhon to judge" list: **deferred to Phase 4**. All
+      flagged cards stay in the deck until then.

@@ -54,6 +54,8 @@ export interface DeckMeta {
   /** Highest intensity a card in this deck may have (PRD §6). */
   maxIntensity: Intensity;
   theme: string;
+  /** Short line for the deck tile (fits next to the card count on a 360px screen). */
+  tagline: string;
   /** Selecting this deck triggers the adult opt-in (D-14). */
   adultOptIn: boolean;
   /** Launch target from PRD §6. */
@@ -69,6 +71,7 @@ export const DECKS: Record<DeckId, DeckMeta> = {
     idPrefix: "warm",
     maxIntensity: 1,
     theme: "Light icebreakers, food, habits, childhood",
+    tagline: "Food, habits, childhood",
     adultOptIn: false,
     launchCount: 60,
     phase1Count: 29,
@@ -79,6 +82,7 @@ export const DECKS: Record<DeckId, DeckMeta> = {
     idPrefix: "barkada",
     maxIntensity: 2,
     theme: "Friendships, group chat secrets, old crushes, betrayals",
+    tagline: "Crushes, group chats",
     adultOptIn: false,
     launchCount: 70,
     phase1Count: 34,
@@ -89,6 +93,7 @@ export const DECKS: Record<DeckId, DeckMeta> = {
     idPrefix: "love",
     maxIntensity: 3,
     theme: "Exes, situationships, ghosting, the talking stage, jealousy",
+    tagline: "Exes, situationships",
     adultOptIn: false,
     launchCount: 70,
     phase1Count: 34,
@@ -99,6 +104,7 @@ export const DECKS: Record<DeckId, DeckMeta> = {
     idPrefix: "family",
     maxIntensity: 2,
     theme: "Titas, family pressure, work, money, salary",
+    tagline: "Titas, money, work",
     adultOptIn: false,
     launchCount: 50,
     phase1Count: 24,
@@ -109,6 +115,7 @@ export const DECKS: Record<DeckId, DeckMeta> = {
     idPrefix: "nofilter",
     maxIntensity: 3,
     theme: "Bold adult questions, body count, regrets, confessions",
+    tagline: "Regrets, confessions",
     adultOptIn: true,
     launchCount: 60,
     phase1Count: 29,

@@ -6,8 +6,10 @@
   "description": "Shot or Spill: a Filipino barkada drinking card game for adults (18+).",
   "scripts": {
     "validate:cards": "tsx scripts/validate-cards.ts",
+    "check:contrast": "tsx scripts/check-contrast.ts",
+    "mocks": "tsx scripts/render-mocks.ts",
     "typecheck": "tsc --noEmit",
-    "check": "npm run typecheck && npm run validate:cards"
+    "check": "npm run typecheck && npm run validate:cards && npm run check:contrast"
   },
   "devDependencies": {
     "@types/node": "26.6.5",

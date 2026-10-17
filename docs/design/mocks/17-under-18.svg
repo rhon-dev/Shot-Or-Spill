@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="800" viewBox="0 0 360 800" role="img" aria-label="Shot or Spill mock: Under 18 (F1)">
+<title>Shot or Spill mock: Under 18 (F1)</title>
+<style>.d{font-family:Anton, Impact, 'Arial Narrow Bold', sans-serif}.s{font-family:Inter, 'Helvetica Neue', Arial, sans-serif}</style>
+<defs>
+<filter id="glow" x="-30%" y="-40%" width="160%" height="180%"><feGaussianBlur in="SourceGraphic" stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+<filter id="glowSoft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur in="SourceGraphic" stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<rect width="360" height="800" fill="#0B0A10"/>
+<g filter="url(#glow)"><text x="180" y="161.44" class="d" font-size="56" fill="#FFB020" text-anchor="middle" letter-spacing="1.68">SHOT</text><text x="180" y="186.07999999999998" class="s" font-size="21.28" font-weight="800" fill="#F5F3FA" text-anchor="middle">or</text><text x="180" y="234.23999999999998" class="d" font-size="56" fill="#FF2E88" text-anchor="middle" letter-spacing="1.68">SPILL</text></g><text x="180" y="352" class="d" font-size="36" fill="#F5F3FA" text-anchor="middle">COME BACK AT 18</text><text x="180" y="400" class="s" font-size="17" font-weight="500" fill="#ABA7BA" text-anchor="middle">Shot or Spill is a drinking game</text><text x="180" y="423.8" class="s" font-size="17" font-weight="500" fill="#ABA7BA" text-anchor="middle">for adults 18 and over. See you</text><text x="180" y="447.6" class="s" font-size="17" font-weight="500" fill="#ABA7BA" text-anchor="middle">in a few years.</text><rect x="20" y="712" width="320" height="56" rx="14" fill="none" stroke="#726C88" stroke-width="2"/><text x="180" y="747.56" class="d" font-size="21" fill="#F5F3FA" text-anchor="middle" letter-spacing="1">GO BACK</text>
+</svg>

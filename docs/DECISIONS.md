@@ -64,6 +64,13 @@ These came up while planning the game engine.
 | D-18 | **JS budget.** "Under 150 KB" doesn't say whether that's raw or gzipped. | **150 KB gzipped** for the JS needed on first load, checked in CI. Framer Motion is the biggest risk, so load only the animation features the app uses. | Phase 3 | Accepted |
 | D-19 | **Recap awards.** F14 names "Most Honest," "Most Secretive," and "Biggest Tea" but doesn't define them. | **Most Honest** goes to whoever has the most spills. **Most Secretive** goes to whoever took the most shots by choice, not counting group-card shots. **Biggest Tea** goes to whoever has the most spills on intensity-3 or Double Down cards. Ties are shared, and an award is hidden when nobody qualifies. | Phase 2, 3 | Accepted |
 
+## D. Added after Phase 0
+
+| ID | Topic | Decision | Phase | Status |
+| --- | --- | --- | --- | --- |
+| D-20 | **Design files.** PRD §14 says "6 key screens in Figma", but Kiro can't create or edit Figma files. | Phase 2 produces the screens as **SVG mocks in the repo** (`docs/design/`), generated from the same design tokens Phase 3 will use. SVGs import into Figma by drag and drop, so Rhon can keep refining them there. | Phase 2 | Proposed: approve at the Phase 2 gate |
+| D-21 | **Phase 1 review items.** The table read and the owner review of flagged cards weren't done before Phase 2 started. | Move both into the Phase 4 playtests, which read real cards at real tables. Flagged cards stay in the deck until then. | Phase 1 → 4 | Accepted (Rhon: "you can continue") |
+
 ---
 
 ## Phase 0 sign-off

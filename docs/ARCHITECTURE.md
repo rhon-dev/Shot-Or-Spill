@@ -40,15 +40,20 @@ reached from any screen.
 
 ```text
 shot-or-spill/
-├─ docs/                     # PRD, phases, architecture, decisions, content guide
+├─ docs/                     # PRD, phases, architecture, decisions, content guide, design spec
+│  └─ design/                # generated SVG brand marks and screen mocks (Phase 2)
 ├─ public/fonts/             # self-hosted display + UI fonts
 ├─ scripts/
-│  └─ validate-cards.ts      # Zod content validation, runs before build
+│  ├─ validate-cards.ts      # Zod content validation, runs before build
+│  ├─ check-contrast.ts      # WCAG AA check of the design tokens
+│  └─ render-mocks.ts        # regenerates docs/design from tokens + real cards
 ├─ src/
 │  ├─ content/
 │  │  ├─ meta.ts             # deck metadata + Card type, no dependencies (app-safe)
 │  │  ├─ schema.ts           # Zod schema, build-time only (keeps Zod out of the bundle)
 │  │  └─ decks/*.json        # one file per deck
+│  ├─ design/
+│  │  └─ tokens.ts           # colors, type, spacing, motion; Tailwind imports these
 │  ├─ game/
 │  │  ├─ engine.ts           # pure rules: pool, shuffle, turns, pacing, names
 │  │  ├─ engine.test.ts

@@ -19,7 +19,7 @@ Gaps and open calls live in [DECISIONS.md](./DECISIONS.md), referenced here as D
 | --- | --- | --- | --- |
 | 0. Lock decisions | DECISIONS.md signed off, PRD v0.3 | 2 days | Nothing left in Proposed |
 | 1. Content v1 | Writing guide + 150 validated cards | 1 week | 150 cards pass validation and review |
-| 2. Design | Brand, card back, 6 key screens in Figma | 1 week | Screens approved, contrast checked |
+| 2. Design | Brand, card back, 6 key screens (SVG mocks in the repo, D-20) | 1 week | Screens approved, contrast checked |
 | 3. Build MVP | Playable MVP on a preview URL | 2 weeks | Every Must requirement passes |
 | 4. Playtest | 4–5 real sessions, 300+ cards, fixes | 1 week | Playtest exit criteria met |
 | 5. Launch | Production site, legal pages, analytics | 3–4 days | Launch checklist complete |
@@ -100,6 +100,9 @@ checklist, and Rhon signs off.
 
 **Goal:** the visual identity and the six key screens, ready to build.
 
+Per D-20, the PRD's Figma deliverable is replaced by SVG mocks in `docs/design/`. They're
+generated from the design tokens and documented in [DESIGN.md](./DESIGN.md).
+
 Tasks:
 
 1. **Brand:** wordmark, the neon "SHOT or SPILL" mark, and a card back with bunting or a
@@ -135,8 +138,8 @@ Tasks:
    - 48px+ tap targets
    - primary actions within thumb reach
 
-Exit criteria: Rhon approves the Figma file, the contrast check passes, and every state
-Phase 3 builds has a design.
+Exit criteria: Rhon approves the designs (D-20), the contrast check passes, and every
+state Phase 3 builds has a design.
 
 ---
 
