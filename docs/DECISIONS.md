@@ -15,7 +15,7 @@ is Deferred to Phase 2.
 
 | ID | Question | Decision | Blocks | Status |
 | --- | --- | --- | --- | --- |
-| D-01 | Name | **Shot or Spill.** It matches the SPILL / SHOT buttons one-to-one and is easy to say at a loud table. Follow-ups: the GitHub repo is named `Spill-Or-Shot`, the reverse order, and the social handles still need to be checked by hand (see below). | Phase 2 (brand) | Accepted |
+| D-01 | Name | **Shot or Spill.** It matches the SPILL / SHOT buttons one-to-one and is easy to say at a loud table. Follow-ups: the GitHub repo was renamed from `Spill-Or-Shot` to `Shot-Or-Spill` to match, and the social handles still need to be checked by hand (see below). | Phase 2 (brand) | Accepted |
 | D-02 | Launch goal | A **real launch** that also works as a portfolio piece. It's the same codebase either way, and it leaves room for social promotion in Phase 5. | Phase 5 | Accepted |
 | D-03 | No Filter deck in v1 | **Ship it in v1** behind the second opt-in. Make the final go/no-go call after the Phase 4 playtests. | Phase 1 (card split) | Accepted |
 | D-04 | Monetization | **Free at launch.** Cards are stored as data, so paid seasonal decks stay possible later. Nothing gets built for payments now. | None | Accepted |

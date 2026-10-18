@@ -10,9 +10,10 @@ It's a mobile-first web app with no install, no account, and no ads.
 
 > **Status:** The game is playable end to end with all 310 cards, and the checks below
 > pass. Phase 4 (playtests) is next: the cards and the playtest kit are ready, and the
-> real inuman sessions need people at a table. It isn't deployed yet.
+> real inuman sessions need people at a table.
 
-Repo: [github.com/rhon-dev/Spill-Or-Shot](https://github.com/rhon-dev/Spill-Or-Shot)
+Live: [spill-or-shot.vercel.app](https://spill-or-shot.vercel.app/) ·
+Repo: [github.com/rhon-dev/Shot-Or-Spill](https://github.com/rhon-dev/Shot-Or-Spill)
 
 <p>
 <img src="docs/design/mocks/01-age-gate.svg" alt="Age gate mock" width="200">
