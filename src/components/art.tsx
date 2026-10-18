@@ -21,6 +21,9 @@ import minus from "@phosphor-icons/core/assets/bold/minus-bold.svg?raw";
 import shuffle from "@phosphor-icons/core/assets/bold/shuffle-bold.svg?raw";
 import drag from "@phosphor-icons/core/assets/bold/dots-six-vertical-bold.svg?raw";
 import trash from "@phosphor-icons/core/assets/bold/trash-bold.svg?raw";
+import heartOutline from "@phosphor-icons/core/assets/bold/heart-bold.svg?raw";
+import flag from "@phosphor-icons/core/assets/bold/flag-bold.svg?raw";
+import sound from "@phosphor-icons/core/assets/bold/speaker-high-bold.svg?raw";
 import honest from "@phosphor-icons/core/assets/fill/chat-circle-dots-fill.svg?raw";
 import secret from "@phosphor-icons/core/assets/fill/lock-key-fill.svg?raw";
 import tea from "@phosphor-icons/core/assets/fill/sparkle-fill.svg?raw";
@@ -53,6 +56,10 @@ const ICONS = {
   shuffle: paths(shuffle),
   drag: paths(drag),
   trash: paths(trash),
+  heart: paths(heartOutline),
+  "heart-fill": paths(heart),
+  flag: paths(flag),
+  sound: paths(sound),
   honest: paths(honest),
   secret: paths(secret),
   tea: paths(tea),

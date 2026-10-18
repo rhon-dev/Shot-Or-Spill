@@ -173,9 +173,59 @@ function Controls({ session, card }: { session: Session; card: Card }) {
   );
 }
 
+/**
+ * Heart a card to remember it, or flag a weak one (v1.1, D-25). Both are
+ * saved on the device only and shown in the recap for the writer's review.
+ */
+function CardActions({ cardId }: { cardId: string }) {
+  const { toggleFavorite, toggleReport } = useApp.getState();
+  const favorited = useApp((s) => s.favorites.includes(cardId));
+  const reported = useApp((s) => s.reports.includes(cardId));
+  const [toast, setToast] = useState<string | null>(null);
+  return (
+    <div className="mt-2 flex items-center justify-center gap-2">
+      <button
+        type="button"
+        aria-pressed={favorited}
+        aria-label={favorited ? "Remove from favorites" : "Favorite this card"}
+        onClick={() => {
+          toggleFavorite(cardId);
+          setToast(favorited ? "Removed from favorites" : "Saved to favorites");
+        }}
+        className={cx(
+          "flex min-h-11 items-center gap-2 rounded-full border px-3.5 text-[14px] font-semibold transition-colors",
+          favorited ? "border-spill bg-spill/15 text-spill" : "border-line-strong text-muted hover:text-ink",
+        )}
+      >
+        <Icon name={favorited ? "heart-fill" : "heart"} size={18} />
+        {favorited ? "Favorited" : "Favorite"}
+      </button>
+      <button
+        type="button"
+        aria-pressed={reported}
+        aria-label={reported ? "Undo report" : "Report this card as weak"}
+        onClick={() => {
+          toggleReport(cardId);
+          setToast(reported ? "Report undone" : "Flagged for review");
+        }}
+        className={cx(
+          "flex min-h-11 items-center gap-2 rounded-full border px-3.5 text-[14px] font-semibold transition-colors",
+          reported ? "border-danger bg-danger/10 text-danger" : "border-line-strong text-muted hover:text-ink",
+        )}
+      >
+        <Icon name="flag" size={18} />
+        {reported ? "Flagged" : "Flag"}
+      </button>
+      <Toast message={toast} onDone={() => setToast(null)} />
+    </div>
+  );
+}
+
 export function Scoreboard({ session, onClose }: { session: Session; onClose: () => void }) {
-  const { setSoftCap, setReducedMotion, endNight, go } = useApp.getState();
+  const { setSoftCap, setReducedMotion, setSound, setHaptics, endNight, go } = useApp.getState();
   const softCap = useApp((s) => s.softCap);
+  const sound = useApp((s) => s.sound);
+  const haptics = useApp((s) => s.haptics);
   const reduced = useReduced();
   const st = stats(session);
   const t = tanggeroIndex(session);
@@ -238,6 +288,12 @@ export function Scoreboard({ session, onClose }: { session: Session; onClose: ()
       </div>
       <div className="mt-3">
         <Toggle label="Reduced motion" hint="Fades instead of flips" checked={reduced} onChange={setReducedMotion} />
+      </div>
+      <div className="mt-3">
+        <Toggle label="Sound effects" hint="Blips on flip and answer" checked={sound} onChange={setSound} />
+      </div>
+      <div className="mt-3">
+        <Toggle label="Vibration" hint="On Android" checked={haptics} onChange={setHaptics} />
       </div>
       <Button variant="danger" className="mt-5" onClick={() => { onClose(); endNight(); }}>
         End the night
@@ -361,6 +417,7 @@ export function Game() {
       </div>
 
       <div className="pad-safe-bottom">
+        {drawn && card && faceUp && !water && <CardActions cardId={card.id} />}
         {drawn && card && faceUp && <Controls key={`${drawn.cardId}:${drawn.text}`} session={session} card={card} />}
         {drawn && !faceUp && (
           <p className="flex min-h-[72px] items-center justify-center text-[15px] font-semibold text-muted">

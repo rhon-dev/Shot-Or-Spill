@@ -272,4 +272,44 @@ describe("persistence (F15)", () => {
     expect(store.getState().screen).toBe("under18");
     expect(JSON.parse(storage.data.get(STORAGE_KEY)!).state.screen).toBe("age");
   });
+
+  it("keeps favorites, reports, and feedback settings across a reload (D-25, D-26)", () => {
+    const storage = memoryStorage();
+    const store = createAppStore(storage);
+    const s = store.getState();
+    s.toggleFavorite("warm-001");
+    s.toggleReport("warm-002");
+    s.setSound(false);
+    s.setHaptics(false);
+    const reloaded = createAppStore(storage).getState();
+    expect(reloaded.favorites).toEqual(["warm-001"]);
+    expect(reloaded.reports).toEqual(["warm-002"]);
+    expect(reloaded.sound).toBe(false);
+    expect(reloaded.haptics).toBe(false);
+  });
+
+  it("drops unknown or duplicate card ids from favorites and reports", () => {
+    const clean = sanitize({ favorites: ["warm-001", "warm-001", "gone-999", 3 as never], reports: ["nope-000"] });
+    expect(clean.favorites).toEqual(["warm-001"]);
+    expect(clean.reports).toEqual([]);
+    expect(clean.sound).toBe(true);
+    expect(clean.haptics).toBe(true);
+  });
+});
+
+describe("favorite and report (D-25)", () => {
+  it("toggles favorites and reports, ignoring unknown cards", () => {
+    const store = createAppStore(memoryStorage());
+    const s = store.getState();
+    s.toggleFavorite("warm-001");
+    expect(store.getState().favorites).toEqual(["warm-001"]);
+    s.toggleFavorite("warm-001");
+    expect(store.getState().favorites).toEqual([]);
+    s.toggleReport("warm-002");
+    expect(store.getState().reports).toEqual(["warm-002"]);
+    s.toggleFavorite("nope-999");
+    s.toggleReport("nope-999");
+    expect(store.getState().favorites).toEqual([]);
+    expect(store.getState().reports).toEqual(["warm-002"]);
+  });
 });

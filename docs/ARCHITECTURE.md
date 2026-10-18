@@ -203,6 +203,13 @@ Targets come from the PRD §11 quality bar.
 - Split info pages out of the first load. A CI size check enforces the JS budget (D-18).
 - Test on a budget Android phone in Phase 3.5 and Phase 4.
 
+**Favorite, report, and feedback (v1.1).** Favorites and reports are arrays of card
+ids in the persisted store (`favorites`, `reports`), sanitized on load against the known
+card set and never sent anywhere. Sound effects are short tones synthesized in
+`src/lib/feedback.ts` with the Web Audio API (no audio files, so the CSP is unchanged),
+and haptics use `navigator.vibrate` where supported. The store fires a cue on flip and
+on each resolve, gated by the `sound` and `haptics` toggles.
+
 **Offline and install (PWA, v1.1).** A service worker precaches the whole app on the
 first visit, so later visits open instantly and work with no signal; the saved night
 already lives in localStorage. The worker is generated after `vite build` by

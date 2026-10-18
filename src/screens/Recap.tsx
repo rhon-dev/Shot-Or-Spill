@@ -1,4 +1,5 @@
 /** End-of-night recap (F14, D-19, mock 06). No Share button in the MVP (D-17 deferred). */
+import { getCard } from "../content/cards";
 import { awards, playerById, stats, totals } from "../game/engine";
 import { useApp } from "../game/useApp";
 import { Avatar, Bunting, Icon, type IconName } from "../components/art";
@@ -18,11 +19,16 @@ function duration(ms: number): string {
 
 export function Recap() {
   const session = useApp((s) => s.session);
+  const favorites = useApp((s) => s.favorites);
   const { playAgain, newPlayers, go } = useApp.getState();
   if (!session) return null;
   const st = stats(session);
   const t = totals(session);
   const list = awards(session);
+  // Favorites from tonight's decks, so the recap shows what this group loved.
+  const nightFavorites = favorites
+    .map((id) => getCard(id))
+    .filter((c) => session.config.decks.includes(c.deck));
 
   return (
     <main className="mx-auto flex min-h-dvh w-full max-w-app flex-col px-5 pt-4">
@@ -85,6 +91,24 @@ export function Recap() {
           })}
         </tbody>
       </table>
+
+      {nightFavorites.length > 0 && (
+        <section className="mt-6" aria-labelledby="faves">
+          <h2 id="faves" className="text-label flex items-center gap-2 text-spill">
+            <Icon name="heart-fill" size={16} /> Favorites ({nightFavorites.length})
+          </h2>
+          <ul className="mt-2 space-y-1.5">
+            {nightFavorites.slice(0, 5).map((c) => (
+              <li key={c.id} className="rounded-sm border border-line bg-surface px-3 py-2 text-[14px] font-medium text-ink">
+                {c.text.replaceAll("{p1}", "someone").replaceAll("{p2}", "someone else").replaceAll("{tanggero}", "the Tanggero")}
+              </li>
+            ))}
+            {nightFavorites.length > 5 && (
+              <li className="px-1 text-[13px] font-semibold text-muted">and {nightFavorites.length - 5} more</li>
+            )}
+          </ul>
+        </section>
+      )}
 
       <div className="mt-auto pt-6 pad-safe-bottom">
         <p className="mb-3 text-center text-sm font-semibold text-accent">Get home safe. Nobody drives tonight.</p>

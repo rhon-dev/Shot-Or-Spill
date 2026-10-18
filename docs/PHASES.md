@@ -314,8 +314,10 @@ from PRD §7:
 
 - **v1.1:**
   - custom cards (F17)
-  - favorite and report a card
-  - sound effects and haptics
+  - favorite and report a card — **done (2026-10-18, D-25).** A face-up card can be
+    hearted or flagged; both are device-only, and the recap lists tonight's favorites.
+  - sound effects and haptics — **done (2026-10-18, D-26).** Web Audio tones on
+    flip/spill/shot/water, plus Android vibration, with off switches in Scores.
   - PWA install and offline play — **done early (2026-10-18).** A hand-written
     service worker (`scripts/build-sw.ts` + `scripts/sw-template.js`) precaches the
     whole app on first visit, so the game installs to the home screen and keeps

@@ -11,6 +11,7 @@ import { CARD_BY_ID, getCard } from "../content/cards";
 import { DECK_IDS, DECKS, type DeckId, type Intensity } from "../content/meta";
 import { layout } from "../design/tokens";
 import { track } from "../lib/analytics";
+import { feedback, type Cue } from "../lib/feedback";
 import * as engine from "./engine";
 import type { GameConfig, Outcome, Player, Session } from "./types";
 
@@ -36,6 +37,12 @@ export interface AppData {
   softCap: number;
   /** The table confirmed it's okay with adult questions (D-14). */
   adultOk: boolean;
+  /** Card ids the table hearted, and card ids flagged as weak (v1.1, D-25). */
+  favorites: string[];
+  reports: string[];
+  /** Sound effects and vibration on card actions (v1.1, D-26). */
+  sound: boolean;
+  haptics: boolean;
   screen: Screen;
   session: Session | null;
 }
@@ -74,6 +81,12 @@ export interface AppActions {
   dismissWarning: () => void;
   setSoftCap: (value: number) => void;
   setReducedMotion: (value: boolean) => void;
+  setSound: (value: boolean) => void;
+  setHaptics: (value: boolean) => void;
+
+  /** Heart or un-heart a card. Report or un-report a weak card (local only). */
+  toggleFavorite: (cardId: string) => void;
+  toggleReport: (cardId: string) => void;
 
   endNight: () => void;
   playAgain: () => void;
@@ -93,6 +106,10 @@ export const initialData: AppData = {
   intensity: 2,
   softCap: DEFAULT_SOFT_CAP,
   adultOk: false,
+  favorites: [],
+  reports: [],
+  sound: true,
+  haptics: true,
   screen: "age",
   session: null,
 };
@@ -170,6 +187,8 @@ export function sanitize(saved: Partial<AppData> | undefined): AppData {
     .slice(0, engine.MAX_PLAYERS);
   const intensity: Intensity = s.intensity === 1 || s.intensity === 3 ? s.intensity : 2;
   const tanggeroId = typeof s.tanggeroId === "string" && players.some((p) => p.id === s.tanggeroId) ? s.tanggeroId : null;
+  const cardIds = (arr: unknown): string[] =>
+    Array.isArray(arr) ? [...new Set(arr.filter((x): x is string => typeof x === "string" && CARD_BY_ID.has(x)))] : [];
   let session = s.session ?? null;
   try {
     if (session && !sessionIsLoadable(session)) session = null;
@@ -183,6 +202,10 @@ export function sanitize(saved: Partial<AppData> | undefined): AppData {
     tanggeroId,
     intensity,
     softCap: Number.isFinite(s.softCap) ? Math.max(1, Math.min(30, Math.round(s.softCap))) : DEFAULT_SOFT_CAP,
+    favorites: cardIds(s.favorites),
+    reports: cardIds(s.reports),
+    sound: typeof s.sound === "boolean" ? s.sound : true,
+    haptics: typeof s.haptics === "boolean" ? s.haptics : true,
     session,
     screen: s.screen === "under18" ? "age" : s.screen,
   };
@@ -219,6 +242,11 @@ export function createAppStore(storage?: StateStorage, now: () => number = Date.
         const config = (): GameConfig => {
           const { decks, intensity, softCap } = get();
           return { decks: [...decks], intensity, softCap };
+        };
+
+        const cue = (name: Cue) => {
+          const { sound, haptics } = get();
+          feedback(name, { sound, haptics });
         };
 
         return {
@@ -321,12 +349,16 @@ export function createAppStore(storage?: StateStorage, now: () => number = Date.
 
           finishHowTo: () => set({ howToPlaySeen: true, screen: get().session ? "game" : "decks" }),
 
-          flip: () => step(engine.flip),
+          flip: () => {
+            if (get().session?.current && !get().session!.current!.faceUp) cue("flip");
+            step(engine.flip);
+          },
 
           resolve: (outcome) => {
             const before = get().session;
             if (!before?.current) return;
             const card = getCard(before.current.cardId);
+            cue(outcome.kind === "water" ? "water" : outcome.kind === "choice" && outcome.choice === "shot" ? "shot" : outcome.kind === "hotSeat" && outcome.shots > 0 ? "shot" : "spill");
             step((s) => engine.resolve(s, outcome));
             track({ name: "card_resolved", props: { cardId: card.id, deck: card.deck, type: card.type, choice: choiceLabel(outcome) } });
             trackDrawn(get().session);
@@ -357,6 +389,20 @@ export function createAppStore(storage?: StateStorage, now: () => number = Date.
           },
 
           setReducedMotion: (value) => set({ reducedMotion: value }),
+          setSound: (value) => set({ sound: value }),
+          setHaptics: (value) => set({ haptics: value }),
+
+          toggleFavorite: (cardId) => {
+            if (!CARD_BY_ID.has(cardId)) return;
+            const favorites = get().favorites;
+            set({ favorites: favorites.includes(cardId) ? favorites.filter((id) => id !== cardId) : [...favorites, cardId] });
+          },
+
+          toggleReport: (cardId) => {
+            if (!CARD_BY_ID.has(cardId)) return;
+            const reports = get().reports;
+            set({ reports: reports.includes(cardId) ? reports.filter((id) => id !== cardId) : [...reports, cardId] });
+          },
 
           endNight: () => {
             const s = get().session;
@@ -395,6 +441,10 @@ export function createAppStore(storage?: StateStorage, now: () => number = Date.
           intensity: s.intensity,
           softCap: s.softCap,
           adultOk: s.adultOk,
+          favorites: s.favorites,
+          reports: s.reports,
+          sound: s.sound,
+          haptics: s.haptics,
           screen: s.screen === "under18" ? "age" : s.screen,
           session: s.session,
         }),

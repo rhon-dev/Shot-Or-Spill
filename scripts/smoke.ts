@@ -242,6 +242,12 @@ try {
   check(true, "swiping the card back flips it (F7)");
   await shot(page, "card-face");
 
+  // Favorite and flag the face-up card (D-25).
+  await button(/^Favorite this card/).click();
+  check(await page.getByRole("button", { name: /Remove from favorites/ }).isVisible(), "card can be favorited");
+  await button(/^Report this card as weak/).click();
+  check(await page.getByRole("button", { name: /Undo report/ }).isVisible(), "card can be flagged for review");
+
   // Skip: same reader, new card, nothing logged.
   const before = await page.getByRole("group").first().textContent();
   await button(/^Skip$/).click();
@@ -321,9 +327,12 @@ try {
   await button(/^Scores/).click();
   check((await page.getByRole("table").textContent()) === scoresBeforeReload, "same scores after reload");
 
-  console.log("Reduced motion toggle");
+  console.log("Reduced motion and feedback toggles");
   await page.getByRole("switch", { name: /Reduced motion/ }).click();
   check((await page.getByRole("switch", { name: /Reduced motion/ }).getAttribute("aria-checked")) === "true", "reduced motion turns on");
+  await page.getByRole("switch", { name: /Sound effects/ }).click();
+  check((await page.getByRole("switch", { name: /Sound effects/ }).getAttribute("aria-checked")) === "false", "sound effects can be turned off (D-26)");
+  check(await page.getByRole("switch", { name: /Vibration/ }).isVisible(), "vibration toggle shown (D-26)");
   await button("Close").click();
   await resolveCurrent("spill");
   await clearDialogs();
@@ -344,6 +353,7 @@ try {
   await button(/^End the night/).click();
   await page.getByRole("heading", { name: "THAT'S THE NIGHT" }).waitFor();
   check(await page.getByText(/Most Honest|Most Secretive|Biggest Tea/).first().isVisible(), "awards shown");
+  check(await page.getByRole("heading", { name: /^Favorites/ }).isVisible(), "recap lists tonight's favorites (D-25)");
   check((await button(/^Share/).count()) === 0, "no Share button in the MVP (D-17)");
   await shot(page, "recap");
   await button(/^Play again/).click();
