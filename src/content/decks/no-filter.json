@@ -7,7 +7,7 @@
     "target": "current",
     "text": "What's the biggest secret you've kept from your current or last partner?",
     "shots": 1,
-    "tags": ["secrets", "relationship"]
+    "tags": ["personal", "secrets", "relationship"]
   },
   {
     "id": "nofilter-002",
@@ -17,7 +17,7 @@
     "target": "current",
     "text": "What's your body count? Spill the number or take a shot.",
     "shots": 1,
-    "tags": ["body-count"]
+    "tags": ["personal", "body-count"]
   },
   {
     "id": "nofilter-003",
@@ -27,7 +27,7 @@
     "target": "current",
     "text": "What's something you've done that would make your parents disown you if they found out?",
     "shots": 1,
-    "tags": ["confessions", "family"]
+    "tags": ["personal", "confessions", "family"]
   },
   {
     "id": "nofilter-004",
@@ -35,9 +35,9 @@
     "type": "spill_or_shot",
     "intensity": 3,
     "target": "current",
-    "text": "Have you ever hooked up with someone from this barkada's circle and kept it from the group?",
+    "text": "Would you rather your ex read your diary or your parents see your search history? Pick one or take a shot.",
     "shots": 1,
-    "tags": ["secrets", "barkada"]
+    "tags": ["hypothetical", "confession"]
   },
   {
     "id": "nofilter-005",
@@ -47,7 +47,7 @@
     "target": "current",
     "text": "What's the worst thing you've done after an inuman that nobody here knows about?",
     "shots": 1,
-    "tags": ["drunk", "secrets"]
+    "tags": ["personal", "drunk", "secrets"]
   },
   {
     "id": "nofilter-006",
@@ -55,9 +55,9 @@
     "type": "spill_or_shot",
     "intensity": 3,
     "target": "current",
-    "text": "Have you ever lied to someone at this table about something that actually mattered?",
+    "text": "If you could erase one memory from everyone at this table, which one would you erase?",
     "shots": 1,
-    "tags": ["lies"]
+    "tags": ["hypothetical", "confession"]
   },
   {
     "id": "nofilter-007",
@@ -67,7 +67,7 @@
     "target": "p1",
     "text": "{p1}, what's a rumor about you that's actually true?",
     "shots": 1,
-    "tags": ["rumors"]
+    "tags": ["personal", "rumors"]
   },
   {
     "id": "nofilter-008",
@@ -77,7 +77,7 @@
     "target": "current",
     "text": "Have you ever been in love with two people at the same time?",
     "shots": 1,
-    "tags": ["love"]
+    "tags": ["personal", "love"]
   },
   {
     "id": "nofilter-009",
@@ -87,7 +87,7 @@
     "target": "current",
     "text": "What's a grudge you're still holding against someone in this room?",
     "shots": 1,
-    "tags": ["grudges"]
+    "tags": ["personal", "grudges"]
   },
   {
     "id": "nofilter-010",
@@ -95,9 +95,9 @@
     "type": "spill_or_shot",
     "intensity": 3,
     "target": "current",
-    "text": "What's the riskiest place you've made out with someone, and how close did a tita come to catching you?",
+    "text": "Would you rather date someone with a wild past or someone with zero experience?",
     "shots": 1,
-    "tags": ["romance"]
+    "tags": ["hypothetical", "confession"]
   },
   {
     "id": "nofilter-011",
@@ -107,7 +107,7 @@
     "target": "tanggero",
     "text": "The Tanggero picks someone to answer: what's your biggest regret from your last relationship?",
     "shots": 1,
-    "tags": ["regret", "relationship"]
+    "tags": ["personal", "regret", "relationship"]
   },
   {
     "id": "nofilter-012",
@@ -115,9 +115,9 @@
     "type": "spill_or_shot",
     "intensity": 3,
     "target": "current",
-    "text": "Have you ever let a sibling or cousin take the blame for something you did?",
+    "text": "If you could get away with one crime and nobody would ever find out, what would it be?",
     "shots": 1,
-    "tags": ["confessions"]
+    "tags": ["hypothetical", "confession"]
   },
   {
     "id": "nofilter-013",
@@ -127,7 +127,7 @@
     "target": "current",
     "text": "What's one decision you'd reverse tonight if you could, no matter the cost?",
     "shots": 1,
-    "tags": ["regret"]
+    "tags": ["hypothetical", "regret"]
   },
   {
     "id": "nofilter-014",
@@ -137,7 +137,7 @@
     "target": "current",
     "text": "Have you ever hooked up with an ex after the breakup? How many times?",
     "shots": 1,
-    "tags": ["exes"]
+    "tags": ["personal", "exes"]
   },
   {
     "id": "nofilter-015",
@@ -145,9 +145,9 @@
     "type": "spill_or_shot",
     "intensity": 3,
     "target": "p1",
-    "text": "{p1}, what's the most scandalous thing you've done at a family event or reunion?",
+    "text": "{p1}, if your whole family could hear your thoughts for one day, what would get you disowned first?",
     "shots": 1,
-    "tags": ["family", "reunion"]
+    "tags": ["hypothetical", "confession"]
   },
   {
     "id": "nofilter-016",
@@ -157,7 +157,7 @@
     "target": "current",
     "text": "What's something about yourself that even your closest barkada doesn't know?",
     "shots": 1,
-    "tags": ["confessions"]
+    "tags": ["personal", "confessions"]
   },
   {
     "id": "nofilter-017",
@@ -165,9 +165,9 @@
     "type": "spill_or_shot",
     "intensity": 3,
     "target": "current",
-    "text": "Have you ever dated someone mainly to make an ex jealous?",
+    "text": "Would you rather your partner be honest about everything, or keep the hurtful stuff to themselves?",
     "shots": 1,
-    "tags": ["exes", "jealousy"]
+    "tags": ["hypothetical", "confession"]
   },
   {
     "id": "nofilter-018",
@@ -177,7 +177,7 @@
     "target": "p1",
     "text": "{p1}, if {p2} secretly had a crush on someone at this table, who would you bet it is?",
     "shots": 1,
-    "tags": ["crush", "barkada"]
+    "tags": ["hypothetical", "crush", "barkada"]
   },
   {
     "id": "nofilter-019",
@@ -267,7 +267,7 @@
     "target": "current",
     "text": "What's the worst thing you've ever done to someone who trusted you? Spill, or take 2 shots.",
     "shots": 2,
-    "tags": ["confessions", "regret"]
+    "tags": ["personal", "confessions", "regret"]
   },
   {
     "id": "nofilter-028",
@@ -277,7 +277,7 @@
     "target": "current",
     "text": "Who in this room have you thought about romantically, even for a second? Say the name, or take 2 shots.",
     "shots": 2,
-    "tags": ["crush", "barkada"]
+    "tags": ["personal", "crush", "barkada"]
   },
   {
     "id": "nofilter-029",
@@ -295,9 +295,9 @@
     "type": "spill_or_shot",
     "intensity": 3,
     "target": "current",
-    "text": "What's the most reckless thing you've done for love or attraction, and did anyone in the barkada have to bail you out?",
+    "text": "What's your biggest dealbreaker in the bedroom? Keep it clean.",
     "shots": 1,
-    "tags": ["recklessness", "love"]
+    "tags": ["generic", "confession"]
   },
   {
     "id": "nofilter-031",
@@ -305,9 +305,9 @@
     "type": "spill_or_shot",
     "intensity": 3,
     "target": "current",
-    "text": "Have you ever hooked up with a coworker? How did you survive the office afterward?",
+    "text": "Would you ever date a coworker? What would make it worth the risk?",
     "shots": 1,
-    "tags": ["work", "hookups"]
+    "tags": ["hypothetical", "confession"]
   },
   {
     "id": "nofilter-032",
@@ -315,9 +315,9 @@
     "type": "spill_or_shot",
     "intensity": 3,
     "target": "current",
-    "text": "What's the biggest lie you've told your parents to get out of trouble, and who took the blame?",
+    "text": "What's the worst lie a person can tell in a relationship?",
     "shots": 1,
-    "tags": ["lies", "regret"]
+    "tags": ["generic", "confession"]
   },
   {
     "id": "nofilter-033",
@@ -325,9 +325,9 @@
     "type": "spill_or_shot",
     "intensity": 3,
     "target": "current",
-    "text": "Which person from your past would you avoid at all costs if you saw them at the mall, and why?",
+    "text": "If an ex messaged you 'I miss you' tonight, would you answer?",
     "shots": 1,
-    "tags": ["past", "grudges"]
+    "tags": ["hypothetical", "confession"]
   },
   {
     "id": "nofilter-034",
@@ -337,7 +337,7 @@
     "target": "p1",
     "text": "{p1}, what's the one thing you've never told your closest friend, even now?",
     "shots": 1,
-    "tags": ["secrets", "friendship"]
+    "tags": ["personal", "secrets", "friendship"]
   },
   {
     "id": "nofilter-035",
@@ -347,7 +347,7 @@
     "target": "current",
     "text": "Have you ever been so jealous that you went through a partner's messages or tracked where they were?",
     "shots": 1,
-    "tags": ["jealousy"]
+    "tags": ["personal", "jealousy"]
   },
   {
     "id": "nofilter-036",
@@ -355,9 +355,9 @@
     "type": "spill_or_shot",
     "intensity": 3,
     "target": "current",
-    "text": "What's something you did in your twenties that you hope your future kids, and your titas, never find out about?",
+    "text": "If your future kids could watch one night of your twenties, which night would you hide from them?",
     "shots": 1,
-    "tags": ["past", "secrets"]
+    "tags": ["hypothetical", "confession"]
   },
   {
     "id": "nofilter-037",
@@ -365,9 +365,9 @@
     "type": "spill_or_shot",
     "intensity": 3,
     "target": "current",
-    "text": "Have you ever hooked up with someone you didn't even like, just for the experience?",
+    "text": "Would you rather have a one-night stand with an ex or with a total stranger? Pick one or take a shot.",
     "shots": 1,
-    "tags": ["hookups"]
+    "tags": ["hypothetical", "confession"]
   },
   {
     "id": "nofilter-038",
@@ -375,9 +375,9 @@
     "type": "spill_or_shot",
     "intensity": 3,
     "target": "current",
-    "text": "What's the most painful truth someone has ever told you about yourself?",
+    "text": "What's the most painful truth a person can hear about themselves?",
     "shots": 1,
-    "tags": ["honesty"]
+    "tags": ["generic", "confession"]
   },
   {
     "id": "nofilter-039",
@@ -385,9 +385,9 @@
     "type": "spill_or_shot",
     "intensity": 3,
     "target": "tanggero",
-    "text": "The Tanggero picks someone to answer: what's your biggest regret from a night out that this group doesn't know about?",
+    "text": "The Tanggero picks someone to answer: if you could redo one night out, would you make it wilder or calmer?",
     "shots": 1,
-    "tags": ["regret", "inuman"]
+    "tags": ["hypothetical", "confession"]
   },
   {
     "id": "nofilter-040",
@@ -395,9 +395,9 @@
     "type": "spill_or_shot",
     "intensity": 3,
     "target": "current",
-    "text": "Have you ever said 'I'm fine' to your family while falling apart? When was the last time?",
+    "text": "When is it okay to say you're fine when you're really not?",
     "shots": 1,
-    "tags": ["honesty", "feelings"]
+    "tags": ["generic", "confession"]
   },
   {
     "id": "nofilter-041",
@@ -405,9 +405,9 @@
     "type": "spill_or_shot",
     "intensity": 3,
     "target": "current",
-    "text": "What's the most irresponsible money decision you've made because of a relationship, like lending money you never got back?",
+    "text": "Would you rather lend your partner a huge amount of money, or say no and risk the relationship?",
     "shots": 1,
-    "tags": ["money", "relationship"]
+    "tags": ["hypothetical", "confession"]
   },
   {
     "id": "nofilter-042",
@@ -415,9 +415,9 @@
     "type": "spill_or_shot",
     "intensity": 3,
     "target": "current",
-    "text": "Have you ever stayed silent when you knew a friend's partner was cheating on them?",
+    "text": "If you knew a friend's partner was cheating, would you tell them? Spill or shot.",
     "shots": 1,
-    "tags": ["cheating", "friendship"]
+    "tags": ["hypothetical", "confession"]
   },
   {
     "id": "nofilter-043",
@@ -425,9 +425,9 @@
     "type": "spill_or_shot",
     "intensity": 3,
     "target": "current",
-    "text": "What's the closest you've come to quitting everything and moving abroad or back to the province?",
+    "text": "If you could disappear and start a new life anywhere for a year, would you do it?",
     "shots": 1,
-    "tags": ["escape"]
+    "tags": ["hypothetical", "confession"]
   },
   {
     "id": "nofilter-044",
@@ -435,9 +435,9 @@
     "type": "spill_or_shot",
     "intensity": 3,
     "target": "p1",
-    "text": "{p1}, what's the most inappropriate thing you've said at a family gathering after a few drinks?",
+    "text": "{p1}, would you rather confess your biggest secret to your family or to this barkada?",
     "shots": 1,
-    "tags": ["family", "drunk"]
+    "tags": ["hypothetical", "confession"]
   },
   {
     "id": "nofilter-045",
@@ -445,9 +445,9 @@
     "type": "spill_or_shot",
     "intensity": 3,
     "target": "current",
-    "text": "Have you ever lied about your age, your job, or your salary to impress someone?",
+    "text": "Would you lie about your age or your salary to impress someone you really liked?",
     "shots": 1,
-    "tags": ["lies"]
+    "tags": ["hypothetical", "confession"]
   },
   {
     "id": "nofilter-046",
@@ -455,9 +455,9 @@
     "type": "spill_or_shot",
     "intensity": 3,
     "target": "current",
-    "text": "What's the worst thing you've ever done to get revenge?",
+    "text": "If you could get revenge on one person with zero consequences, would you? Spill or shot.",
     "shots": 1,
-    "tags": ["revenge"]
+    "tags": ["hypothetical", "confession"]
   },
   {
     "id": "nofilter-047",
@@ -465,9 +465,9 @@
     "type": "spill_or_shot",
     "intensity": 3,
     "target": "current",
-    "text": "Have you ever wished a friend's relationship would end? Spill or shot.",
+    "text": "Is it ever okay to secretly hope a friend's relationship ends?",
     "shots": 1,
-    "tags": ["friendship", "jealousy"]
+    "tags": ["generic", "confession"]
   },
   {
     "id": "nofilter-048",
@@ -477,7 +477,7 @@
     "target": "current",
     "text": "What do you think this table would be most shocked to learn about you?",
     "shots": 1,
-    "tags": ["secrets"]
+    "tags": ["generic", "secrets"]
   },
   {
     "id": "nofilter-049",
@@ -567,7 +567,7 @@
     "target": "current",
     "text": "What's the biggest secret you're keeping from someone sitting at this table? Spill, or take 2 shots.",
     "shots": 2,
-    "tags": ["secrets"]
+    "tags": ["personal", "secrets"]
   },
   {
     "id": "nofilter-058",
@@ -577,7 +577,7 @@
     "target": "current",
     "text": "Have you ever cheated on a partner or been cheated on? Tell the story, or take 2 shots.",
     "shots": 2,
-    "tags": ["cheating"]
+    "tags": ["personal", "cheating"]
   },
   {
     "id": "nofilter-059",
@@ -585,9 +585,9 @@
     "type": "double_down",
     "intensity": 3,
     "target": "current",
-    "text": "What's the one thing you did that you'll never forgive yourself for? Spill, or take 2 shots.",
+    "text": "If undoing your biggest mistake meant losing a friend, would you still undo it? Spill, or take 2 shots.",
     "shots": 2,
-    "tags": ["regret"]
+    "tags": ["hypothetical", "confession"]
   },
   {
     "id": "nofilter-060",

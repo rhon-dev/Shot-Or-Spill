@@ -2,7 +2,7 @@
 import { useRef, useState, type FormEvent, type KeyboardEvent, type PointerEvent } from "react";
 import { DECK_IDS, DECKS, type DeckId, type Intensity } from "../content/meta";
 import { layout } from "../design/tokens";
-import { eligibleCount, MAX_PLAYERS, MIN_ELIGIBLE, MIN_PLAYERS } from "../game/engine";
+import { eligibleCount, MAX_PLAYERS, MIN_ELIGIBLE, MIN_PLAYERS, tanggero } from "../game/engine";
 import { needsAdultOk, sameRoster } from "../game/store";
 import type { Player } from "../game/types";
 import { useApp } from "../game/useApp";
@@ -134,12 +134,17 @@ function RenameForm({ player, onDone }: { player: Player; onDone: () => void }) 
 }
 
 /**
- * Seating order. Turns go around in this order, so the host sorts it to
- * match the table. Three ways to move someone: drag the handle, the up/down
- * buttons (single tap, no dragging needed), or arrow keys on the handle.
+ * Seating order, numbered 1 to 12. Turns go around in this order, so the
+ * host sorts it to match the table; nothing is shuffled. Ways to move
+ * someone: pick a seat number, drag the handle, the up/down buttons, or
+ * arrow keys on the handle (everything but drag works without dragging).
  */
-function SeatList({ players, onAnnounce }: { players: Player[]; onAnnounce: (msg: string) => void }) {
-  const { movePlayer, setPlayerOrder } = useApp.getState();
+function SeatList({ players, tanggeroId, onAnnounce }: { players: Player[]; tanggeroId: string | null; onAnnounce: (msg: string) => void }) {
+  const { movePlayer, setPlayerOrder, setSeat: storeSetSeat } = useApp.getState();
+  const setSeat = (id: string, seat: number) => {
+    storeSetSeat(id, seat);
+    announceSeat(id, seat);
+  };
   const [editing, setEditing] = useState<string | null>(null);
   const [drag, setDrag] = useState<{ id: string; from: number; startY: number; dy: number } | null>(null);
   const listRef = useRef<HTMLOListElement>(null);
@@ -227,16 +232,28 @@ function SeatList({ players, onAnnounce }: { players: Player[]; onAnnounce: (msg
             >
               <Icon name="drag" size={22} />
             </button>
-            <Avatar id={p.id} name={p.name} size={34} />
+            <label className="sr-only" htmlFor={`seat-${id}`}>Seat number for {p.name}</label>
+            <select
+              id={`seat-${id}`}
+              value={i + 1}
+              onChange={(e) => setSeat(id, Number(e.target.value))}
+              className="seat-select h-11 w-11 shrink-0 cursor-pointer appearance-none rounded-full border-[1.5px] border-line-strong bg-bg text-center font-display text-xl text-ink outline-none focus-visible:border-accent"
+            >
+              {order.map((_, n) => (
+                <option key={n} value={n + 1}>{n + 1}</option>
+              ))}
+            </select>
             <button
               type="button"
               onClick={() => setEditing(id)}
               className="flex min-h-12 min-w-0 flex-1 flex-col justify-center pl-2.5 text-left"
-              aria-label={`${p.name}, seat ${i + 1}${i === 0 ? ", starts" : ""}. Tap to rename or remove.`}
+              aria-label={`${p.name}, seat ${i + 1}${i === 0 ? ", reads first" : ""}${id === tanggeroId ? ", Tanggero" : ""}. Tap to rename or remove.`}
             >
               <span className="truncate text-[17px] font-bold text-ink">{p.name}</span>
-              <span className={cx("text-[12px] font-semibold", i === 0 ? "text-shot" : "text-muted")}>
-                {i === 0 ? "Starts first" : `Seat ${i + 1}`}
+              <span className="flex gap-2 text-[12px] font-semibold">
+                {i === 0 && <span className="text-shot">Reads first</span>}
+                {id === tanggeroId && <span className="text-accent">Tanggero</span>}
+                {i !== 0 && id !== tanggeroId && <span className="text-muted">Seat {i + 1}</span>}
               </span>
             </button>
             <IconButton icon="up" label={`Move ${p.name} up`} disabled={i === 0} onClick={() => move(id, -1)} className="w-11 text-muted disabled:opacity-25" />
@@ -264,16 +281,63 @@ function RoundPreview({ players }: { players: Player[] }) {
   );
 }
 
+/**
+ * The host picks the Tanggero (D-23). Default is seat 1. Mid-night this
+ * shows and changes the live Tanggero.
+ */
+export function TanggeroPicker({ players, selected, onAnnounce }: { players: Player[]; selected: string | null; onAnnounce: (msg: string) => void }) {
+  const setTanggero = useApp((s) => s.setTanggero);
+  if (players.length < MIN_PLAYERS) return null;
+  return (
+    <section className="glass-card mt-5 rounded-md border-[1.5px] border-accent/60 p-4" aria-labelledby="tanggero-pick">
+      <div className="flex items-center gap-2">
+        <ShotGlass size={26} />
+        <h2 id="tanggero-pick" className="text-label text-accent">Who's the Tanggero?</h2>
+      </div>
+      <p className="mt-1 text-sm font-medium text-muted">
+        Pours for the table and picks who answers on some cards. Passes to the next seat every 10 cards, and you can change it anytime.
+      </p>
+      <div role="radiogroup" aria-labelledby="tanggero-pick" className="mt-3 flex flex-wrap gap-2">
+        {players.map((p) => {
+          const on = p.id === selected;
+          return (
+            <button
+              key={p.id}
+              type="button"
+              role="radio"
+              aria-checked={on}
+              onClick={() => {
+                setTanggero(p.id);
+                onAnnounce(`${p.name} is the Tanggero.`);
+              }}
+              className={cx(
+                "flex min-h-12 max-w-full items-center gap-2 rounded-full border-2 py-1 pr-4 pl-1 text-[15px] font-bold transition-colors",
+                on ? "border-accent bg-accent/15 text-ink" : "border-line-strong text-muted hover:text-ink",
+              )}
+            >
+              <Avatar id={p.id} name={p.name} size={30} />
+              <span className="truncate">{p.name}</span>
+              {on && <Icon name="check" size={16} className="shrink-0 text-accent" />}
+            </button>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
 export function Players() {
   const players = useApp((s) => s.players);
   const session = useApp((s) => s.session);
-  const { addPlayer, shuffleSeats, applySeating, go } = useApp.getState();
+  const tanggeroPick = useApp((s) => s.tanggeroId);
+  const { addPlayer, applySeating, go } = useApp.getState();
   const [name, setName] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [announcement, setAnnouncement] = useState("");
   const full = players.length >= MAX_PLAYERS;
   const midNight = !!session && sameRoster(session.players, players);
   const rosterChanged = !!session && !midNight;
+  const tanggeroId = midNight ? tanggero(session!).id : (tanggeroPick ?? players[0]?.id ?? null);
 
   const add = (e: FormEvent) => {
     e.preventDefault();
@@ -328,24 +392,18 @@ export function Players() {
       <p id="new-player-err" role="alert" className="mt-2 min-h-5 text-sm font-semibold text-danger">{error}</p>
 
       {players.length > 0 && (
-        <div className="mt-1 mb-3 flex items-center justify-between">
-          <h2 className="text-label text-muted">Seating order · {players.length} of {MAX_PLAYERS}</h2>
-          {players.length > 2 && (
-            <button type="button" onClick={() => { shuffleSeats(); setAnnouncement("Seats shuffled."); }} className="flex min-h-12 items-center gap-1.5 px-2 text-sm font-semibold text-accent">
-              <Icon name="shuffle" size={18} /> Shuffle seats
-            </button>
-          )}
-        </div>
+        <h2 className="text-label mt-1 mb-3 text-muted">Seating order · {players.length} of {MAX_PLAYERS}</h2>
       )}
 
-      <SeatList players={players} onAnnounce={setAnnouncement} />
+      <SeatList players={players} tanggeroId={tanggeroId} onAnnounce={setAnnouncement} />
       <RoundPreview players={players} />
 
       <p className="mt-4 text-sm font-medium text-muted">
         {players.length < MIN_PLAYERS
           ? `Add at least ${MIN_PLAYERS} players to start.`
-          : "Drag the handle or use the arrows to move someone. Tap a name to rename or remove."}
+          : "Tap a seat number, drag the handle, or use the arrows to move someone. Tap a name to rename or remove."}
       </p>
+      <TanggeroPicker players={players} selected={tanggeroId} onAnnounce={setAnnouncement} />
       {midNight && <p className="mt-2 text-sm font-semibold text-accent">Re-sorting keeps tonight's scores.</p>}
       {rosterChanged && <p className="mt-2 text-sm font-semibold text-shot">Changing who's playing starts a new night.</p>}
       <p className="sr-only" aria-live="polite">{announcement}</p>
@@ -525,8 +583,8 @@ export function HowToPlay() {
         <div>
           <h2 className="text-label text-accent">The Tanggero</h2>
           <p className="mt-1 text-sm font-medium text-muted">
-            Pours for the table. The app picks one now and passes the role to the next seat every 10 cards. Some cards let the
-            Tanggero pick who answers.
+            Pours for the table. The host picks one at setup, and the role passes to the next seat every 10 cards. Change it
+            anytime from Scores. Some cards let the Tanggero pick who answers.
           </p>
         </div>
       </section>

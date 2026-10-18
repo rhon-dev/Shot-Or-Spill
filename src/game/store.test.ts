@@ -11,6 +11,7 @@ import {
   sanitize,
   STORAGE_KEY,
 } from "./store";
+import { tanggeroIndex } from "./engine";
 import type { Outcome, Session } from "./types";
 
 function memoryStorage(): StateStorage & { data: Map<string, string> } {
@@ -78,6 +79,35 @@ describe("player setup (F2)", () => {
     expect(store.getState().players[0]!.name).toBe("Kuya Jun");
     s.removePlayer(first.id);
     expect(store.getState().players).toHaveLength(11);
+  });
+  it("puts a player in a seat number without shuffling anyone else (D-23)", () => {
+    const store = createAppStore(memoryStorage());
+    const s = store.getState();
+    for (const n of ["A", "B", "C", "D"]) s.addPlayer(n);
+    const id = (n: string) => store.getState().players.find((p) => p.name === n)!.id;
+    s.setSeat(id("D"), 1);
+    expect(store.getState().players.map((p) => p.name)).toEqual(["D", "A", "B", "C"]);
+    s.setSeat(id("A"), 4);
+    expect(store.getState().players.map((p) => p.name)).toEqual(["D", "B", "C", "A"]);
+    s.setSeat(id("B"), 9);
+    expect(store.getState().players.map((p) => p.name)).toEqual(["D", "B", "C", "A"]);
+  });
+  it("starts the night with the picked Tanggero and changes it mid-night (D-23)", () => {
+    const store = createAppStore(memoryStorage(), () => 1_000_000);
+    const s = store.getState();
+    s.confirmAge();
+    for (const n of ["A", "B", "C"]) s.addPlayer(n);
+    const [a, b, c] = store.getState().players;
+    s.setTanggero(b!.id);
+    s.startNight();
+    let session = store.getState().session!;
+    expect(session.players[tanggeroIndex(session)]!.id).toBe(b!.id);
+    expect(session.players[session.readerIndex]!.id).toBe(a!.id);
+    s.setTanggero(c!.id);
+    session = store.getState().session!;
+    expect(session.players[tanggeroIndex(session)]!.id).toBe(c!.id);
+    s.removePlayer(c!.id);
+    expect(store.getState().tanggeroId).toBeNull();
   });
 });
 

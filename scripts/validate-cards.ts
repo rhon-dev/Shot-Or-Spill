@@ -14,6 +14,8 @@ import {
   CARD_TYPES,
   DECK_IDS,
   DECKS,
+  MIN_EASY_SHARE,
+  STYLE_TAGS,
   TYPE_MIX_TARGET,
   type Card,
   type CardType,
@@ -199,6 +201,31 @@ for (const card of cards) {
   }
 }
 
+// Question style (D-24): every Spill or Shot and Double Down card carries
+// exactly one style tag, and most questions in each deck are easy to answer.
+const isQuestion = (c: Card) => c.type === "spill_or_shot" || c.type === "double_down";
+for (const card of cards.filter(isQuestion)) {
+  const styles = card.tags.filter((t) => (STYLE_TAGS as readonly string[]).includes(t));
+  if (styles.length !== 1) {
+    errors.push({ where: card.id, message: `needs exactly one style tag (${STYLE_TAGS.join(", ")}); has ${styles.length}` });
+  }
+}
+const styleRows: string[] = [];
+for (const id of DECK_IDS) {
+  const qs = cards.filter((c) => c.deck === id && isQuestion(c));
+  const count = (tag: string) => qs.filter((c) => c.tags.includes(tag)).length;
+  const easy = count("hypothetical") + count("generic");
+  styleRows.push(
+    `${DECKS[id].name.padEnd(18)} ${String(qs.length).padStart(5)}  ${String(count("hypothetical")).padStart(5)}  ${String(count("generic")).padStart(5)}  ${String(count("personal")).padStart(5)}  ${pct(easy, qs.length).padStart(5)}`,
+  );
+  if (qs.length > 0 && easy / qs.length < MIN_EASY_SHARE) {
+    errors.push({
+      where: DECKS[id].name,
+      message: `only ${pct(easy, qs.length)} of questions are hypothetical or generic; at least ${pct(MIN_EASY_SHARE, 1)} must be`,
+    });
+  }
+}
+
 for (const [id, count] of seenIds) {
   if (count > 1) errors.push({ where: id, message: `id used ${count} times` });
 }
@@ -228,6 +255,10 @@ const launchTotal = DECK_IDS.reduce((s, id) => s + DECKS[id].launchCount, 0);
 out.push(`${"Total".padEnd(18)} ${String(total).padStart(5)}  ${String(launchTotal).padStart(6)}`);
 // Cutting weak cards after playtests can drop a deck below its PRD §6 count: warn, don't fail.
 for (const msg of short) warnings.push({ where: "launch", message: msg });
+
+out.push("");
+out.push("Question style     Total   Hypo    Gen   Pers   Easy");
+out.push(...styleRows);
 
 out.push("");
 out.push("Type mix           Count  Share  Target");

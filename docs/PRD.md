@@ -70,7 +70,7 @@ on any phone.
 - A group goes from opening the link to the first card in under 20 seconds.
 - The questions are good enough that players choose to answer more often than they
   drink (target: 60%+ spill rate).
-- Launch with 300+ original cards across 5 decks.
+- Launch with 300+ original cards across 6 decks (360 written).
 - Card flips stay smooth on budget Android phones (the real device at most inuman
   tables).
 - Responsible drinking is part of the game design itself, not just a disclaimer.
@@ -144,10 +144,12 @@ player a new card and logs nothing (D-13).
 | Warm Up | 1 | Light icebreakers, food, habits, childhood | 60 |
 | Barkada Tea | 2 | Friendships, group chat secrets, old crushes, betrayals | 70 |
 | Love Life | 2–3 | Exes, situationships, ghosting, "talking stage," jealousy | 70 |
+| Couples | 1–3 | For a couple or a table of pairs: partners, dates, guessing games, would-you-rathers (D-24) | 50 |
 | Family & Adulting | 2 | Titas, family pressure, work, money, salary | 50 |
 | No Filter 🔞 | 3 | Bold adult questions, body count, regrets, confessions | 60 |
 
 - Players can mix decks.
+- At least 60% of the questions in each deck are hypothetical or generic, so anyone can answer them (D-24).
 - Selecting the No Filter deck **or** the No Filter intensity needs a second
   confirmation ("Everyone here is okay with adult questions") (D-14).
 - Intensity filter: Chill / Spicy / No Filter. Cards above the selected level never
@@ -194,7 +196,7 @@ player a new card and logs nothing (D-13).
 | --- | --- | --- | --- |
 | F1 | Age gate | Blocks the app until 18+ is confirmed; remembered for 30 days | Must |
 | F2 | Player setup | Add, edit, and remove 2–12 players; no duplicate names | Must |
-| F3 | Tanggero | Randomly assigned at start; rotates every 10 completed cards (skips and Water Breaks don't count); shown on screen | Must |
+| F3 | Tanggero | Picked by the host at setup (seat 1 by default, D-23) and changeable anytime; rotates to the next seat every 10 completed cards (skips and Water Breaks don't count); shown on screen | Must |
 | F4 | Deck select | One or more decks; the No Filter deck or the No Filter intensity needs a second confirmation (D-14); Start disabled below 10 eligible cards (D-15) | Must |
 | F5 | Intensity filter | No card above the selected intensity is ever drawn | Must |
 | F6 | Turn order | Current player is shown; advances after every completed card | Must |

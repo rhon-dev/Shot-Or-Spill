@@ -54,6 +54,11 @@
 }
 
 @layer utilities {
+  /* Seat number picker: centered digit in a round native select. */
+  .seat-select {
+    text-align-last: center;
+  }
+
   /* Raised panel with a soft top highlight. */
   .glass-card {
     @apply border border-line bg-surface;

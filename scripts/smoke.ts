@@ -160,14 +160,17 @@ try {
   await input.fill("");
   const seats = page.getByRole("list", { name: "Seating order" });
   const seatNames = async () =>
-    // Row text is "<initials><name><Starts first | Seat N>".
-    (await seats.getByRole("listitem").allTextContents()).map((t) => t.match(/^[A-Z?]{1,2}(.+?)(?:Starts first|Seat \d+)$/)?.[1] ?? t);
+    // The name button's label is "<name>, seat N[, reads first][, Tanggero]. Tap to rename or remove."
+    Promise.all(
+      (await seats.getByRole("button", { name: /Tap to rename/ }).all()).map(async (b) => (await b.getAttribute("aria-label"))!.split(", seat")[0]!),
+    );
   check((await seats.getByRole("listitem").count()) === 4, "4 players listed in the seating order");
 
   console.log("Seating order (host sorts the ikot)");
   for (let i = 0; i < 3; i++) await button("Move Carlo up").click();
   check((await seatNames()).join(",") === "Carlo,Juan,Maria,Bea", "up arrows move Carlo to seat 1");
-  check(await seats.getByText("Starts first").isVisible(), "seat 1 is marked as starting first");
+  check(await seats.getByText("Reads first").isVisible(), "seat 1 is marked as reading first");
+  check(!(await page.getByText("Shuffle seats").count()), "no random seat shuffle");
   // Drag Maria's handle down one row.
   const handle = page.getByRole("button", { name: /^Move Maria, seat 3/ });
   const hb = (await handle.boundingBox())!;
@@ -181,6 +184,17 @@ try {
   await page.keyboard.press("ArrowDown");
   await page.keyboard.press("ArrowUp");
   check((await seatNames()).join(",") === "Carlo,Juan,Bea,Maria", "arrow keys move a seat and back");
+  // Seat numbers 1-12: pick a number to put someone in that seat.
+  await page.getByLabel("Seat number for Bea").selectOption("1");
+  check((await seatNames()).join(",") === "Bea,Carlo,Juan,Maria", "seat number picker moves Bea to seat 1");
+  await page.getByLabel("Seat number for Bea").selectOption("3");
+  check((await seatNames()).join(",") === "Carlo,Juan,Bea,Maria", "seat number picker moves Bea back to seat 3");
+
+  console.log("Pick the Tanggero (D-23)");
+  const tPick = page.getByRole("radiogroup", { name: "Who's the Tanggero?" });
+  check((await tPick.getByRole("radio", { checked: true }).textContent())?.includes("Carlo"), "seat 1 is the default Tanggero");
+  await tPick.getByRole("radio", { name: /Juan/ }).click();
+  check((await tPick.getByRole("radio", { name: /Juan/ }).getAttribute("aria-checked")) === "true", "host picks Juan as Tanggero");
   await shot(page, "players");
   await button(/^Next: pick decks/).click();
 
@@ -214,7 +228,7 @@ try {
   check(firstReader === "CARLO", "first reader is seat 1 (Carlo)");
   const upNext = (await page.getByRole("list", { name: "Up next" }).textContent())?.replace(/\s+/g, "");
   check(upNext === "JUJuanBEBeaMAMaria", `up next follows the seating: ${upNext}`);
-  check(await page.getByText(/^Tanggero: /).isVisible(), "Tanggero badge shown");
+  check(await page.getByText("Tanggero: Juan").isVisible(), "the picked Tanggero (Juan) pours first");
   await shot(page, "pass-the-phone");
   // F7: swipe works as well as tap. Drag the card back sideways to flip it.
   const back = await button(/^Flip the card/).boundingBox();
@@ -266,6 +280,11 @@ try {
   await page.getByRole("heading", { name: "SCOREBOARD" }).waitFor();
   const scoresBefore = await page.getByRole("table").textContent();
   await shot(page, "scoreboard");
+  await page.getByRole("radiogroup", { name: "Who's the Tanggero?" }).getByRole("radio", { name: /Bea/ }).click();
+  check(
+    (await page.getByRole("table").getByRole("rowheader", { name: /Bea/ }).textContent())?.includes("Tanggero"),
+    "scoreboard hands the Tanggero role to Bea mid-night",
+  );
 
   console.log("Re-sort seats mid-night");
   await button("Change seating").click();

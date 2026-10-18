@@ -20,6 +20,7 @@ import { Avatar, Icon, WaterGlass } from "../components/art";
 import { CardStage } from "../components/Card";
 import { Dialog, Sheet, Toast } from "../components/overlays";
 import { ActionButton, Button, Chip, cx, Stepper, TanggeroBadge, Toggle } from "../components/ui";
+import { TanggeroPicker } from "./Setup";
 
 const plural = (n: number, word: string) => `${n} ${word}${n === 1 ? "" : "s"}`;
 
@@ -179,6 +180,7 @@ export function Scoreboard({ session, onClose }: { session: Session; onClose: ()
   const st = stats(session);
   const t = tanggeroIndex(session);
   const cd = countdowns(session);
+  const [announcement, setAnnouncement] = useState("");
   return (
     <Sheet title="SCOREBOARD" onClose={onClose}>
       <table className="mt-4 w-full border-separate border-spacing-y-1 text-left">
@@ -222,8 +224,10 @@ export function Scoreboard({ session, onClose }: { session: Session; onClose: ()
         </tbody>
       </table>
       <p className="mt-3 text-[13px] font-semibold text-muted">
-        Card {session.log.length + 1} · New Tanggero in {cd.tanggero} · Water Break in {cd.waterBreak}
+        Card {session.log.length + 1} · Next seat pours in {cd.tanggero} · Water Break in {cd.waterBreak}
       </p>
+      <TanggeroPicker players={session.players} selected={session.players[t]!.id} onAnnounce={setAnnouncement} />
+      <p className="sr-only" aria-live="polite">{announcement}</p>
       <div className="my-4 h-px bg-line" />
       <h3 className="text-label text-muted">Game settings</h3>
       <div className="mt-3 flex items-center justify-between gap-4">

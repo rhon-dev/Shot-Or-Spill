@@ -86,8 +86,8 @@ card breaks it.
 | 2 | Spicy | Real tea: crushes, exes, group-chat secrets, money, family pressure |
 | 3 | No Filter | Bold adult territory: body count, cheating, deep regrets, confessions |
 
-**[auto]** Deck ceilings: Warm Up 1 · Barkada Tea 2 · Love Life 3 · Family & Adulting 2 ·
-No Filter 3. No Filter cards should be intensity 3 unless a card works better as a 2.
+**[auto]** Deck ceilings: Warm Up 1 · Barkada Tea 2 · Love Life 3 · Couples 3 ·
+Family & Adulting 2 · No Filter 3. No Filter cards should be intensity 3 unless a card works better as a 2.
 
 ## 5. Card types, targets, and placeholders
 
@@ -139,6 +139,26 @@ they appear under every filter. Write them as pacing reminders with some deck fl
   snack".
 - Funny beats clever. Writing for the room means getting a laugh or a groan.
 
+### Question style (D-24)
+
+Most questions should be easy for anyone at the table to answer, even someone without a
+wild story. Every `spill_or_shot` and `double_down` card carries exactly one style tag
+**[auto]**:
+
+| Tag | Means | Example |
+| --- | --- | --- |
+| `hypothetical` | A what-if or a would-you-rather | "Would you rather give up rice or coffee for a year?" |
+| `generic` | An opinion or everyday question anyone can answer | "What's the biggest green flag in a friend?" |
+| `personal` | Needs a real story from the player's life | "Have you ever ghosted someone?" |
+
+**[auto]** At least 60% of the questions in each deck are `hypothetical` or `generic`.
+Group cards (Everyone Who, Most Likely, Hot Seat, Water Break) don't need a style tag.
+
+### Couples deck
+
+Write "your partner", not `{p1}`. `{p1}` is a random player, which is only the partner
+when exactly two people play, and the deck should also work for a table of couples.
+
 ## 7. Card format
 
 One JSON array per deck in `src/content/decks/<deck>.json`:
@@ -159,7 +179,7 @@ One JSON array per deck in `src/content/decks/<deck>.json`:
 **[auto]** Field rules:
 
 - `id`: the deck prefix plus 3 digits, unique across every deck. Prefixes: `warm`,
-  `barkada`, `love`, `family`, `nofilter`.
+  `barkada`, `love`, `couples`, `family`, `nofilter`.
 - `deck`: must match the file name.
 - `tags`: 1–4 tags in lowercase-kebab-case, e.g. `group-chat`.
 - Unknown fields are rejected.

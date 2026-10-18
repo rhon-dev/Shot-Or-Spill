@@ -8,7 +8,7 @@ and the player answers honestly (spill) or takes a shot.
 
 It's a mobile-first web app with no install, no account, and no ads.
 
-> **Status:** The game is playable end to end with all 310 cards, and the checks below
+> **Status:** The game is playable end to end with all 360 cards, and the checks below
 > pass. Phase 4 (playtests) is next: the cards and the playtest kit are ready, and the
 > real inuman sessions need people at a table.
 
@@ -84,8 +84,10 @@ It prints a deck and type-mix report, and the run fails if any card breaks a rul
 ## MVP scope (v1)
 
 - 18+ age gate with a responsible-drinking pledge
-- 2–12 players, plus a Tanggero who rotates every 10 cards
-- 5 decks (Warm Up, Barkada Tea, Love Life, Family & Adulting, No Filter) with an
+- 2–12 players in a fixed seating order (seats 1–12, sorted by the host), plus a
+  Tanggero the host picks, who passes to the next seat every 10 cards
+- 6 decks (Warm Up, Barkada Tea, Love Life, Couples, Family & Adulting, No Filter),
+  mostly hypothetical and generic questions, with an
   intensity filter (Chill / Spicy / No Filter)
 - Card flip and swipe, SPILL and SHOT buttons, Skip always available, Undo
 - Shot counters, a scoreboard, Water Break pacing, and a soft-cap warning

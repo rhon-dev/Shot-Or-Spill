@@ -17,6 +17,7 @@ const DECK_BG: Record<DeckId, string> = {
   "warm-up": "bg-deck-warm-up",
   "barkada-tea": "bg-deck-barkada-tea",
   "love-life": "bg-deck-love-life",
+  couples: "bg-deck-couples",
   "family-adulting": "bg-deck-family-adulting",
   "no-filter": "bg-deck-no-filter",
 };
@@ -24,6 +25,7 @@ const DECK_BORDER: Record<DeckId, string> = {
   "warm-up": "border-deck-warm-up",
   "barkada-tea": "border-deck-barkada-tea",
   "love-life": "border-deck-love-life",
+  couples: "border-deck-couples",
   "family-adulting": "border-deck-family-adulting",
   "no-filter": "border-deck-no-filter",
 };

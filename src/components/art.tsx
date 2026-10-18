@@ -26,6 +26,7 @@ import secret from "@phosphor-icons/core/assets/fill/lock-key-fill.svg?raw";
 import tea from "@phosphor-icons/core/assets/fill/sparkle-fill.svg?raw";
 import beer from "@phosphor-icons/core/assets/fill/beer-stein-fill.svg?raw";
 import coffee from "@phosphor-icons/core/assets/fill/coffee-fill.svg?raw";
+import heart from "@phosphor-icons/core/assets/fill/heart-fill.svg?raw";
 import heartBreak from "@phosphor-icons/core/assets/fill/heart-break-fill.svg?raw";
 import house from "@phosphor-icons/core/assets/fill/house-fill.svg?raw";
 import fire from "@phosphor-icons/core/assets/fill/fire-fill.svg?raw";
@@ -78,6 +79,7 @@ const DECK_ICON: Record<DeckId, string[]> = {
   "warm-up": paths(beer),
   "barkada-tea": paths(coffee),
   "love-life": paths(heartBreak),
+  couples: paths(heart),
   "family-adulting": paths(house),
   "no-filter": paths(fire),
 };

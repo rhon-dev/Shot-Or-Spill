@@ -7,7 +7,7 @@
     "target": "current",
     "text": "Who in this group would you NOT trust to keep a secret? Say it or take a shot.",
     "shots": 1,
-    "tags": ["secrets", "trust"]
+    "tags": ["generic", "secrets", "trust"]
   },
   {
     "id": "barkada-002",
@@ -17,7 +17,7 @@
     "target": "current",
     "text": "What's something you told only one person in this barkada and never told the rest?",
     "shots": 1,
-    "tags": ["secrets"]
+    "tags": ["personal", "secrets"]
   },
   {
     "id": "barkada-003",
@@ -27,7 +27,7 @@
     "target": "current",
     "text": "Who here did you not like when you first met, and what changed your mind?",
     "shots": 1,
-    "tags": ["first-impressions"]
+    "tags": ["personal", "first-impressions"]
   },
   {
     "id": "barkada-004",
@@ -37,7 +37,7 @@
     "target": "p1",
     "text": "{p1}, if you got arrested tonight, who here would bail you out first, and who would just laugh?",
     "shots": 1,
-    "tags": ["trust", "hypothetical"]
+    "tags": ["hypothetical", "trust"]
   },
   {
     "id": "barkada-005",
@@ -45,9 +45,9 @@
     "type": "spill_or_shot",
     "intensity": 2,
     "target": "current",
-    "text": "What's the pettiest reason you've ever been annoyed at someone at this table?",
+    "text": "If this barkada started a business together, who would be the boss, and who would run off with the money?",
     "shots": 1,
-    "tags": ["petty"]
+    "tags": ["hypothetical", "friendship"]
   },
   {
     "id": "barkada-006",
@@ -57,7 +57,7 @@
     "target": "current",
     "text": "Have you ever had a crush on someone in this barkada? You don't have to say who.",
     "shots": 1,
-    "tags": ["crush", "barkada"]
+    "tags": ["personal", "crush", "barkada"]
   },
   {
     "id": "barkada-007",
@@ -65,9 +65,9 @@
     "type": "spill_or_shot",
     "intensity": 2,
     "target": "current",
-    "text": "What's the biggest utang someone in this group owes you, and do you think you'll ever see it again?",
+    "text": "What's the one thing a friend could do that you would never forgive?",
     "shots": 1,
-    "tags": ["utang", "money"]
+    "tags": ["generic", "friendship"]
   },
   {
     "id": "barkada-008",
@@ -75,9 +75,9 @@
     "type": "spill_or_shot",
     "intensity": 1,
     "target": "current",
-    "text": "Which barkada trip or night out do you still think about the most, and why?",
+    "text": "If this barkada had its own reality show, what would it be called?",
     "shots": 1,
-    "tags": ["memories"]
+    "tags": ["hypothetical", "friendship"]
   },
   {
     "id": "barkada-009",
@@ -85,9 +85,9 @@
     "type": "spill_or_shot",
     "intensity": 2,
     "target": "current",
-    "text": "What's a message you sent to the group chat that you still regret?",
+    "text": "Would you rather know everything your friends say about you behind your back, or never know any of it?",
     "shots": 1,
-    "tags": ["group-chat", "regret"]
+    "tags": ["hypothetical", "friendship"]
   },
   {
     "id": "barkada-010",
@@ -97,7 +97,7 @@
     "target": "tanggero",
     "text": "The Tanggero picks someone to answer: who in this group gives the worst advice with the most confidence?",
     "shots": 1,
-    "tags": ["advice"]
+    "tags": ["generic", "advice"]
   },
   {
     "id": "barkada-011",
@@ -105,9 +105,9 @@
     "type": "spill_or_shot",
     "intensity": 2,
     "target": "current",
-    "text": "Have you ever made up an excuse to skip a barkada hangout? What was the real reason?",
+    "text": "What makes someone a real friend instead of just a drinking buddy?",
     "shots": 1,
-    "tags": ["excuses"]
+    "tags": ["generic", "friendship"]
   },
   {
     "id": "barkada-012",
@@ -117,7 +117,7 @@
     "target": "p1",
     "text": "{p1}, what's one thing this barkada always does that you secretly can't stand?",
     "shots": 1,
-    "tags": ["honesty"]
+    "tags": ["personal", "honesty"]
   },
   {
     "id": "barkada-013",
@@ -127,7 +127,7 @@
     "target": "current",
     "text": "Who here have you talked about behind their back, and was it good or bad?",
     "shots": 1,
-    "tags": ["gossip"]
+    "tags": ["personal", "gossip"]
   },
   {
     "id": "barkada-014",
@@ -135,9 +135,9 @@
     "type": "spill_or_shot",
     "intensity": 2,
     "target": "current",
-    "text": "What's a friendship you let fade on purpose, and would you fix it if you could?",
+    "text": "If you had to move abroad tomorrow, who here would you miss the most?",
     "shots": 1,
-    "tags": ["friendship", "regret"]
+    "tags": ["hypothetical", "friendship"]
   },
   {
     "id": "barkada-015",
@@ -155,9 +155,9 @@
     "type": "spill_or_shot",
     "intensity": 2,
     "target": "current",
-    "text": "Have you ever been jealous of a friend's success? Spill or shot.",
+    "text": "Would you rather have one best friend for life or a big barkada you only see twice a year?",
     "shots": 1,
-    "tags": ["jealousy"]
+    "tags": ["hypothetical", "friendship"]
   },
   {
     "id": "barkada-017",
@@ -167,7 +167,7 @@
     "target": "p1",
     "text": "{p1}, would you trust {p2} with your phone password? Why or why not?",
     "shots": 1,
-    "tags": ["trust"]
+    "tags": ["hypothetical", "trust"]
   },
   {
     "id": "barkada-018",
@@ -175,9 +175,9 @@
     "type": "spill_or_shot",
     "intensity": 2,
     "target": "current",
-    "text": "What's the worst thing you've done at a friend's debut or birthday that nobody here knows about?",
+    "text": "If you won the lottery, who here would you tell first, and who would you hide it from?",
     "shots": 1,
-    "tags": ["party", "secrets"]
+    "tags": ["hypothetical", "friendship"]
   },
   {
     "id": "barkada-019",
@@ -185,9 +185,9 @@
     "type": "spill_or_shot",
     "intensity": 2,
     "target": "current",
-    "text": "Which friend's ex did you secretly like better than the person they're with now?",
+    "text": "What's the biggest green flag in a friend?",
     "shots": 1,
-    "tags": ["exes", "honesty"]
+    "tags": ["generic", "friendship"]
   },
   {
     "id": "barkada-020",
@@ -197,7 +197,7 @@
     "target": "tanggero",
     "text": "The Tanggero picks someone to answer: what's the most dramatic thing you've done after a fight with a friend?",
     "shots": 1,
-    "tags": ["drama"]
+    "tags": ["personal", "drama"]
   },
   {
     "id": "barkada-021",
@@ -317,7 +317,7 @@
     "target": "current",
     "text": "If you had to cut one person at this table from your life, who goes? Say it, or take 2 shots.",
     "shots": 2,
-    "tags": ["honesty"]
+    "tags": ["hypothetical", "honesty"]
   },
   {
     "id": "barkada-033",
@@ -327,7 +327,7 @@
     "target": "current",
     "text": "What's the meanest thing you've said about someone here when they weren't around? Spill, or take 2 shots.",
     "shots": 2,
-    "tags": ["gossip"]
+    "tags": ["personal", "gossip"]
   },
   {
     "id": "barkada-034",
@@ -347,7 +347,7 @@
     "target": "current",
     "text": "Which member of this barkada would you call first at 3 AM, and why them?",
     "shots": 1,
-    "tags": ["trust", "barkada"]
+    "tags": ["generic", "trust", "barkada"]
   },
   {
     "id": "barkada-036",
@@ -355,9 +355,9 @@
     "type": "spill_or_shot",
     "intensity": 2,
     "target": "current",
-    "text": "Who here is always the last to pay their share of the bill, and do you still love them anyway?",
+    "text": "If this table had to split the bill evenly, who here would try to pay only for what they ate?",
     "shots": 1,
-    "tags": ["money", "utang"]
+    "tags": ["hypothetical", "friendship"]
   },
   {
     "id": "barkada-037",
@@ -365,9 +365,9 @@
     "type": "spill_or_shot",
     "intensity": 2,
     "target": "current",
-    "text": "What's the most awkward moment you've seen in this barkada that nobody ever talks about?",
+    "text": "What's the most important thing a friend has ever done for you?",
     "shots": 1,
-    "tags": ["memories", "awkward"]
+    "tags": ["generic", "friendship"]
   },
   {
     "id": "barkada-038",
@@ -377,7 +377,7 @@
     "target": "p1",
     "text": "{p1}, what's one thing this barkada misunderstands about you?",
     "shots": 1,
-    "tags": ["honesty"]
+    "tags": ["personal", "honesty"]
   },
   {
     "id": "barkada-039",
@@ -387,7 +387,7 @@
     "target": "current",
     "text": "Have you ever lied about being sick to skip a barkada event? Spill the real story or take a shot.",
     "shots": 1,
-    "tags": ["excuses"]
+    "tags": ["personal", "excuses"]
   },
   {
     "id": "barkada-040",
@@ -397,7 +397,7 @@
     "target": "current",
     "text": "What's the best gift this barkada ever gave you, and what's the worst?",
     "shots": 1,
-    "tags": ["gifts"]
+    "tags": ["personal", "gifts"]
   },
   {
     "id": "barkada-041",
@@ -405,9 +405,9 @@
     "type": "spill_or_shot",
     "intensity": 2,
     "target": "current",
-    "text": "Which friend's advice did you ignore, only to find out later they were right?",
+    "text": "Would you rather your best friend date your ex or date your sibling? Pick one or take a shot.",
     "shots": 1,
-    "tags": ["advice", "regret"]
+    "tags": ["hypothetical", "friendship"]
   },
   {
     "id": "barkada-042",
@@ -417,7 +417,7 @@
     "target": "current",
     "text": "Who here would survive the longest without their phone, and who would panic first?",
     "shots": 1,
-    "tags": ["phone", "hypothetical"]
+    "tags": ["hypothetical", "phone"]
   },
   {
     "id": "barkada-043",
@@ -425,9 +425,9 @@
     "type": "spill_or_shot",
     "intensity": 2,
     "target": "current",
-    "text": "What's the longest you've gone without talking to someone in this barkada, and why?",
+    "text": "What's one friendship rule you think everyone should follow?",
     "shots": 1,
-    "tags": ["friendship", "silence"]
+    "tags": ["generic", "friendship"]
   },
   {
     "id": "barkada-044",
@@ -437,7 +437,7 @@
     "target": "tanggero",
     "text": "The Tanggero picks someone to answer: who in this barkada cries the easiest, and what's the best example?",
     "shots": 1,
-    "tags": ["crying"]
+    "tags": ["personal", "crying"]
   },
   {
     "id": "barkada-045",
@@ -447,7 +447,7 @@
     "target": "current",
     "text": "What secret did you keep for a friend that almost made you crack?",
     "shots": 1,
-    "tags": ["secrets"]
+    "tags": ["personal", "secrets"]
   },
   {
     "id": "barkada-046",
@@ -457,7 +457,7 @@
     "target": "p1",
     "text": "{p1}, if {p2} announced they were moving abroad tomorrow, what would you say first?",
     "shots": 1,
-    "tags": ["friendship", "barkada"]
+    "tags": ["hypothetical", "friendship", "barkada"]
   },
   {
     "id": "barkada-047",
@@ -465,9 +465,9 @@
     "type": "spill_or_shot",
     "intensity": 2,
     "target": "current",
-    "text": "Have you ever taken credit for a barkada plan that wasn't your idea?",
+    "text": "If you could add one new rule to this barkada, what would it be?",
     "shots": 1,
-    "tags": ["credit"]
+    "tags": ["hypothetical", "friendship"]
   },
   {
     "id": "barkada-048",
@@ -477,7 +477,7 @@
     "target": "current",
     "text": "What was the first thing you noticed about this barkada when you joined it?",
     "shots": 1,
-    "tags": ["first-impressions"]
+    "tags": ["personal", "first-impressions"]
   },
   {
     "id": "barkada-049",
@@ -487,7 +487,7 @@
     "target": "current",
     "text": "Who here knows your most embarrassing story, and have they ever used it against you?",
     "shots": 1,
-    "tags": ["embarrassing", "barkada"]
+    "tags": ["personal", "embarrassing", "barkada"]
   },
   {
     "id": "barkada-050",
@@ -495,9 +495,9 @@
     "type": "spill_or_shot",
     "intensity": 2,
     "target": "current",
-    "text": "Have you ever left a barkada outing early because the vibe felt off? What happened?",
+    "text": "If a zombie outbreak started tonight, who here would you team up with first?",
     "shots": 1,
-    "tags": ["outings"]
+    "tags": ["hypothetical", "friendship"]
   },
   {
     "id": "barkada-051",
@@ -505,9 +505,9 @@
     "type": "spill_or_shot",
     "intensity": 2,
     "target": "current",
-    "text": "What's a rule of this barkada that everybody breaks but nobody admits?",
+    "text": "What's the worst thing someone can do at an inuman?",
     "shots": 1,
-    "tags": ["rules"]
+    "tags": ["generic", "friendship"]
   },
   {
     "id": "barkada-052",
@@ -517,7 +517,7 @@
     "target": "current",
     "text": "Which friend would you trust to get you home safe after a night out, and which one would you leave at the table?",
     "shots": 1,
-    "tags": ["trust", "inuman"]
+    "tags": ["generic", "trust", "inuman"]
   },
   {
     "id": "barkada-053",
@@ -525,9 +525,9 @@
     "type": "spill_or_shot",
     "intensity": 2,
     "target": "current",
-    "text": "What's the most random thing you've ever asked a barkada member to lend you?",
+    "text": "Would you rather lend a friend ten thousand pesos or help them move houses for a whole weekend?",
     "shots": 1,
-    "tags": ["borrowing"]
+    "tags": ["hypothetical", "friendship"]
   },
   {
     "id": "barkada-054",
@@ -535,9 +535,9 @@
     "type": "spill_or_shot",
     "intensity": 2,
     "target": "current",
-    "text": "Have you ever stayed quiet during a barkada fight just to avoid picking a side?",
+    "text": "What's a topic you think friends should never argue about?",
     "shots": 1,
-    "tags": ["fights"]
+    "tags": ["generic", "friendship"]
   },
   {
     "id": "barkada-055",
@@ -547,7 +547,7 @@
     "target": "p1",
     "text": "{p1}, whose love life in this barkada do you worry about the most?",
     "shots": 1,
-    "tags": ["love", "barkada"]
+    "tags": ["personal", "love", "barkada"]
   },
   {
     "id": "barkada-056",
@@ -555,9 +555,9 @@
     "type": "spill_or_shot",
     "intensity": 1,
     "target": "current",
-    "text": "What's the funniest thing that has happened on a barkada road trip or beach outing?",
+    "text": "If this barkada went on a road trip with no plans, who would drive, and who would complain the whole way?",
     "shots": 1,
-    "tags": ["trips", "memories"]
+    "tags": ["hypothetical", "friendship"]
   },
   {
     "id": "barkada-057",
@@ -667,7 +667,7 @@
     "target": "current",
     "text": "Who here would you call the most two-faced, and when did you first notice? Say it, or take 2 shots.",
     "shots": 2,
-    "tags": ["honesty", "barkada"]
+    "tags": ["personal", "honesty", "barkada"]
   },
   {
     "id": "barkada-068",
@@ -677,7 +677,7 @@
     "target": "current",
     "text": "What's the biggest lie you've told this barkada, and do they know yet? Spill, or take 2 shots.",
     "shots": 2,
-    "tags": ["lies", "secrets"]
+    "tags": ["personal", "lies", "secrets"]
   },
   {
     "id": "barkada-069",

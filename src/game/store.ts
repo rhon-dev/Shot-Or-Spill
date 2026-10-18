@@ -27,7 +27,10 @@ export interface AppData {
   howToPlaySeen: boolean;
   /** null follows the OS setting; true/false is the in-app override. */
   reducedMotion: boolean | null;
+  /** Seating order: index 0 is seat 1, who reads first. Never shuffled. */
   players: Player[];
+  /** The host's pick for the first Tanggero. null means seat 1 (D-23). */
+  tanggeroId: string | null;
   decks: DeckId[];
   intensity: Intensity;
   softCap: number;
@@ -49,7 +52,10 @@ export interface AppActions {
   movePlayer: (id: string, delta: -1 | 1) => void;
   /** Set the whole seating order at once (drag to reorder). */
   setPlayerOrder: (ids: string[]) => void;
-  shuffleSeats: () => void;
+  /** Put a player in a seat number, 1 to the number of players. */
+  setSeat: (id: string, seat: number) => void;
+  /** Pick the Tanggero. Mid-night, it takes effect on the running game right away. */
+  setTanggero: (id: string) => void;
   /** Mid-night: apply a re-sorted seating to the running game. False if the roster changed. */
   applySeating: () => boolean;
 
@@ -82,6 +88,7 @@ export const initialData: AppData = {
   howToPlaySeen: false,
   reducedMotion: null,
   players: [],
+  tanggeroId: null,
   decks: ["warm-up", "barkada-tea"],
   intensity: 2,
   softCap: DEFAULT_SOFT_CAP,
@@ -162,6 +169,7 @@ export function sanitize(saved: Partial<AppData> | undefined): AppData {
     .filter((p): p is Player => !!p && typeof p.id === "string" && typeof p.name === "string")
     .slice(0, engine.MAX_PLAYERS);
   const intensity: Intensity = s.intensity === 1 || s.intensity === 3 ? s.intensity : 2;
+  const tanggeroId = typeof s.tanggeroId === "string" && players.some((p) => p.id === s.tanggeroId) ? s.tanggeroId : null;
   let session = s.session ?? null;
   try {
     if (session && !sessionIsLoadable(session)) session = null;
@@ -172,6 +180,7 @@ export function sanitize(saved: Partial<AppData> | undefined): AppData {
     ...s,
     decks: decks.length > 0 ? decks : initialData.decks,
     players,
+    tanggeroId,
     intensity,
     softCap: Number.isFinite(s.softCap) ? Math.max(1, Math.min(30, Math.round(s.softCap))) : DEFAULT_SOFT_CAP,
     session,
@@ -236,7 +245,10 @@ export function createAppStore(storage?: StateStorage, now: () => number = Date.
             return null;
           },
 
-          removePlayer: (id) => set({ players: get().players.filter((p) => p.id !== id) }),
+          removePlayer: (id) => {
+            const { players, tanggeroId } = get();
+            set({ players: players.filter((p) => p.id !== id), tanggeroId: tanggeroId === id ? null : tanggeroId });
+          },
 
           movePlayer: (id, delta) => {
             const players = [...get().players];
@@ -254,7 +266,26 @@ export function createAppStore(storage?: StateStorage, now: () => number = Date.
             set({ players: ids.map((id) => players.find((p) => p.id === id)!) });
           },
 
-          shuffleSeats: () => set({ players: engine.shuffle(get().players, Math.random) }),
+          setSeat: (id, seat) => {
+            const players = [...get().players];
+            const from = players.findIndex((p) => p.id === id);
+            const to = Math.round(seat) - 1;
+            if (from < 0 || to < 0 || to >= players.length || to === from) return;
+            const [moved] = players.splice(from, 1);
+            players.splice(to, 0, moved!);
+            set({ players });
+          },
+
+          setTanggero: (id) => {
+            const { players, session, tanggeroId } = get();
+            const inSetup = players.some((p) => p.id === id);
+            const inGame = !!session && session.players.some((p) => p.id === id);
+            if (!inSetup && !inGame) return;
+            set({
+              tanggeroId: inSetup ? id : tanggeroId,
+              ...(inGame ? { session: engine.setTanggero(session!, id) } : {}),
+            });
+          },
 
           applySeating: () => {
             const { session, players } = get();
@@ -280,7 +311,7 @@ export function createAppStore(storage?: StateStorage, now: () => number = Date.
             const continuing = !!state.session && sameRoster(state.session.players, players);
             const session = continuing
               ? engine.changeConfig(engine.reorderPlayers(state.session!, players.map((p) => p.id)), cfg)
-              : engine.newSession(players, cfg, Math.random, now());
+              : engine.newSession(players, cfg, Math.random, now(), state.tanggeroId);
             if (!continuing) {
               track({ name: "session_start", props: { players: players.length, decks: cfg.decks.join(","), intensity: cfg.intensity } });
             }
@@ -334,13 +365,13 @@ export function createAppStore(storage?: StateStorage, now: () => number = Date.
           },
 
           playAgain: () => {
-            const { players } = get();
+            const { players, tanggeroId } = get();
             const cfg = config();
             if (players.length < engine.MIN_PLAYERS) return set({ screen: "players" });
             if (engine.eligibleCount(cfg.decks, cfg.intensity, players.length) < engine.MIN_ELIGIBLE) {
               return set({ session: null, screen: "decks" });
             }
-            const session = engine.newSession(players, cfg, Math.random, now());
+            const session = engine.newSession(players, cfg, Math.random, now(), tanggeroId);
             track({ name: "session_start", props: { players: players.length, decks: cfg.decks.join(","), intensity: cfg.intensity } });
             set({ session, screen: "game" });
             trackDrawn(session);
@@ -359,6 +390,7 @@ export function createAppStore(storage?: StateStorage, now: () => number = Date.
           howToPlaySeen: s.howToPlaySeen,
           reducedMotion: s.reducedMotion,
           players: s.players,
+          tanggeroId: s.tanggeroId,
           decks: s.decks,
           intensity: s.intensity,
           softCap: s.softCap,

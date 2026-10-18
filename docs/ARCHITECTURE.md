@@ -11,7 +11,7 @@ The build follows this plan. A few details differ:
 - **Info pages:** they're hash routes (`#about`, `#drink-responsibly`, `#terms`), so the
   phone's back button closes them.
 - **Animation loading:** Motion's animation features load after first paint, which
-  keeps the first-load JS at about 108 KB with all 310 cards bundled.
+  keeps the first-load JS at about 115 KB with all 360 cards bundled.
 - **Turn rules:** the PHASES.md "Phase 3 result" section lists the turn rules the build
   settled.
 
@@ -177,8 +177,9 @@ broadcast later.
 5. **Turn (F6).** After a card is resolved, the turn moves to the next reader.
 6. **Skip (F11, D-13).** The same reader gets the next card. Nothing is logged, and the
    skipped card is used up for this cycle.
-7. **Tanggero (F3, D-13).** Chosen at random at the start. Moves to the next player after
-   every 10 completed cards and shows as a badge.
+7. **Tanggero (F3, D-13, D-23).** Picked by the host (seat 1 by default), never random.
+   Moves to the next seat after every 10 completed cards and shows as a badge.
+   `setTanggero` hands it to someone else for the rest of the current round.
 8. **Water Break (F12, D-12).** After a random 12–15 completed cards, the engine inserts
    one, then picks a new random target.
 9. **Soft cap (F12).** When a player's shots reach the cap, show the warning once for
@@ -198,7 +199,7 @@ Targets come from the PRD §11 quality bar.
 - Self-host fonts with `font-display: swap`. Anton is Latin only. Inter ships several
   `unicode-range` subsets, so browsers download only the Latin file for English text. The
   page makes no third-party requests on load.
-- Bundle the card JSON. About 310 cards is small, so there's no fetch.
+- Bundle the card JSON. About 360 cards is small, so there's no fetch.
 - Split info pages out of the first load. A CI size check enforces the JS budget (D-18).
 - Test on a budget Android phone in Phase 3.5 and Phase 4.
 

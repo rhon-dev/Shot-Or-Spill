@@ -7,7 +7,7 @@
     "target": "current",
     "text": "What's the most awkward question a tita asked you at a family reunion, and how did you answer?",
     "shots": 1,
-    "tags": ["tita", "reunion"]
+    "tags": ["personal", "tita", "reunion"]
   },
   {
     "id": "family-002",
@@ -17,7 +17,7 @@
     "target": "current",
     "text": "Would you tell this group your actual monthly salary? Spill or shot.",
     "shots": 1,
-    "tags": ["salary", "money"]
+    "tags": ["hypothetical", "salary", "money"]
   },
   {
     "id": "family-003",
@@ -27,7 +27,7 @@
     "target": "current",
     "text": "What career did your family plan for you, and how far did you end up from it?",
     "shots": 1,
-    "tags": ["career", "family"]
+    "tags": ["personal", "career", "family"]
   },
   {
     "id": "family-004",
@@ -37,7 +37,7 @@
     "target": "current",
     "text": "What's something you bought that you still hide from your parents?",
     "shots": 1,
-    "tags": ["money", "family"]
+    "tags": ["personal", "money", "family"]
   },
   {
     "id": "family-005",
@@ -47,7 +47,7 @@
     "target": "current",
     "text": "How much of your monthly pay goes to family? Spill the number or take a shot.",
     "shots": 1,
-    "tags": ["money", "family"]
+    "tags": ["personal", "money", "family"]
   },
   {
     "id": "family-006",
@@ -55,9 +55,9 @@
     "type": "spill_or_shot",
     "intensity": 1,
     "target": "current",
-    "text": "What's the weirdest pasalubong a relative has ever asked you to bring home?",
+    "text": "If you could bring back any pasalubong from anywhere in the world, what would you bring your family?",
     "shots": 1,
-    "tags": ["pasalubong", "family"]
+    "tags": ["hypothetical", "adulting"]
   },
   {
     "id": "family-007",
@@ -67,7 +67,7 @@
     "target": "p1",
     "text": "{p1}, which relative would you least want to sit next to at Noche Buena, and why?",
     "shots": 1,
-    "tags": ["christmas", "family"]
+    "tags": ["personal", "christmas", "family"]
   },
   {
     "id": "family-008",
@@ -77,7 +77,7 @@
     "target": "current",
     "text": "What's the biggest lie you've told your parents that they still believe?",
     "shots": 1,
-    "tags": ["lies", "family"]
+    "tags": ["personal", "lies", "family"]
   },
   {
     "id": "family-009",
@@ -87,7 +87,7 @@
     "target": "current",
     "text": "Have you ever hidden from a godchild at Christmas so you wouldn't have to give a gift?",
     "shots": 1,
-    "tags": ["ninong", "christmas"]
+    "tags": ["personal", "ninong", "christmas"]
   },
   {
     "id": "family-010",
@@ -95,9 +95,9 @@
     "type": "spill_or_shot",
     "intensity": 2,
     "target": "current",
-    "text": "What's the worst thing you've done at work that your boss never found out about?",
+    "text": "If you could quit your job tomorrow with no money worries, what would you do instead?",
     "shots": 1,
-    "tags": ["work"]
+    "tags": ["hypothetical", "adulting"]
   },
   {
     "id": "family-011",
@@ -105,9 +105,9 @@
     "type": "spill_or_shot",
     "intensity": 2,
     "target": "current",
-    "text": "Which coworker would you never invite to an inuman, and why?",
+    "text": "Would you rather have a boss you love and a small salary, or a boss you hate and a big one?",
     "shots": 1,
-    "tags": ["work", "inuman"]
+    "tags": ["hypothetical", "adulting"]
   },
   {
     "id": "family-012",
@@ -117,7 +117,7 @@
     "target": "current",
     "text": "What adult skill did you fake until you finally figured it out?",
     "shots": 1,
-    "tags": ["adulting"]
+    "tags": ["generic", "adulting"]
   },
   {
     "id": "family-013",
@@ -127,7 +127,7 @@
     "target": "tanggero",
     "text": "The Tanggero picks someone to answer: what's the most you've ever lent a relative, and did you get it back?",
     "shots": 1,
-    "tags": ["utang", "family"]
+    "tags": ["personal", "utang", "family"]
   },
   {
     "id": "family-014",
@@ -137,7 +137,7 @@
     "target": "current",
     "text": "Which family tradition will you quietly drop once you have your own household?",
     "shots": 1,
-    "tags": ["traditions", "family"]
+    "tags": ["generic", "traditions", "family"]
   },
   {
     "id": "family-015",
@@ -145,9 +145,9 @@
     "type": "spill_or_shot",
     "intensity": 2,
     "target": "current",
-    "text": "Have you ever called in sick to work just to recover from an inuman? Spill or shot.",
+    "text": "What's the most overrated piece of adulting advice?",
     "shots": 1,
-    "tags": ["work", "inuman"]
+    "tags": ["generic", "adulting"]
   },
   {
     "id": "family-016",
@@ -217,7 +217,7 @@
     "target": "current",
     "text": "What's the biggest money mistake you've hidden from your family? Spill, or take 2 shots.",
     "shots": 2,
-    "tags": ["money", "family"]
+    "tags": ["personal", "money", "family"]
   },
   {
     "id": "family-023",
@@ -247,7 +247,7 @@
     "target": "current",
     "text": "What's the most uncomfortable question your parents asked about your love life, and how did you dodge it?",
     "shots": 1,
-    "tags": ["family", "love"]
+    "tags": ["personal", "family", "love"]
   },
   {
     "id": "family-026",
@@ -257,7 +257,7 @@
     "target": "current",
     "text": "Has a relative ever compared you to a cousin? What was the comparison?",
     "shots": 1,
-    "tags": ["family", "comparison"]
+    "tags": ["personal", "family", "comparison"]
   },
   {
     "id": "family-027",
@@ -267,7 +267,7 @@
     "target": "current",
     "text": "What's the family recipe or dish you hope never gets lost?",
     "shots": 1,
-    "tags": ["food", "family"]
+    "tags": ["generic", "food", "family"]
   },
   {
     "id": "family-028",
@@ -275,9 +275,9 @@
     "type": "spill_or_shot",
     "intensity": 2,
     "target": "current",
-    "text": "What do you do at work that your family thinks is a completely different job?",
+    "text": "If you had to work for one relative, who would you pick, and who would you never work for?",
     "shots": 1,
-    "tags": ["work", "family"]
+    "tags": ["hypothetical", "adulting"]
   },
   {
     "id": "family-029",
@@ -287,7 +287,7 @@
     "target": "current",
     "text": "What's a sacrifice your parents made for you that you only understood years later?",
     "shots": 1,
-    "tags": ["family", "gratitude"]
+    "tags": ["generic", "family", "gratitude"]
   },
   {
     "id": "family-030",
@@ -295,9 +295,9 @@
     "type": "spill_or_shot",
     "intensity": 2,
     "target": "current",
-    "text": "What's your honest opinion of your boss, in one sentence?",
+    "text": "What's one thing every boss should know about their team?",
     "shots": 1,
-    "tags": ["work"]
+    "tags": ["generic", "adulting"]
   },
   {
     "id": "family-031",
@@ -307,7 +307,7 @@
     "target": "p1",
     "text": "{p1}, which relative's party dish always disappears first, and which one is left on the table?",
     "shots": 1,
-    "tags": ["food", "family"]
+    "tags": ["personal", "food", "family"]
   },
   {
     "id": "family-032",
@@ -315,9 +315,9 @@
     "type": "spill_or_shot",
     "intensity": 2,
     "target": "current",
-    "text": "What's the longest you've gone without telling your family something important?",
+    "text": "Would you rather live with your parents rent-free or pay rent for your own place?",
     "shots": 1,
-    "tags": ["secrets", "family"]
+    "tags": ["hypothetical", "adulting"]
   },
   {
     "id": "family-033",
@@ -325,9 +325,9 @@
     "type": "spill_or_shot",
     "intensity": 1,
     "target": "current",
-    "text": "How many group chats are you in with your family, and which one do you mute first?",
+    "text": "What's the best thing about family gatherings, besides the food?",
     "shots": 1,
-    "tags": ["group-chat", "family"]
+    "tags": ["generic", "adulting"]
   },
   {
     "id": "family-034",
@@ -337,7 +337,7 @@
     "target": "tanggero",
     "text": "The Tanggero picks someone to answer: what's the most generous thing you've done for your family that nobody thanked you for?",
     "shots": 1,
-    "tags": ["family", "generosity"]
+    "tags": ["personal", "family", "generosity"]
   },
   {
     "id": "family-035",
@@ -345,9 +345,9 @@
     "type": "spill_or_shot",
     "intensity": 2,
     "target": "current",
-    "text": "What's the worst job you've ever had, and how long did you last?",
+    "text": "What's a job you would never do, no matter how much it paid?",
     "shots": 1,
-    "tags": ["work"]
+    "tags": ["generic", "adulting"]
   },
   {
     "id": "family-036",
@@ -355,9 +355,9 @@
     "type": "spill_or_shot",
     "intensity": 2,
     "target": "current",
-    "text": "Have you ever pretended to have plans just to skip a family gathering?",
+    "text": "If you could skip one family event every year with no questions asked, which one would it be?",
     "shots": 1,
-    "tags": ["family", "excuses"]
+    "tags": ["hypothetical", "adulting"]
   },
   {
     "id": "family-037",
@@ -367,7 +367,7 @@
     "target": "current",
     "text": "What's the oldest thing in your house that nobody dares to throw away?",
     "shots": 1,
-    "tags": ["home"]
+    "tags": ["generic", "home"]
   },
   {
     "id": "family-038",
@@ -375,9 +375,9 @@
     "type": "spill_or_shot",
     "intensity": 2,
     "target": "current",
-    "text": "What's the most you've spent on a gift for a family member, and did they appreciate it?",
+    "text": "If you suddenly got rich, which relative would ask you for utang first?",
     "shots": 1,
-    "tags": ["gifts", "money"]
+    "tags": ["hypothetical", "adulting"]
   },
   {
     "id": "family-039",
@@ -385,9 +385,9 @@
     "type": "spill_or_shot",
     "intensity": 2,
     "target": "current",
-    "text": "Have you ever stretched the truth on a resume or in a job interview? What was it?",
+    "text": "What's a skill every adult needs that school never taught?",
     "shots": 1,
-    "tags": ["work", "lies"]
+    "tags": ["generic", "adulting"]
   },
   {
     "id": "family-040",
@@ -395,9 +395,9 @@
     "type": "spill_or_shot",
     "intensity": 2,
     "target": "current",
-    "text": "What money advice from your parents did you ignore, and did it come back to bite you?",
+    "text": "Would you rather have lots of money and no free time, or lots of free time and just enough money?",
     "shots": 1,
-    "tags": ["money", "family"]
+    "tags": ["hypothetical", "adulting"]
   },
   {
     "id": "family-041",
@@ -485,9 +485,9 @@
     "type": "double_down",
     "intensity": 2,
     "target": "current",
-    "text": "What's the biggest argument you've had with a parent, and who was actually right? Spill, or take 2 shots.",
+    "text": "If you had to agree with one parent on everything forever, which one would you pick? Spill, or take 2 shots.",
     "shots": 2,
-    "tags": ["family", "fights"]
+    "tags": ["hypothetical", "adulting"]
   },
   {
     "id": "family-050",

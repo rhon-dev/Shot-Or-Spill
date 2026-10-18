@@ -1,0 +1,502 @@
+[
+  {
+    "id": "couples-001",
+    "deck": "couples",
+    "type": "spill_or_shot",
+    "intensity": 1,
+    "target": "current",
+    "text": "Would you rather have a date night at home or a night out with the barkada? Pick one or take a shot.",
+    "shots": 1,
+    "tags": ["hypothetical", "date-night"]
+  },
+  {
+    "id": "couples-002",
+    "deck": "couples",
+    "type": "spill_or_shot",
+    "intensity": 1,
+    "target": "current",
+    "text": "What was the very first thing you noticed about your partner?",
+    "shots": 1,
+    "tags": ["generic", "first-impression"]
+  },
+  {
+    "id": "couples-003",
+    "deck": "couples",
+    "type": "spill_or_shot",
+    "intensity": 1,
+    "target": "current",
+    "text": "What's your partner's most annoying habit that you secretly find cute?",
+    "shots": 1,
+    "tags": ["generic", "habits"]
+  },
+  {
+    "id": "couples-004",
+    "deck": "couples",
+    "type": "spill_or_shot",
+    "intensity": 1,
+    "target": "current",
+    "text": "If you two could travel anywhere next month, where would you go?",
+    "shots": 1,
+    "tags": ["hypothetical", "travel"]
+  },
+  {
+    "id": "couples-005",
+    "deck": "couples",
+    "type": "spill_or_shot",
+    "intensity": 1,
+    "target": "current",
+    "text": "What song reminds you of your partner the most?",
+    "shots": 1,
+    "tags": ["generic", "music"]
+  },
+  {
+    "id": "couples-006",
+    "deck": "couples",
+    "type": "spill_or_shot",
+    "intensity": 1,
+    "target": "current",
+    "text": "Guess your partner's usual fast-food order. Wrong guess? Take a shot.",
+    "shots": 1,
+    "tags": ["generic", "guessing"]
+  },
+  {
+    "id": "couples-007",
+    "deck": "couples",
+    "type": "spill_or_shot",
+    "intensity": 1,
+    "target": "current",
+    "text": "If your partner were a Filipino dish, which one would they be, and why?",
+    "shots": 1,
+    "tags": ["hypothetical", "food"]
+  },
+  {
+    "id": "couples-008",
+    "deck": "couples",
+    "type": "spill_or_shot",
+    "intensity": 1,
+    "target": "current",
+    "text": "Who said 'I love you' first, and how did it happen?",
+    "shots": 1,
+    "tags": ["personal", "milestones"]
+  },
+  {
+    "id": "couples-009",
+    "deck": "couples",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "What's the one fight you two still laugh about?",
+    "shots": 1,
+    "tags": ["personal", "fights"]
+  },
+  {
+    "id": "couples-010",
+    "deck": "couples",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "Would you rather read your partner's mind for a day or have them read yours?",
+    "shots": 1,
+    "tags": ["hypothetical", "mind-reading"]
+  },
+  {
+    "id": "couples-011",
+    "deck": "couples",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "If you two switched lives for a week, what's the first thing you'd change?",
+    "shots": 1,
+    "tags": ["hypothetical", "swap"]
+  },
+  {
+    "id": "couples-012",
+    "deck": "couples",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "What's the best gift your partner has ever given you?",
+    "shots": 1,
+    "tags": ["generic", "gifts"]
+  },
+  {
+    "id": "couples-013",
+    "deck": "couples",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "What's something your partner does that you've never told them bothers you?",
+    "shots": 1,
+    "tags": ["personal", "honesty"]
+  },
+  {
+    "id": "couples-014",
+    "deck": "couples",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "Would you rather your partner be best friends with your ex or with your worst enemy?",
+    "shots": 1,
+    "tags": ["hypothetical", "exes"]
+  },
+  {
+    "id": "couples-015",
+    "deck": "couples",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "Who says sorry first after a fight, and is that fair?",
+    "shots": 1,
+    "tags": ["generic", "fights"]
+  },
+  {
+    "id": "couples-016",
+    "deck": "couples",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "If your family and your partner's barkada spent a whole day together, who would get along best?",
+    "shots": 1,
+    "tags": ["hypothetical", "family"]
+  },
+  {
+    "id": "couples-017",
+    "deck": "couples",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "What's your partner's love language, and how well do you speak it?",
+    "shots": 1,
+    "tags": ["generic", "love-language"]
+  },
+  {
+    "id": "couples-018",
+    "deck": "couples",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "What's the most jealous you've ever been in this relationship?",
+    "shots": 1,
+    "tags": ["personal", "jealousy"]
+  },
+  {
+    "id": "couples-019",
+    "deck": "couples",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "If you could change one thing about how you two met, would you?",
+    "shots": 1,
+    "tags": ["hypothetical", "how-we-met"]
+  },
+  {
+    "id": "couples-020",
+    "deck": "couples",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "What's a small thing your partner does that makes you feel loved?",
+    "shots": 1,
+    "tags": ["generic", "small-things"]
+  },
+  {
+    "id": "couples-021",
+    "deck": "couples",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "Would you rather have a big wedding with every tita invited or a small one with just the barkada?",
+    "shots": 1,
+    "tags": ["hypothetical", "wedding"]
+  },
+  {
+    "id": "couples-022",
+    "deck": "couples",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "What's something you kept from your partner early on that you can finally admit now?",
+    "shots": 1,
+    "tags": ["personal", "secrets"]
+  },
+  {
+    "id": "couples-023",
+    "deck": "couples",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "What's the most overrated couple goal?",
+    "shots": 1,
+    "tags": ["generic", "couple-goals"]
+  },
+  {
+    "id": "couples-024",
+    "deck": "couples",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "tanggero",
+    "text": "The Tanggero picks someone to answer: what's the sweetest thing your partner has done that nobody here knows about?",
+    "shots": 1,
+    "tags": ["personal", "sweet"]
+  },
+  {
+    "id": "couples-025",
+    "deck": "couples",
+    "type": "spill_or_shot",
+    "intensity": 3,
+    "target": "current",
+    "text": "Would you rather know every detail of your partner's past or nothing at all?",
+    "shots": 1,
+    "tags": ["hypothetical", "past"]
+  },
+  {
+    "id": "couples-026",
+    "deck": "couples",
+    "type": "spill_or_shot",
+    "intensity": 3,
+    "target": "current",
+    "text": "What's something your partner does that drives you wild, that they don't even know about?",
+    "shots": 1,
+    "tags": ["personal", "attraction"]
+  },
+  {
+    "id": "couples-027",
+    "deck": "couples",
+    "type": "spill_or_shot",
+    "intensity": 3,
+    "target": "current",
+    "text": "If your partner wanted to try something new in the bedroom, would you say yes before asking what it is?",
+    "shots": 1,
+    "tags": ["hypothetical", "bedroom"]
+  },
+  {
+    "id": "couples-028",
+    "deck": "couples",
+    "type": "spill_or_shot",
+    "intensity": 3,
+    "target": "current",
+    "text": "Have you ever checked your partner's phone without them knowing?",
+    "shots": 1,
+    "tags": ["personal", "trust"]
+  },
+  {
+    "id": "couples-029",
+    "deck": "couples",
+    "type": "spill_or_shot",
+    "intensity": 3,
+    "target": "current",
+    "text": "What's one thing that would end a relationship instantly for you?",
+    "shots": 1,
+    "tags": ["generic", "dealbreakers"]
+  },
+  {
+    "id": "couples-030",
+    "deck": "couples",
+    "type": "spill_or_shot",
+    "intensity": 3,
+    "target": "current",
+    "text": "What's the closest you two have come to breaking up?",
+    "shots": 1,
+    "tags": ["personal", "rough-patch"]
+  },
+  {
+    "id": "couples-031",
+    "deck": "couples",
+    "type": "spill_or_shot",
+    "intensity": 2,
+    "target": "current",
+    "text": "If your partner could hear every thought you had about them today, would you be in trouble?",
+    "shots": 1,
+    "tags": ["hypothetical", "thoughts"]
+  },
+  {
+    "id": "couples-032",
+    "deck": "couples",
+    "type": "everyone_who",
+    "intensity": 1,
+    "target": "group",
+    "text": "Everyone who has fallen asleep during a movie date, drink.",
+    "shots": 1,
+    "tags": ["dates"]
+  },
+  {
+    "id": "couples-033",
+    "deck": "couples",
+    "type": "everyone_who",
+    "intensity": 1,
+    "target": "group",
+    "text": "Everyone who has stolen food off their partner's plate, drink.",
+    "shots": 1,
+    "tags": ["food"]
+  },
+  {
+    "id": "couples-034",
+    "deck": "couples",
+    "type": "everyone_who",
+    "intensity": 2,
+    "target": "group",
+    "text": "Everyone who has pretended to love a gift from their partner, drink.",
+    "shots": 1,
+    "tags": ["gifts"]
+  },
+  {
+    "id": "couples-035",
+    "deck": "couples",
+    "type": "everyone_who",
+    "intensity": 2,
+    "target": "group",
+    "text": "Everyone who has looked up their partner's ex online, drink.",
+    "shots": 1,
+    "tags": ["exes"]
+  },
+  {
+    "id": "couples-036",
+    "deck": "couples",
+    "type": "everyone_who",
+    "intensity": 1,
+    "target": "group",
+    "text": "Everyone who has forgotten an anniversary or a monthsary, drink.",
+    "shots": 1,
+    "tags": ["milestones"]
+  },
+  {
+    "id": "couples-037",
+    "deck": "couples",
+    "type": "everyone_who",
+    "intensity": 2,
+    "target": "group",
+    "text": "Everyone who has won an argument they knew they were wrong about, drink.",
+    "shots": 1,
+    "tags": ["fights"]
+  },
+  {
+    "id": "couples-038",
+    "deck": "couples",
+    "type": "everyone_who",
+    "intensity": 2,
+    "target": "group",
+    "text": "Everyone who has pretended to be asleep to skip a serious talk, drink.",
+    "shots": 1,
+    "tags": ["avoidance"]
+  },
+  {
+    "id": "couples-039",
+    "deck": "couples",
+    "type": "most_likely",
+    "intensity": 1,
+    "target": "group",
+    "text": "Most likely to cry during a romantic movie. Point on 3.",
+    "shots": 1,
+    "tags": ["movies"]
+  },
+  {
+    "id": "couples-040",
+    "deck": "couples",
+    "type": "most_likely",
+    "intensity": 1,
+    "target": "group",
+    "text": "Most likely to get lost on the way to a date. Point on 3.",
+    "shots": 1,
+    "tags": ["dates"]
+  },
+  {
+    "id": "couples-041",
+    "deck": "couples",
+    "type": "most_likely",
+    "intensity": 2,
+    "target": "group",
+    "text": "Most likely to start a fight over something tiny. Point on 3.",
+    "shots": 1,
+    "tags": ["fights"]
+  },
+  {
+    "id": "couples-042",
+    "deck": "couples",
+    "type": "most_likely",
+    "intensity": 2,
+    "target": "group",
+    "text": "Most likely to plan a surprise and spoil it early. Point on 3.",
+    "shots": 1,
+    "tags": ["surprises"]
+  },
+  {
+    "id": "couples-043",
+    "deck": "couples",
+    "type": "most_likely",
+    "intensity": 2,
+    "target": "group",
+    "text": "Most likely to be the first to say sorry. Point on 3.",
+    "shots": 1,
+    "tags": ["fights"]
+  },
+  {
+    "id": "couples-044",
+    "deck": "couples",
+    "type": "hot_seat",
+    "intensity": 1,
+    "target": "current",
+    "text": "Hot Seat: your partner asks you three questions about your first date. One shot skips one.",
+    "shots": 1,
+    "tags": ["first-date"]
+  },
+  {
+    "id": "couples-045",
+    "deck": "couples",
+    "type": "hot_seat",
+    "intensity": 2,
+    "target": "current",
+    "text": "Hot Seat: the table asks you three questions about your relationship. One shot skips one.",
+    "shots": 1,
+    "tags": ["relationship"]
+  },
+  {
+    "id": "couples-046",
+    "deck": "couples",
+    "type": "hot_seat",
+    "intensity": 3,
+    "target": "current",
+    "text": "Hot Seat: your partner asks you three questions they've always been too shy to ask. One shot skips one.",
+    "shots": 1,
+    "tags": ["curiosity"]
+  },
+  {
+    "id": "couples-047",
+    "deck": "couples",
+    "type": "double_down",
+    "intensity": 3,
+    "target": "current",
+    "text": "What's the biggest thing you've never told your partner? Spill, or take 2 shots.",
+    "shots": 2,
+    "tags": ["personal", "secrets"]
+  },
+  {
+    "id": "couples-048",
+    "deck": "couples",
+    "type": "double_down",
+    "intensity": 2,
+    "target": "current",
+    "text": "If you had to rate this relationship from 1 to 10 out loud right now, what number would you say? Spill, or take 2 shots.",
+    "shots": 2,
+    "tags": ["hypothetical", "honesty"]
+  },
+  {
+    "id": "couples-049",
+    "deck": "couples",
+    "type": "water_break",
+    "intensity": 1,
+    "target": "group",
+    "text": "Water Break. Everyone drinks a glass of water. Take care of each other tonight.",
+    "shots": 1,
+    "tags": ["pacing"]
+  },
+  {
+    "id": "couples-050",
+    "deck": "couples",
+    "type": "water_break",
+    "intensity": 1,
+    "target": "group",
+    "text": "Water Break. Partners pour water for each other, and everyone drinks it.",
+    "shots": 1,
+    "tags": ["pacing"]
+  }
+]

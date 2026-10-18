@@ -7,7 +7,7 @@
     "target": "current",
     "text": "Have you ever stayed in a situationship longer than a real relationship?",
     "shots": 1,
-    "tags": ["situationship"]
+    "tags": ["personal", "situationship"]
   },
   {
     "id": "love-002",
@@ -15,9 +15,9 @@
     "type": "spill_or_shot",
     "intensity": 2,
     "target": "p1",
-    "text": "{p1}, what's the most 'delulu' thing you've done for a crush?",
+    "text": "{p1}, would you rather date someone who's always late or someone who's always on their phone?",
     "shots": 1,
-    "tags": ["crush", "delulu"]
+    "tags": ["hypothetical", "dating"]
   },
   {
     "id": "love-003",
@@ -27,7 +27,7 @@
     "target": "current",
     "text": "Have you ever gone back to an ex after swearing to the whole barkada you wouldn't?",
     "shots": 1,
-    "tags": ["exes", "barkada"]
+    "tags": ["personal", "exes", "barkada"]
   },
   {
     "id": "love-004",
@@ -35,9 +35,9 @@
     "type": "spill_or_shot",
     "intensity": 2,
     "target": "current",
-    "text": "What's the longest talking stage you've had that the whole barkada was already shipping, and it still went nowhere?",
+    "text": "Would you rather know exactly how your love life turns out, or be surprised? Pick one or take a shot.",
     "shots": 1,
-    "tags": ["talking-stage"]
+    "tags": ["hypothetical", "dating"]
   },
   {
     "id": "love-005",
@@ -47,7 +47,7 @@
     "target": "current",
     "text": "Have you ever ghosted someone? What was the real reason?",
     "shots": 1,
-    "tags": ["ghosting"]
+    "tags": ["personal", "ghosting"]
   },
   {
     "id": "love-006",
@@ -57,7 +57,7 @@
     "target": "current",
     "text": "What red flag did you ignore even after your barkada warned you about it?",
     "shots": 1,
-    "tags": ["red-flags"]
+    "tags": ["personal", "red-flags"]
   },
   {
     "id": "love-007",
@@ -65,9 +65,9 @@
     "type": "spill_or_shot",
     "intensity": 2,
     "target": "current",
-    "text": "Have you ever kept going to Simbang Gabi mostly to see a crush?",
+    "text": "What's the biggest green flag in a partner?",
     "shots": 1,
-    "tags": ["crush", "christmas"]
+    "tags": ["generic", "dating"]
   },
   {
     "id": "love-008",
@@ -75,9 +75,9 @@
     "type": "spill_or_shot",
     "intensity": 2,
     "target": "current",
-    "text": "What's the pettiest reason you lost interest in someone, like how they ate or how they sang at videoke?",
+    "text": "What's the biggest turn-off on a first date?",
     "shots": 1,
-    "tags": ["dating", "petty"]
+    "tags": ["generic", "dating"]
   },
   {
     "id": "love-009",
@@ -87,7 +87,7 @@
     "target": "current",
     "text": "Have you ever been the third party in someone else's relationship, knowingly or not?",
     "shots": 1,
-    "tags": ["cheating"]
+    "tags": ["personal", "cheating"]
   },
   {
     "id": "love-010",
@@ -97,7 +97,7 @@
     "target": "tanggero",
     "text": "The Tanggero picks someone to answer: who was your first real crush, and do they know?",
     "shots": 1,
-    "tags": ["crush"]
+    "tags": ["personal", "crush"]
   },
   {
     "id": "love-011",
@@ -107,7 +107,7 @@
     "target": "current",
     "text": "What's something an ex did that you still compare every new person to?",
     "shots": 1,
-    "tags": ["exes"]
+    "tags": ["personal", "exes"]
   },
   {
     "id": "love-012",
@@ -117,7 +117,7 @@
     "target": "current",
     "text": "What's the most embarrassing thing you've done to get an ex's attention after the breakup?",
     "shots": 1,
-    "tags": ["exes", "embarrassing"]
+    "tags": ["personal", "exes", "embarrassing"]
   },
   {
     "id": "love-013",
@@ -125,9 +125,9 @@
     "type": "spill_or_shot",
     "intensity": 2,
     "target": "current",
-    "text": "Have you ever met someone's whole family before you were even official?",
+    "text": "Would you rather meet your partner's whole family on the first date or never meet them at all?",
     "shots": 1,
-    "tags": ["family", "dating"]
+    "tags": ["hypothetical", "dating"]
   },
   {
     "id": "love-014",
@@ -135,9 +135,9 @@
     "type": "spill_or_shot",
     "intensity": 2,
     "target": "current",
-    "text": "What's the biggest lie you've told a date's parents to make a good first impression?",
+    "text": "What's the best way to win over a partner's parents?",
     "shots": 1,
-    "tags": ["lies", "family"]
+    "tags": ["generic", "dating"]
   },
   {
     "id": "love-015",
@@ -145,9 +145,9 @@
     "type": "spill_or_shot",
     "intensity": 2,
     "target": "p1",
-    "text": "{p1}, what would your ex say is your worst habit in a relationship?",
+    "text": "{p1}, if you could set up anyone at this table on a date, who would you pair with whom?",
     "shots": 1,
-    "tags": ["exes", "habits"]
+    "tags": ["hypothetical", "dating"]
   },
   {
     "id": "love-016",
@@ -155,9 +155,9 @@
     "type": "spill_or_shot",
     "intensity": 2,
     "target": "current",
-    "text": "Have you ever ended up liking someone mostly because the barkada kept teasing you two?",
+    "text": "If the barkada got to pick your next partner, would you trust their choice? Spill or shot.",
     "shots": 1,
-    "tags": ["crush", "barkada"]
+    "tags": ["hypothetical", "dating"]
   },
   {
     "id": "love-017",
@@ -167,7 +167,7 @@
     "target": "current",
     "text": "Have you ever stayed in a relationship only because you were scared to be alone?",
     "shots": 1,
-    "tags": ["relationship", "regret"]
+    "tags": ["personal", "relationship", "regret"]
   },
   {
     "id": "love-018",
@@ -177,7 +177,7 @@
     "target": "p1",
     "text": "{p1}, would {p2} be a green flag or a red flag as a partner? Explain.",
     "shots": 1,
-    "tags": ["red-flags", "barkada"]
+    "tags": ["hypothetical", "red-flags", "barkada"]
   },
   {
     "id": "love-019",
@@ -187,7 +187,7 @@
     "target": "current",
     "text": "Have you ever cheated, or come very close to it? Spill or shot.",
     "shots": 1,
-    "tags": ["cheating"]
+    "tags": ["personal", "cheating"]
   },
   {
     "id": "love-020",
@@ -195,9 +195,9 @@
     "type": "spill_or_shot",
     "intensity": 2,
     "target": "current",
-    "text": "What's the most you've spent on someone who wasn't even your partner, pasalubong and dates included?",
+    "text": "How much is too much to spend on a first date?",
     "shots": 1,
-    "tags": ["money", "crush"]
+    "tags": ["generic", "dating"]
   },
   {
     "id": "love-021",
@@ -307,7 +307,7 @@
     "target": "current",
     "text": "What's the most embarrassing thing you've ever done out of jealousy? Spill, or take 2 shots.",
     "shots": 2,
-    "tags": ["jealousy"]
+    "tags": ["personal", "jealousy"]
   },
   {
     "id": "love-032",
@@ -317,7 +317,7 @@
     "target": "current",
     "text": "Which ex would you take back if they asked tonight? Say the name, or take 2 shots.",
     "shots": 2,
-    "tags": ["exes"]
+    "tags": ["hypothetical", "exes"]
   },
   {
     "id": "love-033",
@@ -345,9 +345,9 @@
     "type": "spill_or_shot",
     "intensity": 2,
     "target": "current",
-    "text": "What's the cringiest pickup line anyone has used on you at a party or a videoke night, and did it work?",
+    "text": "What's the cheesiest pickup line you secretly think would work?",
     "shots": 1,
-    "tags": ["pickup-lines"]
+    "tags": ["generic", "dating"]
   },
   {
     "id": "love-036",
@@ -355,9 +355,9 @@
     "type": "spill_or_shot",
     "intensity": 2,
     "target": "current",
-    "text": "Have you ever pretended to like someone's favorite band or hobby just to impress them?",
+    "text": "Would you rather date someone exactly like you or your complete opposite?",
     "shots": 1,
-    "tags": ["crush", "pretending"]
+    "tags": ["hypothetical", "dating"]
   },
   {
     "id": "love-037",
@@ -365,9 +365,9 @@
     "type": "spill_or_shot",
     "intensity": 2,
     "target": "current",
-    "text": "What's the longest you've waited for a crush to reply, and did the barkada notice you checking?",
+    "text": "How long is too long to wait for a reply before you give up on someone?",
     "shots": 1,
-    "tags": ["crush", "waiting"]
+    "tags": ["generic", "dating"]
   },
   {
     "id": "love-038",
@@ -375,9 +375,9 @@
     "type": "spill_or_shot",
     "intensity": 2,
     "target": "p1",
-    "text": "{p1}, what's the most romantic thing you've ever done, and did the whole barkada find out?",
+    "text": "{p1}, what would your dream date look like, from start to finish?",
     "shots": 1,
-    "tags": ["romance"]
+    "tags": ["hypothetical", "dating"]
   },
   {
     "id": "love-039",
@@ -385,9 +385,9 @@
     "type": "spill_or_shot",
     "intensity": 2,
     "target": "current",
-    "text": "Have you ever brought a date to a family event and regretted it immediately?",
+    "text": "Would you rather bring a new date to a family reunion or to a barkada inuman first?",
     "shots": 1,
-    "tags": ["dating", "family"]
+    "tags": ["hypothetical", "dating"]
   },
   {
     "id": "love-040",
@@ -395,9 +395,9 @@
     "type": "spill_or_shot",
     "intensity": 2,
     "target": "current",
-    "text": "What's the strangest place a date ever took you, like a mall food court, a church fiesta, or a cousin's debut?",
+    "text": "If money didn't matter, where would you take someone on a first date?",
     "shots": 1,
-    "tags": ["dating"]
+    "tags": ["hypothetical", "dating"]
   },
   {
     "id": "love-041",
@@ -405,9 +405,9 @@
     "type": "spill_or_shot",
     "intensity": 2,
     "target": "current",
-    "text": "Have you ever stayed in touch with an ex's family after the breakup?",
+    "text": "Should exes ever stay friends? Defend your answer.",
     "shots": 1,
-    "tags": ["exes", "family"]
+    "tags": ["generic", "dating"]
   },
   {
     "id": "love-042",
@@ -415,9 +415,9 @@
     "type": "spill_or_shot",
     "intensity": 2,
     "target": "current",
-    "text": "What's the best advice a tita or a barkada member gave you after a heartbreak, and did you follow it?",
+    "text": "What's the best breakup advice you'd give someone at this table?",
     "shots": 1,
-    "tags": ["heartbreak", "advice"]
+    "tags": ["generic", "dating"]
   },
   {
     "id": "love-043",
@@ -427,7 +427,7 @@
     "target": "current",
     "text": "Have you ever been attracted to a friend's partner? You don't have to say who.",
     "shots": 1,
-    "tags": ["attraction", "friends"]
+    "tags": ["personal", "attraction", "friends"]
   },
   {
     "id": "love-044",
@@ -435,9 +435,9 @@
     "type": "spill_or_shot",
     "intensity": 2,
     "target": "current",
-    "text": "What's the most you've changed about yourself for someone you liked, like your hair, your music, or your whole barkada?",
+    "text": "Would you rather be the one who loves more, or the one who is loved more?",
     "shots": 1,
-    "tags": ["change"]
+    "tags": ["hypothetical", "dating"]
   },
   {
     "id": "love-045",
@@ -447,7 +447,7 @@
     "target": "tanggero",
     "text": "The Tanggero picks someone to answer: what's the sweetest thing a crush ever did for you?",
     "shots": 1,
-    "tags": ["crush"]
+    "tags": ["personal", "crush"]
   },
   {
     "id": "love-046",
@@ -455,9 +455,9 @@
     "type": "spill_or_shot",
     "intensity": 2,
     "target": "current",
-    "text": "Have you ever kept dating someone just because you were already invited to their family's Christmas party?",
+    "text": "If you could know one thing about your future partner right now, what would you ask?",
     "shots": 1,
-    "tags": ["dating", "christmas"]
+    "tags": ["hypothetical", "dating"]
   },
   {
     "id": "love-047",
@@ -465,9 +465,9 @@
     "type": "spill_or_shot",
     "intensity": 2,
     "target": "current",
-    "text": "Have you ever liked someone mainly because your whole barkada approved of them?",
+    "text": "Would you rather your barkada dislike your partner, or your family dislike your partner?",
     "shots": 1,
-    "tags": ["barkada", "dating"]
+    "tags": ["hypothetical", "dating"]
   },
   {
     "id": "love-048",
@@ -477,7 +477,7 @@
     "target": "current",
     "text": "What's one thing you could never forgive in a relationship, no matter how much you loved them?",
     "shots": 1,
-    "tags": ["dealbreakers"]
+    "tags": ["generic", "dealbreakers"]
   },
   {
     "id": "love-049",
@@ -487,7 +487,7 @@
     "target": "p1",
     "text": "{p1}, which of your exes would the barkada call the worst for you, and do you agree?",
     "shots": 1,
-    "tags": ["exes", "barkada"]
+    "tags": ["personal", "exes", "barkada"]
   },
   {
     "id": "love-050",
@@ -495,9 +495,9 @@
     "type": "spill_or_shot",
     "intensity": 2,
     "target": "current",
-    "text": "Have you ever been friends with someone for years while secretly hoping for more?",
+    "text": "Can two friends ever stay just friends once one of them catches feelings?",
     "shots": 1,
-    "tags": ["friend-zone"]
+    "tags": ["generic", "dating"]
   },
   {
     "id": "love-051",
@@ -505,9 +505,9 @@
     "type": "spill_or_shot",
     "intensity": 2,
     "target": "current",
-    "text": "What's the most extra thing you've done for an anniversary, like a surprise at a restaurant or a videoke serenade?",
+    "text": "If you had an unlimited budget for one anniversary surprise, what would you plan?",
     "shots": 1,
-    "tags": ["romance"]
+    "tags": ["hypothetical", "dating"]
   },
   {
     "id": "love-052",
@@ -515,9 +515,9 @@
     "type": "spill_or_shot",
     "intensity": 3,
     "target": "current",
-    "text": "Have you ever lied about your relationship status to avoid an awkward conversation?",
+    "text": "Would you rather find out your partner lied about their past or is hiding something now? Pick one or take a shot.",
     "shots": 1,
-    "tags": ["lies", "relationship"]
+    "tags": ["hypothetical", "dating"]
   },
   {
     "id": "love-053",
@@ -525,9 +525,9 @@
     "type": "spill_or_shot",
     "intensity": 2,
     "target": "current",
-    "text": "What's the longest you've kept a crush secret from the whole barkada?",
+    "text": "What's the first thing you notice about someone you're attracted to?",
     "shots": 1,
-    "tags": ["crush", "secrets"]
+    "tags": ["generic", "dating"]
   },
   {
     "id": "love-054",
@@ -537,7 +537,7 @@
     "target": "p1",
     "text": "{p1}, what's the biggest mistake you've made in a relationship that the barkada still brings up?",
     "shots": 1,
-    "tags": ["relationship", "regret"]
+    "tags": ["personal", "relationship", "regret"]
   },
   {
     "id": "love-055",
@@ -547,7 +547,7 @@
     "target": "current",
     "text": "Have you ever blocked an ex and then unblocked them just to check on them?",
     "shots": 1,
-    "tags": ["exes", "stalking"]
+    "tags": ["personal", "exes", "stalking"]
   },
   {
     "id": "love-056",
@@ -555,9 +555,9 @@
     "type": "spill_or_shot",
     "intensity": 2,
     "target": "current",
-    "text": "Who was your first love, and do your titas still ask about them?",
+    "text": "If your first love showed up single tonight, would you give it another shot?",
     "shots": 1,
-    "tags": ["first-love"]
+    "tags": ["hypothetical", "dating"]
   },
   {
     "id": "love-057",
@@ -667,7 +667,7 @@
     "target": "current",
     "text": "What's the most hurtful thing you've ever said to a partner during a fight? Spill, or take 2 shots.",
     "shots": 2,
-    "tags": ["fights", "regret"]
+    "tags": ["personal", "fights", "regret"]
   },
   {
     "id": "love-068",
@@ -677,7 +677,7 @@
     "target": "current",
     "text": "Have you ever stayed with someone after falling out of love? How long? Spill, or take 2 shots.",
     "shots": 2,
-    "tags": ["relationship", "honesty"]
+    "tags": ["personal", "relationship", "honesty"]
   },
   {
     "id": "love-069",

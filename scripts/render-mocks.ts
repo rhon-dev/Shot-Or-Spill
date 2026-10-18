@@ -545,6 +545,7 @@ const DECK_EMOJI: Record<DeckId, string> = {
   "warm-up": "🍻",
   "barkada-tea": "☕",
   "love-life": "💔",
+  couples: "❤️",
   "family-adulting": "🏠",
   "no-filter": "🔞",
 };

@@ -10,6 +10,7 @@ export const DECK_IDS = [
   "warm-up",
   "barkada-tea",
   "love-life",
+  "couples",
   "family-adulting",
   "no-filter",
 ] as const;
@@ -93,6 +94,16 @@ export const DECKS: Record<DeckId, DeckMeta> = {
     adultOptIn: false,
     launchCount: 70,
   },
+  couples: {
+    id: "couples",
+    name: "Couples",
+    idPrefix: "couples",
+    maxIntensity: 3,
+    theme: "For a couple or a table of pairs: partners, dates, guessing games, would-you-rathers",
+    tagline: "For two, or pairs",
+    adultOptIn: false,
+    launchCount: 50,
+  },
   "family-adulting": {
     id: "family-adulting",
     name: "Family & Adulting",
@@ -124,6 +135,16 @@ export const ALLOWED_TARGETS: Record<CardType, readonly CardTarget[]> = {
   most_likely: ["group"],
   water_break: ["group"],
 };
+
+/**
+ * Question style, carried as a tag on every Spill or Shot and Double Down
+ * card (content guide §6). Most questions in every deck are hypothetical or
+ * generic, so anyone can answer them without a specific story (D-24).
+ */
+export const STYLE_TAGS = ["hypothetical", "generic", "personal"] as const;
+export type StyleTag = (typeof STYLE_TAGS)[number];
+/** Minimum share of hypothetical + generic questions per deck (D-24). */
+export const MIN_EASY_SHARE = 0.6;
 
 /** Target share of each type across the written deck (PRD §5). */
 export const TYPE_MIX_TARGET: Record<CardType, number> = {

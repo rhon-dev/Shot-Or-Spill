@@ -48,6 +48,7 @@ export const deckAccent: Record<DeckId, string> = {
   "warm-up": "#B6F24A", // lime
   "barkada-tea": "#22D3C5", // teal
   "love-life": "#C58BFF", // violet
+  couples: "#FF9EB5", // rose
   "family-adulting": "#5CB8FF", // sky
   "no-filter": "#FF6A3D", // red-orange
 };

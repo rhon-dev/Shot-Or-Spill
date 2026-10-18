@@ -177,7 +177,7 @@ build has five steps, and each one ends with a working build. The technical desi
 - Name substitution, resolved once per draw (F8, D-08)
 - Spill / Shot logging to the answering player (F10, D-09)
 - Skip: same player gets a new card, nothing logged (F11, D-13)
-- Tanggero assigned at random, rotates every 10 cards, badge on screen (F3, D-13)
+- Tanggero assigned at random, rotates every 10 cards, badge on screen (F3, D-13). Later changed to a host pick, D-23
 - Card-type behaviors:
   - "Who drank?" for group cards (D-10)
   - Hot Seat stepper (D-11)
@@ -354,7 +354,7 @@ Each release gets its own plan and gate when it's picked up.
 | --- | --- | --- | --- |
 | Lighthouse mobile 90+ | 3.1 | 3.5, 5 | 97 / 100 / 100 / 100 locally; re-run on the live site in Phase 5 |
 | WCAG AA contrast | 2 | 5 | 46 color pairs pass (`npm run check:contrast`). Lighthouse a11y 100. Manual screen-reader pass still due in Phase 5 |
-| JS bundle under 150 KB (D-18) | 3.1 | 3.5, 5 | 112.3 KB gzipped with all 310 cards, seating, and icons, enforced in CI |
+| JS bundle under 150 KB (D-18) | 3.1 | 3.5, 5 | 114.6 KB gzipped with all 360 cards, seating, Tanggero pick, and icons, enforced in CI |
 | Playable on 3G after first load | 3.1 | 5 | Not yet tested |
 | Smooth on budget Android | 2 (motion spec) | 3.5, 4 | Not yet tested on a device |
 

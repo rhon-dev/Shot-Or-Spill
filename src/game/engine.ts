@@ -102,7 +102,11 @@ function buildQueue(config: GameConfig, playerCount: number, rng: Rng): string[]
 // Roles
 // ---------------------------------------------------------------------------
 
-/** Tanggero: random at start, moves to the next player every 10 completed cards (F3, D-13). */
+/**
+ * Tanggero: the host picks who starts (seat 1 by default, never random,
+ * D-23). The role moves to the next seat every 10 completed cards (F3,
+ * D-13), and the host can hand it to anyone at any time with setTanggero.
+ */
 export function tanggeroIndex(s: SessionCore): number {
   const n = s.players.length;
   return (s.tanggeroStart + Math.floor(s.completed / TANGGERO_EVERY)) % n;
@@ -158,11 +162,15 @@ export function fillNames(
   const p1 = card.text.includes("{p1}") && others.length > 0 ? pick(others, rng) : null;
   const rest = others.filter((p) => p.id !== p1?.id);
   const p2 = card.text.includes("{p2}") && rest.length > 0 ? pick(rest, rng) : null;
-  const text = card.text
-    .replaceAll("{p1}", p1?.name ?? "someone")
-    .replaceAll("{p2}", p2?.name ?? "someone")
-    .replaceAll("{tanggero}", tanggeroName);
+  const text = renderText(card, p1?.name, p2?.name, tanggeroName);
   return { text, p1Id: p1?.id ?? null, p2Id: p2?.id ?? null };
+}
+
+function renderText(card: Card, p1Name: string | undefined, p2Name: string | undefined, tanggeroName: string): string {
+  return card.text
+    .replaceAll("{p1}", p1Name ?? "someone")
+    .replaceAll("{p2}", p2Name ?? "someone")
+    .replaceAll("{tanggero}", tanggeroName);
 }
 
 function drawCard(s: SessionCore, cardId: string, faceUp: boolean, rng: Rng): Drawn {
@@ -187,15 +195,22 @@ function drawNext(s: SessionCore, rng: Rng, faceUp = false): SessionCore {
 // Session lifecycle
 // ---------------------------------------------------------------------------
 
+/**
+ * Start a night. Players are seated in the order given (seat 1 reads
+ * first), and `tanggeroId` is the host's pick for the first Tanggero.
+ * Nothing about the seating is random; only the card order is shuffled.
+ */
 export function newSession(
   players: readonly Player[],
   config: GameConfig,
   rng: Rng = Math.random,
   now: number = Date.now(),
+  tanggeroId: string | null = null,
 ): Session {
   if (players.length < MIN_PLAYERS || players.length > MAX_PLAYERS) {
     throw new Error(`A game needs ${MIN_PLAYERS} to ${MAX_PLAYERS} players`);
   }
+  const picked = players.findIndex((p) => p.id === tanggeroId);
   const base: SessionCore = {
     players: players.map((p) => ({ ...p })),
     config: { ...config, decks: [...config.decks] },
@@ -204,7 +219,7 @@ export function newSession(
     exhausted: false,
     readerIndex: 0,
     completed: 0,
-    tanggeroStart: randomInt(0, players.length - 1, rng),
+    tanggeroStart: Math.max(0, picked),
     pacing: { sinceBreak: 0, nextAt: randomInt(WATER_BREAK_MIN, WATER_BREAK_MAX, rng) },
     handoff: true,
     log: [],
@@ -375,6 +390,40 @@ export function reorderPlayers(s: Session, orderedIds: readonly string[]): Sessi
     tanggeroStart: (((newTanggero - rotations) % n) + n) % n,
     previous: null,
   };
+}
+
+/** tanggeroStart that makes `index` the Tanggero right now. */
+function startFor(s: SessionCore, index: number): number {
+  const n = s.players.length;
+  const rotations = Math.floor(s.completed / TANGGERO_EVERY);
+  return (((index - rotations) % n) + n) % n;
+}
+
+function withTanggero(s: SessionCore, id: string): SessionCore {
+  const index = s.players.findIndex((p) => p.id === id);
+  if (index < 0) return s;
+  const next: SessionCore = { ...s, tanggeroStart: startFor(s, index) };
+  const drawn = next.current;
+  if (!drawn) return next;
+  const card = getCard(drawn.cardId);
+  if (!card.text.includes("{tanggero}")) return next;
+  const text = renderText(
+    card,
+    drawn.p1Id ? playerById(next, drawn.p1Id)?.name : undefined,
+    drawn.p2Id ? playerById(next, drawn.p2Id)?.name : undefined,
+    tanggero(next).name,
+  );
+  return { ...next, current: { ...drawn, text } };
+}
+
+/**
+ * The host hands the Tanggero role to someone (D-23). They keep it for the
+ * rest of this round of 10 cards; then it moves to the next seat as usual.
+ * The Undo snapshot gets the same pick, so Undo never brings back the old one.
+ */
+export function setTanggero(s: Session, id: string): Session {
+  if (!playerById(s, id)) return s;
+  return { ...withTanggero(core(s), id), previous: s.previous ? withTanggero(s.previous, id) : null };
 }
 
 /** Players in turn order starting from the current reader (for the "up next" strip). */

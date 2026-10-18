@@ -7,7 +7,7 @@
     "target": "current",
     "text": "What's your most embarrassing videoke song choice, and did you finish it?",
     "shots": 1,
-    "tags": ["videoke", "embarrassing"]
+    "tags": ["personal", "videoke", "embarrassing"]
   },
   {
     "id": "warm-002",
@@ -17,7 +17,7 @@
     "target": "current",
     "text": "What pulutan would you defend to the end, even if everyone at this table hates it?",
     "shots": 1,
-    "tags": ["pulutan", "food"]
+    "tags": ["generic", "pulutan", "food"]
   },
   {
     "id": "warm-003",
@@ -25,9 +25,9 @@
     "type": "spill_or_shot",
     "intensity": 1,
     "target": "current",
-    "text": "What's a Filipino habit you didn't know was Filipino until someone from abroad pointed it out?",
+    "text": "If you could only eat one Filipino dish for the rest of your life, what would it be?",
     "shots": 1,
-    "tags": ["habits", "culture"]
+    "tags": ["hypothetical", "icebreaker"]
   },
   {
     "id": "warm-004",
@@ -35,9 +35,9 @@
     "type": "spill_or_shot",
     "intensity": 1,
     "target": "current",
-    "text": "What did you collect as a kid that you'd be embarrassed to admit you still keep?",
+    "text": "Would you rather give up rice or give up coffee for a whole year? Pick one or take a shot.",
     "shots": 1,
-    "tags": ["childhood"]
+    "tags": ["hypothetical", "icebreaker"]
   },
   {
     "id": "warm-005",
@@ -45,9 +45,9 @@
     "type": "spill_or_shot",
     "intensity": 1,
     "target": "current",
-    "text": "What's the strangest merienda combination you've eaten and secretly loved?",
+    "text": "What's a food combination you love that everyone else thinks is weird?",
     "shots": 1,
-    "tags": ["food", "merienda"]
+    "tags": ["generic", "icebreaker"]
   },
   {
     "id": "warm-006",
@@ -57,7 +57,7 @@
     "target": "p1",
     "text": "{p1}, what's your go-to excuse for being late, and how many times has this barkada heard it?",
     "shots": 1,
-    "tags": ["late", "barkada"]
+    "tags": ["personal", "late", "barkada"]
   },
   {
     "id": "warm-007",
@@ -67,7 +67,7 @@
     "target": "current",
     "text": "What childhood game were you weirdly competitive at, and are you still a sore loser about it?",
     "shots": 1,
-    "tags": ["childhood", "games"]
+    "tags": ["personal", "childhood", "games"]
   },
   {
     "id": "warm-008",
@@ -77,7 +77,7 @@
     "target": "current",
     "text": "Which teleserye plot twist made you actually yell at the TV?",
     "shots": 1,
-    "tags": ["teleserye", "tv"]
+    "tags": ["personal", "teleserye", "tv"]
   },
   {
     "id": "warm-009",
@@ -85,9 +85,9 @@
     "type": "spill_or_shot",
     "intensity": 1,
     "target": "current",
-    "text": "What's the weirdest thing a relative ever packed for you in a balikbayan box?",
+    "text": "If you won a million pesos tonight, what's the first thing you'd buy?",
     "shots": 1,
-    "tags": ["balikbayan", "family"]
+    "tags": ["hypothetical", "icebreaker"]
   },
   {
     "id": "warm-010",
@@ -97,7 +97,7 @@
     "target": "tanggero",
     "text": "Tanggero {tanggero} picks someone to answer: what's the most cups of rice you've eaten in one sitting?",
     "shots": 1,
-    "tags": ["food", "rice"]
+    "tags": ["generic", "food", "rice"]
   },
   {
     "id": "warm-011",
@@ -107,7 +107,7 @@
     "target": "current",
     "text": "What dish did your lola make that no restaurant has ever matched?",
     "shots": 1,
-    "tags": ["food", "family"]
+    "tags": ["generic", "food", "family"]
   },
   {
     "id": "warm-012",
@@ -117,7 +117,7 @@
     "target": "current",
     "text": "What's your most-used excuse for leaving a party early, and does anyone still believe it?",
     "shots": 1,
-    "tags": ["excuses", "party"]
+    "tags": ["personal", "excuses", "party"]
   },
   {
     "id": "warm-013",
@@ -125,9 +125,9 @@
     "type": "spill_or_shot",
     "intensity": 1,
     "target": "current",
-    "text": "What's the longest you've ever lined up for food, and was it worth it?",
+    "text": "If you could have any superpower for just one day, which one would you pick?",
     "shots": 1,
-    "tags": ["food"]
+    "tags": ["hypothetical", "icebreaker"]
   },
   {
     "id": "warm-014",
@@ -137,7 +137,7 @@
     "target": "current",
     "text": "What song do you know every word to but would never admit to liking in public?",
     "shots": 1,
-    "tags": ["music", "embarrassing"]
+    "tags": ["generic", "music", "embarrassing"]
   },
   {
     "id": "warm-015",
@@ -147,7 +147,7 @@
     "target": "p1",
     "text": "{p1}, if {p2} had to cook for this whole table tonight, what would we end up eating?",
     "shots": 1,
-    "tags": ["food", "barkada"]
+    "tags": ["hypothetical", "food", "barkada"]
   },
   {
     "id": "warm-016",
@@ -155,9 +155,9 @@
     "type": "spill_or_shot",
     "intensity": 1,
     "target": "current",
-    "text": "What's the most embarrassing thing that's ever happened to you on a jeepney ride?",
+    "text": "What's your biggest pet peeve, and who here triggers it the most?",
     "shots": 1,
-    "tags": ["jeepney", "embarrassing"]
+    "tags": ["generic", "icebreaker"]
   },
   {
     "id": "warm-017",
@@ -167,7 +167,7 @@
     "target": "current",
     "text": "What's the worst haircut you've ever had, and who did you blame for it?",
     "shots": 1,
-    "tags": ["childhood", "embarrassing"]
+    "tags": ["personal", "childhood", "embarrassing"]
   },
   {
     "id": "warm-018",
@@ -295,9 +295,9 @@
     "type": "spill_or_shot",
     "intensity": 1,
     "target": "current",
-    "text": "What's the most embarrassing thing you've said to a stranger because you thought they were someone you knew?",
+    "text": "Would you rather sit in rush-hour traffic for six hours or sing solo at videoke in front of strangers?",
     "shots": 1,
-    "tags": ["embarrassing", "strangers"]
+    "tags": ["hypothetical", "icebreaker"]
   },
   {
     "id": "warm-031",
@@ -307,7 +307,7 @@
     "target": "current",
     "text": "Which childhood merienda would you pay good money to eat again today?",
     "shots": 1,
-    "tags": ["food", "childhood"]
+    "tags": ["hypothetical", "food", "childhood"]
   },
   {
     "id": "warm-032",
@@ -317,7 +317,7 @@
     "target": "current",
     "text": "What's your go-to excuse when the barkada invites you out and you'd rather stay home?",
     "shots": 1,
-    "tags": ["excuses", "barkada"]
+    "tags": ["personal", "excuses", "barkada"]
   },
   {
     "id": "warm-033",
@@ -327,7 +327,7 @@
     "target": "current",
     "text": "What song makes you grab the videoke mic no matter who is already singing?",
     "shots": 1,
-    "tags": ["videoke", "music"]
+    "tags": ["generic", "videoke", "music"]
   },
   {
     "id": "warm-034",
@@ -335,9 +335,9 @@
     "type": "spill_or_shot",
     "intensity": 1,
     "target": "current",
-    "text": "What's the weirdest thing you've ever bought from a sari-sari store at midnight?",
+    "text": "If you could live inside any movie or teleserye for a week, which one would you pick?",
     "shots": 1,
-    "tags": ["sari-sari", "food"]
+    "tags": ["hypothetical", "icebreaker"]
   },
   {
     "id": "warm-035",
@@ -345,9 +345,9 @@
     "type": "spill_or_shot",
     "intensity": 1,
     "target": "current",
-    "text": "What's the one thing in your home that has been broken for years but nobody fixes?",
+    "text": "What's the best piece of advice anyone has ever given you?",
     "shots": 1,
-    "tags": ["home", "family"]
+    "tags": ["generic", "icebreaker"]
   },
   {
     "id": "warm-036",
@@ -355,9 +355,9 @@
     "type": "spill_or_shot",
     "intensity": 1,
     "target": "current",
-    "text": "What's the longest you've ever waited for a jeepney or a ride, and what did you do to pass the time?",
+    "text": "Would you rather always be 10 minutes late or always be 30 minutes early?",
     "shots": 1,
-    "tags": ["jeepney", "commute"]
+    "tags": ["hypothetical", "icebreaker"]
   },
   {
     "id": "warm-037",
@@ -367,7 +367,7 @@
     "target": "p1",
     "text": "{p1}, what's the one dish you'd cook to impress someone, and does it actually taste good?",
     "shots": 1,
-    "tags": ["food", "cooking"]
+    "tags": ["generic", "food", "cooking"]
   },
   {
     "id": "warm-038",
@@ -377,7 +377,7 @@
     "target": "current",
     "text": "What's your most-used emoji or sticker, and what does it say about you?",
     "shots": 1,
-    "tags": ["chat", "habits"]
+    "tags": ["generic", "chat", "habits"]
   },
   {
     "id": "warm-039",
@@ -387,7 +387,7 @@
     "target": "current",
     "text": "What's the most overdramatic thing you've done because of a bad hair day?",
     "shots": 1,
-    "tags": ["hair", "embarrassing"]
+    "tags": ["personal", "hair", "embarrassing"]
   },
   {
     "id": "warm-040",
@@ -397,7 +397,7 @@
     "target": "current",
     "text": "Which Filipino food do you secretly not like, even though everyone expects you to?",
     "shots": 1,
-    "tags": ["food", "culture"]
+    "tags": ["generic", "food", "culture"]
   },
   {
     "id": "warm-041",
@@ -405,9 +405,9 @@
     "type": "spill_or_shot",
     "intensity": 1,
     "target": "current",
-    "text": "What was the first event you begged your parents to let you go to?",
+    "text": "What's a small thing that instantly makes your day better?",
     "shots": 1,
-    "tags": ["childhood", "family"]
+    "tags": ["generic", "icebreaker"]
   },
   {
     "id": "warm-042",
@@ -417,7 +417,7 @@
     "target": "tanggero",
     "text": "The Tanggero picks someone to answer: what's the funniest nickname you've ever had?",
     "shots": 1,
-    "tags": ["nicknames"]
+    "tags": ["personal", "nicknames"]
   },
   {
     "id": "warm-043",
@@ -427,7 +427,7 @@
     "target": "current",
     "text": "What's a lie you told as a kid that you're still a little proud of?",
     "shots": 1,
-    "tags": ["childhood", "lies"]
+    "tags": ["personal", "childhood", "lies"]
   },
   {
     "id": "warm-044",
@@ -435,9 +435,9 @@
     "type": "spill_or_shot",
     "intensity": 1,
     "target": "current",
-    "text": "What's the most you've ever spent on a single meal, and was it worth it?",
+    "text": "If you could swap lives with anyone at this table for a day, who would it be?",
     "shots": 1,
-    "tags": ["food", "money"]
+    "tags": ["hypothetical", "icebreaker"]
   },
   {
     "id": "warm-045",
@@ -447,7 +447,7 @@
     "target": "current",
     "text": "What's something you pretend to understand but honestly have no idea about?",
     "shots": 1,
-    "tags": ["honesty", "habits"]
+    "tags": ["generic", "honesty", "habits"]
   },
   {
     "id": "warm-046",
@@ -457,7 +457,7 @@
     "target": "p1",
     "text": "{p1}, which song would you sing at a wedding videoke, and who gets stuck with the harmony?",
     "shots": 1,
-    "tags": ["videoke", "music"]
+    "tags": ["hypothetical", "videoke", "music"]
   },
   {
     "id": "warm-047",
@@ -467,7 +467,7 @@
     "target": "current",
     "text": "What's your most irrational fear, and does it make sense to anyone but you?",
     "shots": 1,
-    "tags": ["fears"]
+    "tags": ["generic", "fears"]
   },
   {
     "id": "warm-048",
@@ -477,7 +477,7 @@
     "target": "current",
     "text": "What's the last thing you laughed at so hard that it embarrassed you in public?",
     "shots": 1,
-    "tags": ["embarrassing", "laughing"]
+    "tags": ["personal", "embarrassing", "laughing"]
   },
   {
     "id": "warm-049",

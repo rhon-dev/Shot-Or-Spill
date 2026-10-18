@@ -14,6 +14,8 @@ import {
   reorderPlayers,
   reshuffle,
   resolve,
+  setTanggero,
+  tanggero,
   skip,
   stats,
   tanggeroIndex,
@@ -39,7 +41,7 @@ function seeded(seed: number) {
 const players = (n: number): Player[] =>
   Array.from({ length: n }, (_, i) => ({ id: `p${i}`, name: `Player ${i}` }));
 
-const ALL_DECKS: GameConfig["decks"] = ["warm-up", "barkada-tea", "love-life", "family-adulting", "no-filter"];
+const ALL_DECKS: GameConfig["decks"] = ["warm-up", "barkada-tea", "love-life", "couples", "family-adulting", "no-filter"];
 const config = (over: Partial<GameConfig> = {}): GameConfig => ({
   decks: ALL_DECKS,
   intensity: 3,
@@ -179,6 +181,44 @@ describe("turns, Tanggero, and skips", () => {
     s = playOne(s, rng);
     expect(tanggeroIndex(s)).toBe((start + 1) % 4);
     expect(countdowns(s).tanggero).toBe(10);
+  });
+
+  it("seats are never random: seat 1 reads first and is the default Tanggero (D-23)", () => {
+    for (let seed = 0; seed < 20; seed++) {
+      const s = newSession(players(6), config(), seeded(seed));
+      expect(reader(s).id).toBe("p0");
+      expect(tanggero(s).id).toBe("p0");
+    }
+  });
+
+  it("starts with the host's Tanggero pick (D-23)", () => {
+    const s = newSession(players(5), config(), seeded(1), 0, "p3");
+    expect(tanggero(s).id).toBe("p3");
+    expect(reader(s).id).toBe("p0");
+  });
+
+  it("setTanggero hands the role over for the rest of the round, then it moves on (D-23)", () => {
+    const rng = seeded(8);
+    let s = newSession(players(4), config(), rng);
+    s = { ...s, pacing: { sinceBreak: 0, nextAt: 99 } };
+    for (let i = 0; i < 4; i++) s = playOne(s, rng);
+    s = setTanggero(s, "p2");
+    expect(tanggero(s).id).toBe("p2");
+    expect(tanggero(undo(s)).id).toBe("p2");
+    for (let i = 0; i < 5; i++) s = playOne(s, rng);
+    expect(tanggero(s).id).toBe("p2");
+    s = playOne(s, rng); // card 10 ends the round
+    expect(tanggero(s).id).toBe("p3");
+    expect(setTanggero(s, "nobody")).toBe(s);
+  });
+
+  it("setTanggero updates the Tanggero's name on the card already on the table", () => {
+    const card = CARDS.find((c) => c.text.includes("{tanggero}"))!;
+    const s = withCard(newSession(players(3), config(), seeded(2)), card.id);
+    expect(s.current!.text).toContain("Player 0");
+    const next = setTanggero(s, "p1");
+    expect(next.current!.text).toContain("Player 1");
+    expect(next.current!.text).not.toContain("Player 0");
   });
 
   it("skip keeps the same reader, logs nothing, and draws face up (F11, D-13)", () => {

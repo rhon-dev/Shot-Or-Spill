@@ -280,3 +280,11 @@ answerable within 60 seconds. Keep, rewrite, or cut any card that fails.
 - [ ] Table reads: the 30 cards in batch 1's sheet and the 32 above (Rhon, in the playtests)
 - [ ] Owner review of both "Cards for Rhon to judge" lists
 - [ ] Cards that fail in playtests are rewritten or cut, and the deck stays at its launch count
+
+## Batch 3: question style pass and Couples deck (D-24)
+
+93 questions were rewritten in place toward hypothetical and generic questions, keeping
+their ids, types, intensities, and targets, and the 50-card Couples deck was added. Notes
+above that mention a rewritten id describe its old text. The validator report lists the
+style share per deck (`npm run validate:cards`). These cards still need the Phase 4
+table read and Rhon's sign-off.
