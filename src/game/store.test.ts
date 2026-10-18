@@ -122,6 +122,46 @@ describe("flow", () => {
     expect(store.getState().screen).toBe("game");
   });
 
+  it("lets the host sort the seating, and turns follow it", () => {
+    const { store } = readyStore();
+    const s = store.getState();
+    const [juan, maria, bea] = store.getState().players;
+    s.movePlayer(bea!.id, -1);
+    expect(store.getState().players.map((p) => p.name)).toEqual(["Juan", "Bea", "Maria"]);
+    s.movePlayer(juan!.id, -1); // already first: no-op
+    s.setPlayerOrder([maria!.id, juan!.id, bea!.id]);
+    expect(store.getState().players.map((p) => p.name)).toEqual(["Maria", "Juan", "Bea"]);
+    s.setPlayerOrder([maria!.id]); // wrong roster: ignored
+    expect(store.getState().players).toHaveLength(3);
+
+    s.startNight();
+    s.finishHowTo();
+    const firstReader = store.getState().session!.players[store.getState().session!.readerIndex]!;
+    expect(firstReader.name).toBe("Maria");
+  });
+
+  it("re-sorting mid-night keeps scores; changing who plays starts fresh", () => {
+    const { store } = readyStore();
+    const s = store.getState();
+    s.startNight();
+    s.finishHowTo();
+    for (let i = 0; i < 3; i++) {
+      s.flip();
+      s.resolve(outcomeFor(store.getState().session!));
+    }
+    const log = store.getState().session!.log;
+    const ids = store.getState().players.map((p) => p.id);
+    s.setPlayerOrder([ids[2]!, ids[0]!, ids[1]!]);
+    expect(s.applySeating()).toBe(true);
+    expect(store.getState().session!.log).toEqual(log);
+    expect(store.getState().session!.players.map((p) => p.id)).toEqual([ids[2], ids[0], ids[1]]);
+
+    s.addPlayer("Carlo");
+    expect(s.applySeating()).toBe(false);
+    s.startNight();
+    expect(store.getState().session!.log).toEqual([]);
+  });
+
   it("changing decks mid-night keeps the scores", () => {
     const { store } = readyStore();
     const s = store.getState();

@@ -246,3 +246,36 @@ These go a step beyond what the PRD spells out.
 - [x] Rhon approved the designs and the §7 design calls ("approve all", 2026-10-17)
 - [ ] D-17 is still open and now deferred to Phase 5. The MVP Recap has no Share button;
       the dashed button in mock 06 is a placeholder only.
+
+---
+
+## UI refresh (2026-10-18)
+
+These changes came after launch, at Rhon's request. They were checked against the
+UI/UX Pro Max skill's guidelines. The brand colors, fonts, and tokens are unchanged:
+the skill's generic design-system suggestion (Swiss minimalism, Outfit/Work Sans) didn't
+fit a neon barkada party game, so the approved Phase 2 brand stays.
+
+- **Seating order (D-22).** The players screen is now a seating list. Each row has a
+  drag handle, up/down buttons, and arrow-key support. Seat 1 shows "Starts first", and a
+  preview below the list shows the round ("then back to Carlo"). There's also a
+  Shuffle seats button. Tapping a name opens rename/remove, which keeps each row to
+  three controls. Changes are announced to screen readers.
+- **Turn order in the game.** The header shows the reader's avatar plus an "Up next"
+  strip with the next three seats. The scoreboard lists players in seating order and has
+  a Change seating link. The recap has Play again (same seats), Seating, and New players.
+- **Icons.** The emoji (deck tiles, recap awards) and the hand-drawn UI icons are
+  replaced with one family: Phosphor (MIT), bold for controls and fill for decks and
+  awards. Each icon is imported as its own SVG from `@phosphor-icons/core`, so only the
+  23 icons used are shipped. The brand art (tagay glass, water glass, wordmark, bunting)
+  stays custom.
+- **Player avatars.** Colored initials circles in the brand and deck colors, all on the
+  contrast-checked near-black text pairing. The first seven players always get different
+  colors, and a player keeps their color when re-seated.
+- **Polish.**
+  - a faint pink-and-amber neon glow on the page background
+  - colored glow and a hover brightness change on bright buttons
+  - a raised-panel style for the pledge, info boxes, and awards
+  - bunting on the age gate and recap
+  - footers fade in instead of cutting off the list above them
+  - the reader's name on its own line so long names don't truncate as early

@@ -9,13 +9,14 @@ export function cx(...parts: (string | false | null | undefined)[]): string {
 type Variant = "primary" | "spill" | "shot" | "secondary" | "ghost" | "danger";
 type Size = "lg" | "md" | "sm";
 
+// Bright fills get a matching glow; hover lifts brightness (no layout shift).
 const VARIANT: Record<Variant, string> = {
-  primary: "bg-accent text-on-bright",
-  spill: "bg-spill text-on-bright",
-  shot: "bg-shot text-on-bright",
-  secondary: "border-2 border-line-strong text-ink",
-  danger: "border-2 border-danger text-danger",
-  ghost: "text-accent",
+  primary: "bg-accent text-on-bright shadow-[0_6px_20px_-6px_rgb(34_211_197/0.55)] hover:brightness-110",
+  spill: "bg-spill text-on-bright shadow-[0_6px_22px_-6px_rgb(255_46_136/0.6)] hover:brightness-110",
+  shot: "bg-shot text-on-bright shadow-[0_6px_22px_-6px_rgb(255_176_32/0.55)] hover:brightness-110",
+  secondary: "border-2 border-line-strong text-ink hover:bg-raised",
+  danger: "border-2 border-danger text-danger hover:bg-danger/10",
+  ghost: "text-accent hover:underline",
 };
 
 const SIZE: Record<Size, string> = {
@@ -44,9 +45,9 @@ export function Button({
     <button
       type="button"
       className={cx(
-        "flex flex-col items-center justify-center rounded-md px-4 transition-transform active:scale-[0.98]",
+        "flex flex-col items-center justify-center rounded-md px-4 transition-[transform,filter,background-color] duration-150 active:scale-[0.98]",
         block && "w-full",
-        "disabled:border-transparent disabled:bg-disabled-bg disabled:text-disabled-ink disabled:active:scale-100",
+        "disabled:border-transparent disabled:bg-disabled-bg disabled:text-disabled-ink disabled:shadow-none disabled:hover:brightness-100 disabled:active:scale-100",
         ghost ? "min-h-12 font-sans text-base font-semibold" : cx("font-display uppercase tracking-[1px]", SIZE[size]),
         VARIANT[variant],
         className,
@@ -61,7 +62,7 @@ export function Button({
 
 export function IconButton({ icon, label, className, ...rest }: ButtonHTMLAttributes<HTMLButtonElement> & { icon: IconName; label: string }) {
   return (
-    <button type="button" aria-label={label} className={cx("grid size-12 place-items-center rounded-md text-ink", className)} {...rest}>
+    <button type="button" aria-label={label} className={cx("grid size-12 place-items-center rounded-md text-ink transition-colors hover:bg-raised/60", className)} {...rest}>
       <Icon name={icon} size={24} />
     </button>
   );
@@ -231,7 +232,11 @@ export function ScreenLayout({
       )}
       {title && <h1 className={cx("font-display text-[36px] leading-[1.05] text-ink", !onBack && !step && "pt-8")}>{title}</h1>}
       <div className="flex-1 pb-4">{children}</div>
-      {footer && <div className="pad-safe-bottom sticky bottom-0 bg-bg pt-3">{footer}</div>}
+      {footer && (
+        <div className="pad-safe-bottom sticky bottom-0 -mx-5 px-5 pt-6 [background:linear-gradient(to_top,rgb(11_10_16/0.97)_70%,rgb(11_10_16/0))]">
+          {footer}
+        </div>
+      )}
     </div>
   );
 }

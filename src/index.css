@@ -37,7 +37,29 @@
   }
 }
 
+/*
+ * Sari-sari neon night (PRD §10): faint pink and amber glows on the
+ * near-black page. Kept at low alpha so every contrast pair in
+ * scripts/check-contrast.ts still holds against the darkest and lightest
+ * points of the background.
+ */
+@layer base {
+  body {
+    background-color: var(--color-bg);
+    background-image:
+      radial-gradient(60rem 40rem at 0% -10%, rgb(255 46 136 / 0.09), transparent 60%),
+      radial-gradient(50rem 36rem at 110% 105%, rgb(255 176 32 / 0.07), transparent 60%);
+    background-attachment: fixed;
+  }
+}
+
 @layer utilities {
+  /* Raised panel with a soft top highlight. */
+  .glass-card {
+    @apply border border-line bg-surface;
+    background-image: linear-gradient(180deg, rgb(255 255 255 / 0.035), transparent 40%);
+  }
+
   .neon-glow {
     filter: drop-shadow(0 0 6px currentColor) drop-shadow(0 0 14px currentColor);
   }

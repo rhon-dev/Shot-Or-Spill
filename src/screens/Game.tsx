@@ -12,15 +12,40 @@ import {
   stats,
   tanggero,
   tanggeroIndex,
+  turnOrder,
 } from "../game/engine";
 import type { Session } from "../game/types";
 import { useApp, useReduced } from "../game/useApp";
-import { Icon, WaterGlass } from "../components/art";
+import { Avatar, Icon, WaterGlass } from "../components/art";
 import { CardStage } from "../components/Card";
 import { Dialog, Sheet, Toast } from "../components/overlays";
 import { ActionButton, Button, Chip, cx, Stepper, TanggeroBadge, Toggle } from "../components/ui";
 
 const plural = (n: number, word: string) => `${n} ${word}${n === 1 ? "" : "s"}`;
+
+/**
+ * The next few seats in turn order, so the table can see whose turn is
+ * coming (turns go around the circle like the tagay).
+ */
+function UpNext({ session }: { session: Session }) {
+  const order = turnOrder(session);
+  const next = order.slice(1, Math.min(order.length, 4));
+  if (next.length === 0) return null;
+  return (
+    <div className="mt-2 flex items-center gap-2 text-[13px] font-semibold text-muted">
+      <span className="text-label text-[13px]">Up next</span>
+      <ol className="flex min-w-0 items-center gap-1.5" aria-label="Up next">
+        {next.map((p, i) => (
+          <li key={p.id} className="flex min-w-0 items-center gap-1.5">
+            {i > 0 && <Icon name="down" size={11} className="shrink-0 -rotate-90" />}
+            <Avatar id={p.id} name={p.name} size={20} />
+            <span className="truncate text-ink">{p.name}</span>
+          </li>
+        ))}
+      </ol>
+    </div>
+  );
+}
 
 function joinNames(names: string[]): string {
   if (names.length <= 1) return names[0] ?? "";
@@ -172,8 +197,9 @@ export function Scoreboard({ session, onClose }: { session: Session; onClose: ()
             const capped = s.shots >= softCap;
             return (
               <tr key={p.id} className={cx(isReader && "bg-raised")}>
-                <th scope="row" className="rounded-l-sm py-2.5 pl-2 text-[17px] font-bold text-ink">
+                <th scope="row" className="rounded-l-sm py-2 pl-2 text-[17px] font-bold text-ink">
                   <span className="inline-flex items-center gap-2">
+                    <Avatar id={p.id} name={p.name} size={28} />
                     {p.name}
                     {i === t && (
                       <span className="grid h-[22px] w-6 place-items-center rounded-full border-[1.5px] border-accent font-display text-[13px] text-accent" title="Tanggero">
@@ -213,6 +239,7 @@ export function Scoreboard({ session, onClose }: { session: Session; onClose: ()
         End the night
       </Button>
       <nav aria-label="Help" className="mt-2 flex flex-wrap justify-center gap-x-1 text-sm font-semibold">
+        <button type="button" className="min-h-12 px-2 text-accent" onClick={() => { onClose(); go("players"); }}>Change seating</button>
         <button type="button" className="min-h-12 px-2 text-accent" onClick={() => { onClose(); go("howto"); }}>How to play</button>
         <a href="#drink-responsibly" className="inline-flex min-h-12 items-center px-2 text-accent">Drink Responsibly</a>
         <a href="#terms" className="inline-flex min-h-12 items-center px-2 text-accent">Terms</a>
@@ -301,13 +328,17 @@ export function Game() {
 
   return (
     <main className="mx-auto flex min-h-dvh w-full max-w-app flex-col px-5 pt-4">
-      <header className="flex items-start justify-between gap-3">
-        <div className="min-w-0">
-          <p className="text-label text-muted">{faceUp ? "Now reading" : "Pass the phone to"}</p>
-          <h1 className="truncate font-display text-[46px] leading-[1.1] text-ink">{who.name.toUpperCase()}</h1>
+      <header>
+        <div className="flex items-center justify-between gap-3">
+          <p className="text-label truncate text-muted">{faceUp ? "Now reading" : "Pass the phone to"}</p>
+          <TanggeroBadge name={tanggero(session).name} />
         </div>
-        <TanggeroBadge name={tanggero(session).name} />
+        <div className="mt-1 flex min-w-0 items-center gap-3">
+          <Avatar id={who.id} name={who.name} size={40} />
+          <h1 className="min-w-0 truncate font-display text-[44px] leading-[1.1] text-ink">{who.name.toUpperCase()}</h1>
+        </div>
       </header>
+      <UpNext session={session} />
 
       <div className={cx("relative my-3 flex-1", compact ? "min-h-[260px]" : "min-h-[340px]")}>
         {drawn && card ? (

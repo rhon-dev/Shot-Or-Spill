@@ -158,7 +158,29 @@ try {
   await input.press("Enter");
   check(await page.getByText("That name is already in.").isVisible(), "duplicate names are rejected");
   await input.fill("");
-  check((await page.getByRole("list", { name: "Players" }).getByRole("listitem").count()) === 4, "4 players listed");
+  const seats = page.getByRole("list", { name: "Seating order" });
+  const seatNames = async () =>
+    // Row text is "<initials><name><Starts first | Seat N>".
+    (await seats.getByRole("listitem").allTextContents()).map((t) => t.match(/^[A-Z?]{1,2}(.+?)(?:Starts first|Seat \d+)$/)?.[1] ?? t);
+  check((await seats.getByRole("listitem").count()) === 4, "4 players listed in the seating order");
+
+  console.log("Seating order (host sorts the ikot)");
+  for (let i = 0; i < 3; i++) await button("Move Carlo up").click();
+  check((await seatNames()).join(",") === "Carlo,Juan,Maria,Bea", "up arrows move Carlo to seat 1");
+  check(await seats.getByText("Starts first").isVisible(), "seat 1 is marked as starting first");
+  // Drag Maria's handle down one row.
+  const handle = page.getByRole("button", { name: /^Move Maria, seat 3/ });
+  const hb = (await handle.boundingBox())!;
+  await page.mouse.move(hb.x + hb.width / 2, hb.y + hb.height / 2);
+  await page.mouse.down();
+  await page.mouse.move(hb.x + hb.width / 2, hb.y + hb.height / 2 + 70, { steps: 10 });
+  await page.mouse.up();
+  check((await seatNames()).join(",") === "Carlo,Juan,Bea,Maria", "dragging the handle moves Maria down a seat");
+  // Keyboard: arrow keys on the handle.
+  await page.getByRole("button", { name: /^Move Bea, seat 3/ }).focus();
+  await page.keyboard.press("ArrowDown");
+  await page.keyboard.press("ArrowUp");
+  check((await seatNames()).join(",") === "Carlo,Juan,Bea,Maria", "arrow keys move a seat and back");
   await shot(page, "players");
   await button(/^Next: pick decks/).click();
 
@@ -189,7 +211,9 @@ try {
   console.log("Game loop (F3, F6–F12)");
   await page.getByText("Pass the phone to").waitFor();
   const firstReader = (await page.locator("main h1").textContent())?.trim();
-  check(firstReader === "JUAN", "first reader is the first player");
+  check(firstReader === "CARLO", "first reader is seat 1 (Carlo)");
+  const upNext = (await page.getByRole("list", { name: "Up next" }).textContent())?.replace(/\s+/g, "");
+  check(upNext === "JUJuanBEBeaMAMaria", `up next follows the seating: ${upNext}`);
   check(await page.getByText(/^Tanggero: /).isVisible(), "Tanggero badge shown");
   await shot(page, "pass-the-phone");
   // F7: swipe works as well as tap. Drag the card back sideways to flip it.
@@ -208,7 +232,7 @@ try {
   const before = await page.getByRole("group").first().textContent();
   await button(/^Skip$/).click();
   await page.waitForTimeout(250);
-  check((await page.locator("main h1").textContent())?.trim() === "JUAN", "skip keeps the same reader");
+  check((await page.locator("main h1").textContent())?.trim() === "CARLO", "skip keeps the same reader");
   check((await page.getByRole("group").first().textContent()) !== before, "skip shows a different card");
 
   const seen = new Set<string>();
@@ -242,7 +266,30 @@ try {
   await page.getByRole("heading", { name: "SCOREBOARD" }).waitFor();
   const scoresBefore = await page.getByRole("table").textContent();
   await shot(page, "scoreboard");
+
+  console.log("Re-sort seats mid-night");
+  await button("Change seating").click();
+  await page.getByRole("heading", { name: "WHO'S DRINKING?" }).waitFor();
+  check(await page.getByText("Re-sorting keeps tonight's scores.").isVisible(), "mid-night seating says scores are kept");
+  await button("Move Maria up").click();
+  await shot(page, "seating-mid-night");
+  await button(/^Back to the game/).click();
+  await page.getByRole("list", { name: "Up next" }).waitFor();
+  await button(/^Scores/).click();
+  // Row header text is "<initials><name>[T (Tanggero)][reading]".
+  const rowsAfter = (await page.getByRole("table").getByRole("rowheader").allTextContents()).map(
+    (t) => t.replace(/^[A-Z?]{1,2}/, "").replace(/T \(Tanggero\)/, "").replace(/reading$/, "").trim(),
+  );
+  check(rowsAfter.join(",") === "Carlo,Juan,Maria,Bea", `scoreboard follows the new seating: ${rowsAfter.join(",")}`);
+  const sortScores = (t: string | null) => (t ?? "").replace(/\s+/g, "");
+  check(sortScores(await page.getByRole("table").textContent()).length === sortScores(scoresBefore).length, "scores carried over after re-sorting");
   await button("Close").click();
+  const scoresBeforeReload = await (async () => {
+    await button(/^Scores/).click();
+    const t = await page.getByRole("table").textContent();
+    await button("Close").click();
+    return t;
+  })();
 
   console.log("Refresh restores the night (F15)");
   await flipIfNeeded();
@@ -253,7 +300,7 @@ try {
   check((await page.locator("main h1").textContent())?.trim() === nameBefore, "same reader after reload");
   check((await page.getByRole("group").first().textContent()) === cardBefore, "same card text after reload");
   await button(/^Scores/).click();
-  check((await page.getByRole("table").textContent()) === scoresBefore, "same scores after reload");
+  check((await page.getByRole("table").textContent()) === scoresBeforeReload, "same scores after reload");
 
   console.log("Reduced motion toggle");
   await page.getByRole("switch", { name: /Reduced motion/ }).click();

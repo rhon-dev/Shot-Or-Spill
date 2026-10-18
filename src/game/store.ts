@@ -45,6 +45,13 @@ export interface AppActions {
   addPlayer: (name: string) => string | null;
   renamePlayer: (id: string, name: string) => string | null;
   removePlayer: (id: string) => void;
+  /** Move a player one seat up (-1) or down (+1). Turns follow this order. */
+  movePlayer: (id: string, delta: -1 | 1) => void;
+  /** Set the whole seating order at once (drag to reorder). */
+  setPlayerOrder: (ids: string[]) => void;
+  shuffleSeats: () => void;
+  /** Mid-night: apply a re-sorted seating to the running game. False if the roster changed. */
+  applySeating: () => boolean;
 
   toggleDeck: (id: DeckId) => void;
   setIntensity: (intensity: Intensity) => void;
@@ -94,6 +101,11 @@ export function isAgeValid(confirmedAt: number | null, now = Date.now()): boolea
 /** Choosing this needs the adult confirmation (D-14). */
 export function needsAdultOk(choice: { deck?: DeckId; intensity?: Intensity }): boolean {
   return (choice.deck !== undefined && DECKS[choice.deck].adultOptIn) || choice.intensity === 3;
+}
+
+/** Same people, ignoring order. */
+export function sameRoster(a: readonly Player[], b: readonly Player[]): boolean {
+  return a.length === b.length && a.every((p) => b.some((q) => q.id === p.id));
 }
 
 export function cleanName(raw: string): string {
@@ -226,6 +238,31 @@ export function createAppStore(storage?: StateStorage, now: () => number = Date.
 
           removePlayer: (id) => set({ players: get().players.filter((p) => p.id !== id) }),
 
+          movePlayer: (id, delta) => {
+            const players = [...get().players];
+            const from = players.findIndex((p) => p.id === id);
+            const to = from + delta;
+            if (from < 0 || to < 0 || to >= players.length) return;
+            const [moved] = players.splice(from, 1);
+            players.splice(to, 0, moved!);
+            set({ players });
+          },
+
+          setPlayerOrder: (ids) => {
+            const { players } = get();
+            if (ids.length !== players.length || !players.every((p) => ids.includes(p.id))) return;
+            set({ players: ids.map((id) => players.find((p) => p.id === id)!) });
+          },
+
+          shuffleSeats: () => set({ players: engine.shuffle(get().players, Math.random) }),
+
+          applySeating: () => {
+            const { session, players } = get();
+            if (!session || !sameRoster(session.players, players)) return false;
+            set({ session: engine.reorderPlayers(session, players.map((p) => p.id)), screen: "game" });
+            return true;
+          },
+
           toggleDeck: (id) => {
             const { decks } = get();
             set({ decks: decks.includes(id) ? decks.filter((d) => d !== id) : DECK_IDS.filter((d) => d === id || decks.includes(d)) });
@@ -239,13 +276,10 @@ export function createAppStore(storage?: StateStorage, now: () => number = Date.
             const cfg = config();
             const players = state.players;
             if (engine.eligibleCount(cfg.decks, cfg.intensity, players.length) < engine.MIN_ELIGIBLE) return;
-            // Mid-night deck change keeps scores; otherwise start fresh.
-            const continuing =
-              state.session &&
-              state.session.players.length === players.length &&
-              state.session.players.every((p, i) => p.id === players[i]?.id);
+            // Same players (in any order) keep the night's scores; new players start fresh.
+            const continuing = !!state.session && sameRoster(state.session.players, players);
             const session = continuing
-              ? engine.changeConfig(state.session!, cfg)
+              ? engine.changeConfig(engine.reorderPlayers(state.session!, players.map((p) => p.id)), cfg)
               : engine.newSession(players, cfg, Math.random, now());
             if (!continuing) {
               track({ name: "session_start", props: { players: players.length, decks: cfg.decks.join(","), intensity: cfg.intensity } });

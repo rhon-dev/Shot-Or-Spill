@@ -69,6 +69,7 @@ These came up while planning the game engine.
 | ID | Topic | Decision | Phase | Status |
 | --- | --- | --- | --- | --- |
 | D-20 | **Design files.** PRD §14 says "6 key screens in Figma", but Kiro can't create or edit Figma files. | Phase 2 produces the screens as **SVG mocks in the repo** (`docs/design/`), generated from the same design tokens Phase 3 will use. SVGs import into Figma by drag and drop, so Rhon can keep refining them there. | Phase 2 | Accepted (Rhon: "approve all", Phase 2 gate) |
+| D-22 | **Seating order.** Turns already went in the order players were added, but the host couldn't change it. | The host sorts players to match how the table is sitting: drag the handle, tap the up/down arrows, or use the arrow keys (WCAG 2.5.7 needs a non-drag way). Seat 1 starts, and turns and the Tanggero role go around in that order, like the tagay. The order can be changed mid-night from the scoreboard ("Change seating") without losing scores. Adding or removing someone still starts a new night. | Post-launch | Accepted (Rhon's request, 2026-10-18) |
 | D-21 | **Phase 1 review items.** The table read and the owner review of flagged cards weren't done before Phase 2 started. | Move both into the Phase 4 playtests, which read real cards at real tables. Flagged cards stay in the deck until then. | Phase 1 → 4 | Accepted (Rhon: "you can continue") |
 
 ---

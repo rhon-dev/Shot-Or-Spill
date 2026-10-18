@@ -1,39 +1,89 @@
-/** Brand art and icons (DESIGN.md §1). Decorative unless a label is passed. */
-import type { SVGProps } from "react";
+/**
+ * Icons and brand art (DESIGN.md §1).
+ *
+ * UI icons come from one family, Phosphor, so stroke and style stay
+ * consistent. Brand art (tagay glass, water glass, wordmark, bunting) is
+ * drawn here. Everything is decorative (aria-hidden) unless a label is
+ * passed by the caller.
+ */
+// Phosphor icons (MIT), imported one SVG at a time so only these ship.
+import back from "@phosphor-icons/core/assets/bold/caret-left-bold.svg?raw";
+import up from "@phosphor-icons/core/assets/bold/caret-up-bold.svg?raw";
+import down from "@phosphor-icons/core/assets/bold/caret-down-bold.svg?raw";
+import skip from "@phosphor-icons/core/assets/bold/fast-forward-bold.svg?raw";
+import undo from "@phosphor-icons/core/assets/bold/arrow-counter-clockwise-bold.svg?raw";
+import scores from "@phosphor-icons/core/assets/bold/chart-bar-bold.svg?raw";
+import close from "@phosphor-icons/core/assets/bold/x-bold.svg?raw";
+import edit from "@phosphor-icons/core/assets/bold/pencil-simple-bold.svg?raw";
+import check from "@phosphor-icons/core/assets/bold/check-bold.svg?raw";
+import plus from "@phosphor-icons/core/assets/bold/plus-bold.svg?raw";
+import minus from "@phosphor-icons/core/assets/bold/minus-bold.svg?raw";
+import shuffle from "@phosphor-icons/core/assets/bold/shuffle-bold.svg?raw";
+import drag from "@phosphor-icons/core/assets/bold/dots-six-vertical-bold.svg?raw";
+import trash from "@phosphor-icons/core/assets/bold/trash-bold.svg?raw";
+import honest from "@phosphor-icons/core/assets/fill/chat-circle-dots-fill.svg?raw";
+import secret from "@phosphor-icons/core/assets/fill/lock-key-fill.svg?raw";
+import tea from "@phosphor-icons/core/assets/fill/sparkle-fill.svg?raw";
+import beer from "@phosphor-icons/core/assets/fill/beer-stein-fill.svg?raw";
+import coffee from "@phosphor-icons/core/assets/fill/coffee-fill.svg?raw";
+import heartBreak from "@phosphor-icons/core/assets/fill/heart-break-fill.svg?raw";
+import house from "@phosphor-icons/core/assets/fill/house-fill.svg?raw";
+import fire from "@phosphor-icons/core/assets/fill/fire-fill.svg?raw";
+import type { DeckId } from "../content/meta";
+import { useApp } from "../game/useApp";
+
+/** Pull the path data out of a Phosphor SVG (256-unit viewBox, fill="currentColor"). */
+function paths(svg: string): string[] {
+  return [...svg.matchAll(/\sd="([^"]+)"/g)].map((m) => m[1]!);
+}
 
 const ICONS = {
-  back: "M13 4 L7 10 L13 16",
-  skip: "M4 4 L10 10 L4 16 M11 4 L17 10 L11 16",
-  undo: "M7 4 L3 8 L7 12 M3 8 H12 A5 5 0 0 1 12 18 H8",
-  scores: "M4 17 V11 M10 17 V4 M16 17 V8",
-  close: "M5 5 L15 15 M15 5 L5 15",
-  edit: "M4 16 L5 12 L13 4 L16 7 L8 15 Z",
-  check: "M4 10.5 L8.5 15 L16 6",
-  plus: "M10 4 V16 M4 10 H16",
-  minus: "M4 10 H16",
-  shuffle: "M2 6 H6 L14 14 H18 M2 14 H6 L14 6 H18 M15.5 3.5 L18 6 L15.5 8.5 M15.5 11.5 L18 14 L15.5 16.5",
-} as const;
+  back: paths(back),
+  up: paths(up),
+  down: paths(down),
+  skip: paths(skip),
+  undo: paths(undo),
+  scores: paths(scores),
+  close: paths(close),
+  edit: paths(edit),
+  check: paths(check),
+  plus: paths(plus),
+  minus: paths(minus),
+  shuffle: paths(shuffle),
+  drag: paths(drag),
+  trash: paths(trash),
+  honest: paths(honest),
+  secret: paths(secret),
+  tea: paths(tea),
+};
 
 export type IconName = keyof typeof ICONS;
 
-export function Icon({ name, size = 20, ...rest }: { name: IconName; size?: number } & SVGProps<SVGSVGElement>) {
+function Glyph({ d, size, className }: { d: string[]; size: number; className?: string }) {
   return (
-    <svg
-      viewBox="0 0 20 20"
-      width={size}
-      height={size}
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={2.2}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-      focusable="false"
-      {...rest}
-    >
-      <path d={ICONS[name]} />
+    <svg viewBox="0 0 256 256" width={size} height={size} fill="currentColor" aria-hidden="true" focusable="false" className={className}>
+      {d.map((p, i) => (
+        <path key={i} d={p} />
+      ))}
     </svg>
   );
+}
+
+export function Icon({ name, size = 20, className }: { name: IconName; size?: number; className?: string; weight?: "bold" | "fill" }) {
+  return <Glyph d={ICONS[name]} size={size} className={className} />;
+}
+
+/** One icon per deck, so decks never rely on color alone (DESIGN.md §2). */
+const DECK_ICON: Record<DeckId, string[]> = {
+  "warm-up": paths(beer),
+  "barkada-tea": paths(coffee),
+  "love-life": paths(heartBreak),
+  "family-adulting": paths(house),
+  "no-filter": paths(fire),
+};
+
+export function DeckIcon({ deck, size = 24, className }: { deck: DeckId; size?: number; className?: string }) {
+  return <Glyph d={DECK_ICON[deck]} size={size} className={className} />;
 }
 
 /** Tagay glass with an amber pour: the Tanggero mark. */
@@ -74,7 +124,7 @@ export function Wordmark({ size = 82, as: Tag = "div" }: { size?: number; as?: "
   );
 }
 
-/** Fiesta bunting across the card back. */
+/** Fiesta bunting across the card back and the top of the setup screens. */
 export function Bunting({ className }: { className?: string }) {
   const colors = [
     "fill-shot",
@@ -96,5 +146,49 @@ export function Bunting({ className }: { className?: string }) {
         return <path key={i} d={`M${p.x - w / 2} ${p.y} L${p.x + w / 2} ${p.y} L${p.x} ${p.y + w * 1.1} Z`} className={colors[i % colors.length]} />;
       })}
     </svg>
+  );
+}
+
+// Player avatar colors: brand and deck fills, all checked for 4.5:1 with
+// near-black text by scripts/check-contrast.ts.
+const AVATAR_BG = [
+  "bg-shot",
+  "bg-spill",
+  "bg-accent",
+  "bg-deck-warm-up",
+  "bg-deck-love-life",
+  "bg-deck-family-adulting",
+  "bg-deck-no-filter",
+];
+
+function hash(s: string): number {
+  let h = 0;
+  for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) >>> 0;
+  return h;
+}
+
+function initials(name: string): string {
+  const parts = name.trim().split(/\s+/);
+  const first = parts[0]?.[0] ?? "?";
+  const second = parts.length > 1 ? (parts.at(-1)?.[0] ?? "") : (parts[0]?.[1] ?? "");
+  return (first + second).toUpperCase();
+}
+
+/**
+ * Colored initials circle. Colors go by the order players were added (ids
+ * are time-based), so the first 7 players never share a color and a color
+ * stays with its player when seats are re-sorted.
+ */
+export function Avatar({ id, name, size = 36, className }: { id: string; name: string; size?: number; className?: string }) {
+  const added = useApp((s) => s.players.map((p) => p.id).sort().indexOf(id));
+  const color = AVATAR_BG[(added >= 0 ? added : hash(id)) % AVATAR_BG.length];
+  return (
+    <span
+      aria-hidden="true"
+      className={`grid shrink-0 place-items-center rounded-full font-display text-on-bright ${color} ${className ?? ""}`}
+      style={{ width: size, height: size, fontSize: size * 0.42 }}
+    >
+      {initials(name)}
+    </span>
   );
 }

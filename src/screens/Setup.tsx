@@ -1,11 +1,12 @@
-/** Age gate, under-18, players, decks, and How to Play (PHASES 3.2, mocks 01–04, 14, 15, 17). */
-import { useState, type FormEvent } from "react";
+/** Age gate, under-18, players + seating, decks, and How to Play (PHASES 3.2, mocks 01–04, 14, 15, 17). */
+import { useRef, useState, type FormEvent, type KeyboardEvent, type PointerEvent } from "react";
 import { DECK_IDS, DECKS, type DeckId, type Intensity } from "../content/meta";
 import { layout } from "../design/tokens";
 import { eligibleCount, MAX_PLAYERS, MIN_ELIGIBLE, MIN_PLAYERS } from "../game/engine";
-import { needsAdultOk } from "../game/store";
+import { needsAdultOk, sameRoster } from "../game/store";
+import type { Player } from "../game/types";
 import { useApp } from "../game/useApp";
-import { Icon, ShotGlass, Wordmark } from "../components/art";
+import { Avatar, Bunting, DeckIcon, Icon, ShotGlass, Wordmark } from "../components/art";
 import { DECK_BG, DECK_BORDER } from "../components/Card";
 import { Dialog } from "../components/overlays";
 import { AdultBadge, Button, cx, IconButton, ScreenLayout, Segmented } from "../components/ui";
@@ -13,11 +14,11 @@ import { AdultBadge, Button, cx, IconButton, ScreenLayout, Segmented } from "../
 export function InfoLinks({ className }: { className?: string }) {
   return (
     <nav aria-label="About Shot or Spill" className={cx("flex flex-wrap justify-center gap-x-1 text-sm font-semibold", className)}>
-      <a href="#about" className="inline-flex min-h-12 items-center px-2 text-accent">About</a>
+      <a href="#about" className="inline-flex min-h-12 items-center px-2 text-accent hover:underline">About</a>
       <span aria-hidden="true" className="self-center text-muted">·</span>
-      <a href="#drink-responsibly" className="inline-flex min-h-12 items-center px-2 text-accent">Drink Responsibly</a>
+      <a href="#drink-responsibly" className="inline-flex min-h-12 items-center px-2 text-accent hover:underline">Drink Responsibly</a>
       <span aria-hidden="true" className="self-center text-muted">·</span>
-      <a href="#terms" className="inline-flex min-h-12 items-center px-2 text-accent">Terms</a>
+      <a href="#terms" className="inline-flex min-h-12 items-center px-2 text-accent hover:underline">Terms</a>
     </nav>
   );
 }
@@ -28,22 +29,27 @@ export function AgeGate() {
   const confirmAge = useApp((s) => s.confirmAge);
   const declareUnder18 = useApp((s) => s.declareUnder18);
   return (
-    <main className="mx-auto flex min-h-dvh w-full max-w-app flex-col items-center px-5 pt-10 text-center">
-      <ShotGlass size={56} />
-      <div className="mt-2">
+    <main className="mx-auto flex min-h-dvh w-full max-w-app flex-col items-center px-5 pt-4 text-center">
+      <Bunting className="h-10 w-full" />
+      <ShotGlass size={52} className="mt-4" />
+      <div className="mt-1">
         <Wordmark size={82} as="h1" />
       </div>
       <span className="mt-4 rounded-full border-[1.5px] border-deck-no-filter px-4 py-0.5 font-display text-sm tracking-[1.4px] text-deck-no-filter">
         18+ ONLY
       </span>
-      <p className="mt-3 max-w-[280px] text-base font-medium text-muted">The barkada card game. Answer honestly, or take a shot.</p>
+      <p className="mt-3 max-w-[290px] text-base font-medium text-muted">
+        The barkada card game. Pass the phone around the table, then answer honestly or take a shot.
+      </p>
 
-      <section aria-labelledby="pledge" className="mt-6 w-full rounded-lg border border-line bg-surface p-5 text-left">
+      <section aria-labelledby="pledge" className="glass-card mt-6 w-full rounded-lg p-5 text-left">
         <h2 id="pledge" className="text-label text-accent">Tonight's pledge</h2>
-        <ul className="mt-3 space-y-2">
+        <ul className="mt-3 space-y-2.5">
           {PLEDGE.map((line) => (
             <li key={line} className="flex items-center gap-3 text-[17px] font-semibold text-ink">
-              <Icon name="check" className="text-accent" />
+              <span className="grid size-6 shrink-0 place-items-center rounded-full bg-accent/15 text-accent">
+                <Icon name="check" size={14} />
+              </span>
               {line}
             </li>
           ))}
@@ -57,7 +63,7 @@ export function AgeGate() {
         <Button variant="ghost" className="mt-2" onClick={declareUnder18}>
           I'm under 18
         </Button>
-        <InfoLinks className="mt-2" />
+        <InfoLinks className="mt-1" />
       </div>
     </main>
   );
@@ -81,81 +87,223 @@ export function UnderAge() {
   );
 }
 
-function PlayerRow({ index, id, name }: { index: number; id: string; name: string }) {
+// ---------------------------------------------------------------------------
+// Players and seating order
+// ---------------------------------------------------------------------------
+
+/** Row height (56) + gap (8). Drag math depends on rows staying this tall. */
+const ROW = 64;
+
+function RenameForm({ player, onDone }: { player: Player; onDone: () => void }) {
   const renamePlayer = useApp((s) => s.renamePlayer);
   const removePlayer = useApp((s) => s.removePlayer);
-  const [editing, setEditing] = useState(false);
-  const [draft, setDraft] = useState(name);
+  const [draft, setDraft] = useState(player.name);
   const [error, setError] = useState<string | null>(null);
-
-  const save = (e?: FormEvent) => {
-    e?.preventDefault();
-    const err = renamePlayer(id, draft);
+  const save = (e: FormEvent) => {
+    e.preventDefault();
+    const err = renamePlayer(player.id, draft);
     setError(err);
-    if (!err) setEditing(false);
+    if (!err) onDone();
+  };
+  return (
+    <form onSubmit={save} className="rounded-md border-2 border-accent bg-surface p-2">
+      <div className="flex items-center gap-2">
+        <label className="sr-only" htmlFor={`edit-${player.id}`}>Rename {player.name}</label>
+        <input
+          id={`edit-${player.id}`}
+          autoFocus
+          value={draft}
+          maxLength={layout.playerNameMax + 4}
+          aria-invalid={!!error}
+          aria-describedby={error ? `edit-${player.id}-err` : undefined}
+          onChange={(e) => setDraft(e.target.value)}
+          onKeyDown={(e) => e.key === "Escape" && onDone()}
+          className="min-h-12 min-w-0 flex-1 rounded-sm bg-bg px-3 text-[17px] font-semibold text-ink outline-none"
+        />
+        <Button type="submit" size="sm" block={false} className="shrink-0 px-4">Save</Button>
+      </div>
+      {error && <p id={`edit-${player.id}-err`} role="alert" className="px-1 pt-2 text-sm font-semibold text-danger">{error}</p>}
+      <div className="mt-1 flex justify-between">
+        <button type="button" onClick={() => removePlayer(player.id)} className="flex min-h-12 items-center gap-2 px-2 text-sm font-semibold text-danger">
+          <Icon name="trash" size={18} /> Remove {player.name}
+        </button>
+        <button type="button" onClick={onDone} className="min-h-12 px-2 text-sm font-semibold text-muted">Cancel</button>
+      </div>
+    </form>
+  );
+}
+
+/**
+ * Seating order. Turns go around in this order, so the host sorts it to
+ * match the table. Three ways to move someone: drag the handle, the up/down
+ * buttons (single tap, no dragging needed), or arrow keys on the handle.
+ */
+function SeatList({ players, onAnnounce }: { players: Player[]; onAnnounce: (msg: string) => void }) {
+  const { movePlayer, setPlayerOrder } = useApp.getState();
+  const [editing, setEditing] = useState<string | null>(null);
+  const [drag, setDrag] = useState<{ id: string; from: number; startY: number; dy: number } | null>(null);
+  const listRef = useRef<HTMLOListElement>(null);
+
+  const ids = players.map((p) => p.id);
+  const shift = drag ? Math.max(-drag.from, Math.min(ids.length - 1 - drag.from, Math.round(drag.dy / ROW))) : 0;
+  const order = drag ? (() => {
+    const next = ids.filter((id) => id !== drag.id);
+    next.splice(drag.from + shift, 0, drag.id);
+    return next;
+  })() : ids;
+  const byId = new Map(players.map((p) => [p.id, p]));
+
+  const announceSeat = (id: string, seat: number) => {
+    const p = byId.get(id);
+    if (p) onAnnounce(`${p.name} moved to seat ${seat}.`);
+  };
+
+  const move = (id: string, delta: -1 | 1) => {
+    const i = ids.indexOf(id);
+    const to = i + delta;
+    if (to < 0 || to >= ids.length) return;
+    movePlayer(id, delta);
+    announceSeat(id, to + 1);
+  };
+
+  const onHandleDown = (e: PointerEvent<HTMLButtonElement>, id: string) => {
+    if (e.button !== 0) return;
+    e.currentTarget.setPointerCapture(e.pointerId);
+    setEditing(null);
+    setDrag({ id, from: ids.indexOf(id), startY: e.clientY, dy: 0 });
+  };
+  const onHandleMove = (e: PointerEvent<HTMLButtonElement>) => {
+    if (!drag) return;
+    setDrag({ ...drag, dy: e.clientY - drag.startY });
+  };
+  const onHandleUp = () => {
+    if (!drag) return;
+    if (shift !== 0) {
+      setPlayerOrder(order);
+      announceSeat(drag.id, drag.from + shift + 1);
+    }
+    setDrag(null);
+  };
+  const onHandleKey = (e: KeyboardEvent<HTMLButtonElement>, id: string) => {
+    if (e.key === "ArrowUp" || e.key === "ArrowDown") {
+      e.preventDefault();
+      move(id, e.key === "ArrowUp" ? -1 : 1);
+      // Keep focus on the moved row's handle after it re-renders.
+      requestAnimationFrame(() => listRef.current?.querySelector<HTMLButtonElement>(`[data-handle="${id}"]`)?.focus());
+    }
   };
 
   return (
-    <li className="rounded-md bg-raised">
-      {editing ? (
-        <form onSubmit={save} className="flex items-center gap-2 p-1.5">
-          <label className="sr-only" htmlFor={`edit-${id}`}>Rename {name}</label>
-          <input
-            id={`edit-${id}`}
-            autoFocus
-            value={draft}
-            maxLength={layout.playerNameMax + 4}
-            aria-invalid={!!error}
-            aria-describedby={error ? `edit-${id}-err` : undefined}
-            onChange={(e) => setDraft(e.target.value)}
-            onKeyDown={(e) => e.key === "Escape" && (setEditing(false), setDraft(name), setError(null))}
-            className={cx("min-h-12 min-w-0 flex-1 rounded-md border-2 bg-surface px-3 text-[17px] font-semibold text-ink outline-none", error ? "border-danger" : "border-accent")}
-          />
-          <Button type="submit" size="sm" block={false} className="shrink-0 px-4">Save</Button>
-        </form>
-      ) : (
-        <div className="flex min-h-[54px] items-center gap-3 pl-3">
-          <span aria-hidden="true" className="grid size-7 shrink-0 place-items-center rounded-full border-[1.5px] border-line-strong bg-bg text-sm font-bold text-muted">
-            {index + 1}
-          </span>
-          <span className="min-w-0 flex-1 truncate text-[17px] font-bold text-ink">{name}</span>
-          <IconButton icon="edit" label={`Rename ${name}`} className="text-muted" onClick={() => { setDraft(name); setEditing(true); }} />
-          <IconButton icon="close" label={`Remove ${name}`} className="text-muted" onClick={() => removePlayer(id)} />
-        </div>
-      )}
-      {error && editing && (
-        <p id={`edit-${id}-err`} className="px-3 pb-2 text-sm font-semibold text-danger">{error}</p>
-      )}
-    </li>
+    <ol ref={listRef} aria-label="Seating order" className="relative flex flex-col gap-2">
+      {order.map((id, i) => {
+        const p = byId.get(id)!;
+        const dragging = drag?.id === id;
+        if (editing === id) {
+          return (
+            <li key={id}>
+              <RenameForm player={p} onDone={() => setEditing(null)} />
+            </li>
+          );
+        }
+        return (
+          <li
+            key={id}
+            className={cx(
+              "flex h-14 items-center gap-1 rounded-md pr-1 transition-[background-color,box-shadow]",
+              dragging ? "z-10 bg-raised shadow-[0_8px_24px_rgba(0,0,0,0.5)] ring-2 ring-accent" : "bg-raised",
+            )}
+            style={dragging ? { transform: `translateY(${drag.dy - shift * ROW}px)` } : undefined}
+          >
+            <button
+              type="button"
+              data-handle={id}
+              aria-label={`Move ${p.name}, seat ${i + 1} of ${order.length}. Use the arrow keys.`}
+              onPointerDown={(e) => onHandleDown(e, id)}
+              onPointerMove={onHandleMove}
+              onPointerUp={onHandleUp}
+              onPointerCancel={() => setDrag(null)}
+              onKeyDown={(e) => onHandleKey(e, id)}
+              className={cx("grid h-14 w-10 shrink-0 touch-none place-items-center rounded-l-md text-muted", dragging ? "cursor-grabbing" : "cursor-grab")}
+            >
+              <Icon name="drag" size={22} />
+            </button>
+            <Avatar id={p.id} name={p.name} size={34} />
+            <button
+              type="button"
+              onClick={() => setEditing(id)}
+              className="flex min-h-12 min-w-0 flex-1 flex-col justify-center pl-2.5 text-left"
+              aria-label={`${p.name}, seat ${i + 1}${i === 0 ? ", starts" : ""}. Tap to rename or remove.`}
+            >
+              <span className="truncate text-[17px] font-bold text-ink">{p.name}</span>
+              <span className={cx("text-[12px] font-semibold", i === 0 ? "text-shot" : "text-muted")}>
+                {i === 0 ? "Starts first" : `Seat ${i + 1}`}
+              </span>
+            </button>
+            <IconButton icon="up" label={`Move ${p.name} up`} disabled={i === 0} onClick={() => move(id, -1)} className="w-11 text-muted disabled:opacity-25" />
+            <IconButton icon="down" label={`Move ${p.name} down`} disabled={i === order.length - 1} onClick={() => move(id, 1)} className="w-11 text-muted disabled:opacity-25" />
+          </li>
+        );
+      })}
+    </ol>
+  );
+}
+
+/** Small preview of the turn order, wrapping back to the start like a round of tagay. */
+function RoundPreview({ players }: { players: Player[] }) {
+  if (players.length < 2) return null;
+  return (
+    <div aria-hidden="true" className="mt-4 flex items-center gap-1.5 overflow-x-auto pb-1">
+      {players.map((p, i) => (
+        <span key={p.id} className="flex shrink-0 items-center gap-1.5">
+          <Avatar id={p.id} name={p.name} size={28} />
+          {i < players.length - 1 && <Icon name="down" size={12} className="-rotate-90 text-muted" />}
+        </span>
+      ))}
+      <span className="ml-1 shrink-0 text-[12px] font-semibold text-muted">then back to {players[0]!.name}</span>
+    </div>
   );
 }
 
 export function Players() {
   const players = useApp((s) => s.players);
-  const addPlayer = useApp((s) => s.addPlayer);
-  const go = useApp((s) => s.go);
+  const session = useApp((s) => s.session);
+  const { addPlayer, shuffleSeats, applySeating, go } = useApp.getState();
   const [name, setName] = useState("");
   const [error, setError] = useState<string | null>(null);
+  const [announcement, setAnnouncement] = useState("");
   const full = players.length >= MAX_PLAYERS;
+  const midNight = !!session && sameRoster(session.players, players);
+  const rosterChanged = !!session && !midNight;
 
   const add = (e: FormEvent) => {
     e.preventDefault();
     const err = addPlayer(name);
     setError(err);
-    if (!err) setName("");
+    if (!err) {
+      setAnnouncement(`${name.trim()} added to seat ${players.length + 1}.`);
+      setName("");
+    }
   };
 
   return (
     <ScreenLayout
       title="WHO'S DRINKING?"
-      step="STEP 1 OF 2"
+      step={midNight ? "SEATING" : "STEP 1 OF 2"}
+      onBack={midNight ? () => go("game") : undefined}
       footer={
-        <Button size="lg" disabled={players.length < MIN_PLAYERS} onClick={() => go("decks")}>
-          Next: pick decks
-        </Button>
+        midNight ? (
+          <Button size="lg" sub="Scores carry over" onClick={applySeating}>Back to the game</Button>
+        ) : (
+          <Button size="lg" disabled={players.length < MIN_PLAYERS} onClick={() => go("decks")}>
+            Next: pick decks
+          </Button>
+        )
       }
     >
-      <p className="mt-2 text-base font-medium text-muted">Add {MIN_PLAYERS} to {MAX_PLAYERS} players, in the order you're sitting.</p>
+      <p className="mt-2 text-base font-medium text-muted">
+        Add everyone, then sort them in the order you're sitting. Turns go around the table, like the tagay.
+      </p>
+
       <form onSubmit={add} className="mt-5 flex gap-3" noValidate>
         <label htmlFor="new-player" className="sr-only">Player name</label>
         <input
@@ -171,7 +319,7 @@ export function Players() {
           aria-describedby={error ? "new-player-err" : undefined}
           onChange={(e) => { setName(e.target.value); setError(null); }}
           className={cx(
-            "min-h-[54px] min-w-0 flex-1 rounded-md border-2 bg-surface px-4 text-[17px] font-semibold text-ink outline-none placeholder:font-medium placeholder:text-muted",
+            "min-h-[54px] min-w-0 flex-1 rounded-md border-2 bg-surface px-4 text-[17px] font-semibold text-ink outline-none transition-colors placeholder:font-medium placeholder:text-muted",
             error ? "border-danger" : "border-line-strong focus:border-accent",
           )}
         />
@@ -179,31 +327,41 @@ export function Players() {
       </form>
       <p id="new-player-err" role="alert" className="mt-2 min-h-5 text-sm font-semibold text-danger">{error}</p>
 
-      <ol className="mt-2 space-y-2" aria-label="Players">
-        {players.map((p, i) => <PlayerRow key={p.id} index={i} id={p.id} name={p.name} />)}
-      </ol>
-      <p className="mt-4 text-sm font-semibold text-muted">
-        {players.length} of {MAX_PLAYERS} players
-        {players.length < MIN_PLAYERS && ` · add at least ${MIN_PLAYERS}`}
+      {players.length > 0 && (
+        <div className="mt-1 mb-3 flex items-center justify-between">
+          <h2 className="text-label text-muted">Seating order · {players.length} of {MAX_PLAYERS}</h2>
+          {players.length > 2 && (
+            <button type="button" onClick={() => { shuffleSeats(); setAnnouncement("Seats shuffled."); }} className="flex min-h-12 items-center gap-1.5 px-2 text-sm font-semibold text-accent">
+              <Icon name="shuffle" size={18} /> Shuffle seats
+            </button>
+          )}
+        </div>
+      )}
+
+      <SeatList players={players} onAnnounce={setAnnouncement} />
+      <RoundPreview players={players} />
+
+      <p className="mt-4 text-sm font-medium text-muted">
+        {players.length < MIN_PLAYERS
+          ? `Add at least ${MIN_PLAYERS} players to start.`
+          : "Drag the handle or use the arrows to move someone. Tap a name to rename or remove."}
       </p>
-      <p className="mt-1 text-sm font-medium text-muted">The app picks the Tanggero when the game starts.</p>
+      {midNight && <p className="mt-2 text-sm font-semibold text-accent">Re-sorting keeps tonight's scores.</p>}
+      {rosterChanged && <p className="mt-2 text-sm font-semibold text-shot">Changing who's playing starts a new night.</p>}
+      <p className="sr-only" aria-live="polite">{announcement}</p>
     </ScreenLayout>
   );
 }
+
+// ---------------------------------------------------------------------------
+// Decks
+// ---------------------------------------------------------------------------
 
 const INTENSITIES: { value: Intensity; label: string; hint: string }[] = [
   { value: 1, label: "Chill", hint: "Light and safe. Nothing spicy." },
   { value: 2, label: "Spicy", hint: "Tea, exes, a little heat." },
   { value: 3, label: "No Filter", hint: "Adults only. Bold questions." },
 ];
-
-const DECK_EMOJI: Record<DeckId, string> = {
-  "warm-up": "🍻",
-  "barkada-tea": "☕",
-  "love-life": "💔",
-  "family-adulting": "🏠",
-  "no-filter": "🔞",
-};
 
 type Pending = { deck: DeckId } | { intensity: Intensity };
 
@@ -218,8 +376,7 @@ export function Decks() {
 
   const count = eligibleCount(decks, intensity, players.length);
   const enough = count >= MIN_ELIGIBLE;
-  const continuing =
-    !!session && session.players.length === players.length && session.players.every((p, i) => p.id === players[i]?.id);
+  const continuing = !!session && sameRoster(session.players, players);
 
   const apply = (choice: Pending) => ("deck" in choice ? toggleDeck(choice.deck) : setIntensity(choice.intensity));
   const request = (choice: Pending) => {
@@ -256,12 +413,12 @@ export function Decks() {
               aria-pressed={on}
               onClick={() => request({ deck: id })}
               className={cx(
-                "flex min-h-[72px] w-full items-center gap-3.5 rounded-md bg-surface px-3.5 text-left",
-                on ? cx("border-2", DECK_BORDER[id]) : "border-[1.5px] border-line",
+                "flex min-h-[72px] w-full items-center gap-3.5 rounded-md px-3.5 text-left transition-[background-color,border-color,transform] duration-150 active:scale-[0.99]",
+                on ? cx("border-2 bg-raised", DECK_BORDER[id]) : "border-[1.5px] border-line bg-surface hover:border-line-strong",
               )}
             >
-              <span aria-hidden="true" className={cx("grid size-11 shrink-0 place-items-center rounded-[12px] text-[22px]", DECK_BG[id])}>
-                {DECK_EMOJI[id]}
+              <span aria-hidden="true" className={cx("grid size-11 shrink-0 place-items-center rounded-[12px] text-on-bright", DECK_BG[id])}>
+                <DeckIcon deck={id} size={24} />
               </span>
               <span className="min-w-0 flex-1">
                 <span className="flex items-center gap-2">
@@ -274,16 +431,16 @@ export function Decks() {
               </span>
               <span
                 aria-hidden="true"
-                className={cx("grid size-7 shrink-0 place-items-center rounded-full", on ? cx(DECK_BG[id], "text-on-bright") : "border-2 border-line-strong")}
+                className={cx("grid size-7 shrink-0 place-items-center rounded-full transition-colors", on ? cx(DECK_BG[id], "text-on-bright") : "border-2 border-line-strong")}
               >
-                {on && <Icon name="check" size={18} />}
+                {on && <Icon name="check" size={16} />}
               </span>
             </button>
           );
         })}
       </div>
 
-      <h2 className="text-label mt-6 mb-3 text-muted" id="intensity-label">Intensity</h2>
+      <h2 className="text-label mt-6 mb-3 text-muted">Intensity</h2>
       <Segmented
         label="Intensity"
         value={intensity}
@@ -326,12 +483,16 @@ export function Decks() {
   );
 }
 
+// ---------------------------------------------------------------------------
+// How to Play
+// ---------------------------------------------------------------------------
+
 const RULES = [
-  "Pass the phone. Whoever holds it draws the card.",
-  "Read the card out loud.",
+  "Sit in the order you set up. Turns go around the table, like the tagay.",
+  "Whoever holds the phone flips the card and reads it out loud.",
   "Spill (answer honestly) or Shot (drink and keep your secret).",
   "Too vague? The group decides. If it is, that person drinks.",
-  "Tap Spill or Shot, then pass the phone.",
+  "Tap Spill or Shot, then pass the phone to the next seat.",
 ];
 
 export function HowToPlay() {
@@ -359,16 +520,17 @@ export function HowToPlay() {
           </li>
         ))}
       </ol>
-      <section className="mt-6 flex gap-4 rounded-md border-[1.5px] border-accent bg-surface p-4">
+      <section className="glass-card mt-6 flex gap-4 rounded-md border-[1.5px] border-accent/70 p-4">
         <ShotGlass size={32} className="shrink-0" />
         <div>
           <h2 className="text-label text-accent">The Tanggero</h2>
           <p className="mt-1 text-sm font-medium text-muted">
-            Pours for the table. The app picks one now and passes the role every 10 cards. Some cards let the Tanggero pick who answers.
+            Pours for the table. The app picks one now and passes the role to the next seat every 10 cards. Some cards let the
+            Tanggero pick who answers.
           </p>
         </div>
       </section>
-      <section className="mt-3 rounded-md border-[1.5px] border-shot bg-surface p-4">
+      <section className="glass-card mt-3 rounded-md border-[1.5px] border-shot/70 p-4">
         <h2 className="text-label text-shot">What's a shot?</h2>
         <p className="mt-1 text-sm font-medium text-muted">A small tagay-sized pour, not a full glass. Skipping a card is always okay.</p>
       </section>

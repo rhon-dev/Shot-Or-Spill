@@ -351,6 +351,38 @@ export function changeConfig(s: Session, config: GameConfig, rng: Rng = Math.ran
   return { ...drawNext({ ...base, current: null }, rng), previous: null };
 }
 
+/**
+ * Change the seating order mid-night (the host re-sorts the circle). Same
+ * players, new order: scores stay, and the same person keeps reading and
+ * keeps the Tanggero role. Turns then continue around the new order.
+ * Undo history is cleared, since the old snapshot has the old seating.
+ */
+export function reorderPlayers(s: Session, orderedIds: readonly string[]): Session {
+  const ids = new Set(orderedIds);
+  if (ids.size !== s.players.length || !s.players.every((p) => ids.has(p.id))) {
+    throw new Error("reorderPlayers needs exactly the same players");
+  }
+  const players = orderedIds.map((id) => s.players.find((p) => p.id === id)!);
+  const n = players.length;
+  const readerId = reader(s).id;
+  const tanggeroId = tanggero(s).id;
+  const rotations = Math.floor(s.completed / TANGGERO_EVERY);
+  const newTanggero = players.findIndex((p) => p.id === tanggeroId);
+  return {
+    ...s,
+    players,
+    readerIndex: players.findIndex((p) => p.id === readerId),
+    tanggeroStart: (((newTanggero - rotations) % n) + n) % n,
+    previous: null,
+  };
+}
+
+/** Players in turn order starting from the current reader (for the "up next" strip). */
+export function turnOrder(s: SessionCore): Player[] {
+  const n = s.players.length;
+  return Array.from({ length: n }, (_, i) => s.players[(s.readerIndex + i) % n]!);
+}
+
 export function setSoftCap(s: Session, softCap: number): Session {
   const cap = Math.max(1, Math.min(30, Math.round(softCap)));
   return { ...s, config: { ...s.config, softCap: cap } };

@@ -11,11 +11,13 @@ import {
   flip,
   newSession,
   reader,
+  reorderPlayers,
   reshuffle,
   resolve,
   skip,
   stats,
   tanggeroIndex,
+  turnOrder,
   undo,
   WATER_BREAK_MAX,
   WATER_BREAK_MIN,
@@ -359,6 +361,46 @@ describe("scores and awards (F13, F14, D-19)", () => {
     const dd = CARDS.find((c) => c.type === "double_down" && c.target === "current")!.id;
     s = resolve(withCard({ ...s, readerIndex: 1 }, dd), { kind: "choice", choice: "spill" });
     expect(awards(s).find((x) => x.id === "biggest-tea")).toMatchObject({ playerIds: ["p1"], value: 1 });
+  });
+});
+
+describe("seating order", () => {
+  it("turns follow the seating order, wrapping around the circle", () => {
+    const rng = seeded(20);
+    let s: Session = { ...newSession(players(4), config(), rng), pacing: { sinceBreak: 0, nextAt: 99 } };
+    const seen: string[] = [];
+    for (let i = 0; i < 6; i++) {
+      seen.push(reader(s).id);
+      s = playOne(s, rng);
+    }
+    expect(seen).toEqual(["p0", "p1", "p2", "p3", "p0", "p1"]);
+    expect(turnOrder(s).map((p) => p.id)).toEqual(["p2", "p3", "p0", "p1"]);
+  });
+
+  it("re-sorting mid-night keeps scores, the current reader, and the Tanggero", () => {
+    const rng = seeded(21);
+    let s: Session = { ...newSession(players(5), config(), rng), pacing: { sinceBreak: 0, nextAt: 99 } };
+    for (let i = 0; i < 13; i++) s = playOne(s, rng);
+    const before = { reader: reader(s).id, tanggero: s.players[tanggeroIndex(s)]!.id, stats: stats(s) };
+
+    const order = ["p4", "p2", "p0", "p3", "p1"];
+    const next = reorderPlayers(s, order);
+    expect(next.players.map((p) => p.id)).toEqual(order);
+    expect(reader(next).id).toBe(before.reader);
+    expect(next.players[tanggeroIndex(next)]!.id).toBe(before.tanggero);
+    expect(stats(next)).toEqual(before.stats);
+    expect(next.previous).toBeNull();
+
+    // The turn after the current reader is the next seat in the new order.
+    const after = playOne(next, rng);
+    const idx = order.indexOf(before.reader);
+    expect(reader(after).id).toBe(order[(idx + 1) % order.length]);
+  });
+
+  it("rejects an order with different players", () => {
+    const s = newSession(players(3), config(), seeded(22));
+    expect(() => reorderPlayers(s, ["p0", "p1"])).toThrow();
+    expect(() => reorderPlayers(s, ["p0", "p1", "p9"])).toThrow();
   });
 });
 
