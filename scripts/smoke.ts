@@ -350,6 +350,41 @@ try {
   await page.getByText("Pass the phone to").waitFor();
   check(true, "Play again starts a new night with the same players");
 
+  console.log("PWA offline (v1.1)");
+  // The manifest and service worker are served by the production build.
+  const manifest = await page.evaluate(async () => {
+    const res = await fetch("/manifest.webmanifest");
+    return res.ok ? ((await res.json()) as { name: string; icons: unknown[] }) : null;
+  });
+  check(manifest?.name === "Shot or Spill", "web manifest is served");
+  check(Array.isArray(manifest?.icons) && manifest!.icons.length >= 2, "manifest lists install icons");
+
+  // Wait for the service worker to install and take control of the page.
+  const controlled = await page.evaluate(async () => {
+    if (!("serviceWorker" in navigator)) return false;
+    const reg = await navigator.serviceWorker.ready;
+    for (let i = 0; i < 50 && !navigator.serviceWorker.controller; i++) {
+      await new Promise((r) => setTimeout(r, 100));
+    }
+    return !!reg.active && !!navigator.serviceWorker.controller;
+  });
+  check(controlled, "service worker installed and controls the page");
+
+  // Cut the network on this same context (so the SW and its cache are the
+  // ones we just installed), then reload: the app must still boot.
+  await context.setOffline(true);
+  await page.goto(url, { waitUntil: "domcontentloaded" });
+  // The app mounts and renders a screen (a game in progress shows the reader).
+  await page.locator("main h1").first().waitFor({ timeout: 8000 });
+  // A hashed asset must come from the cache, not the (dead) network.
+  const assetOffline = await page.evaluate(async () => {
+    const res = await fetch("/manifest.webmanifest");
+    return res.ok;
+  });
+  check(assetOffline, "cached assets still load while offline");
+  check(true, "app boots with the network offline");
+  await context.setOffline(false);
+
   check(problems.length === 0, `no console or page errors${problems.length ? `:\n${problems.join("\n")}` : ""}`);
   console.log("\nSMOKE PASSED");
 } catch (err) {

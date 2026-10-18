@@ -203,6 +203,15 @@ Targets come from the PRD §11 quality bar.
 - Split info pages out of the first load. A CI size check enforces the JS budget (D-18).
 - Test on a budget Android phone in Phase 3.5 and Phase 4.
 
+**Offline and install (PWA, v1.1).** A service worker precaches the whole app on the
+first visit, so later visits open instantly and work with no signal; the saved night
+already lives in localStorage. The worker is generated after `vite build` by
+`scripts/build-sw.ts` from `scripts/sw-template.js`: it lists every built asset, stamps a
+version from the file hashes, and writes `dist/sw.js`. Strategy is precache-everything,
+cache-first for the hashed assets, and the cached `index.html` for navigations. It's
+same-origin only, so it stays inside the CSP. `src/lib/pwa.ts` registers it and tracks
+the "update ready" and "offline ready" states for the banner.
+
 ## Accessibility
 
 - WCAG AA contrast for all text and buttons. Pay special attention to pink and amber on

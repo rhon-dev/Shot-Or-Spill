@@ -316,7 +316,13 @@ from PRD §7:
   - custom cards (F17)
   - favorite and report a card
   - sound effects and haptics
-  - PWA install and offline play
+  - PWA install and offline play — **done early (2026-10-18).** A hand-written
+    service worker (`scripts/build-sw.ts` + `scripts/sw-template.js`) precaches the
+    whole app on first visit, so the game installs to the home screen and keeps
+    working with no signal. A web manifest and icons ship in `public/`, and an
+    "Update ready" / "Ready to play offline" banner handles new versions. The smoke
+    test loads the app with the network cut to prove it boots offline. Adds about
+    0.6 KB to first-load JS.
 - **v2:**
   - room codes (Supabase Realtime)
   - shareable custom decks

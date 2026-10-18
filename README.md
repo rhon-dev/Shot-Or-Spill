@@ -93,6 +93,7 @@ It prints a deck and type-mix report, and the run fails if any card breaks a rul
 - Shot counters, a scoreboard, Water Break pacing, and a soft-cap warning
 - End-of-night recap with awards
 - Game state saved on the device, so a refresh keeps progress
+- Installs to the home screen and plays offline (PWA), for inuman spots with no signal
 
 **Not in v1:** accounts, payments, ads, multi-phone sync, Tagalog or Taglish card text,
 alcohol brand partnerships, and explicit sexual content. The full list is in

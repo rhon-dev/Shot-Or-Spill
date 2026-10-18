@@ -6,7 +6,7 @@
   "description": "Shot or Spill: a Filipino barkada drinking card game for adults (18+).",
   "scripts": {
     "dev": "vite",
-    "build": "npm run validate:cards && vite build",
+    "build": "npm run validate:cards && vite build && tsx scripts/build-sw.ts",
     "preview": "vite preview",
     "test": "vitest run",
     "typecheck": "tsc --noEmit",

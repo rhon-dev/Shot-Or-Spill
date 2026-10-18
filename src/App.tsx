@@ -5,7 +5,11 @@ import { useApp } from "./game/useApp";
 import { Game } from "./screens/Game";
 import { Recap } from "./screens/Recap";
 import { AgeGate, Decks, HowToPlay, Players, UnderAge } from "./screens/Setup";
+import { PwaBanner } from "./components/PwaBanner";
+import { registerServiceWorker } from "./lib/pwa";
 import type { InfoPageId } from "./pages/Info";
+
+registerServiceWorker();
 
 const InfoPage = lazy(() => import("./pages/Info"));
 const loadMotionFeatures = () => import("./lib/motionFeatures").then((m) => m.default);
@@ -72,6 +76,7 @@ export function App() {
             <InfoPage page={page} onClose={closeInfo} />
           </Suspense>
         )}
+        {!page && <PwaBanner />}
       </MotionConfig>
     </LazyMotion>
   );
