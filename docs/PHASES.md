@@ -216,7 +216,7 @@ preview, and the JS budget is met.
 | End-to-end | `npm run smoke` plays a full night in headless Chromium at 360×800 with the production CSP. It covers setup through recap, including refresh restore, Undo, swipe-to-flip, and the adult opt-in. There are no console errors, and it passed on repeated runs. |
 | JS budget (D-18) | 102.2 KB gzipped on first load, out of 150 KB, with the first 150 cards. It's 107.7 KB with the full 310-card deck. Animation features (30.8 KB) and info pages (1.4 KB) load lazily. |
 | Lighthouse mobile | 97 Performance · 100 Accessibility · 100 Best Practices · 100 SEO, on a local `vite preview` with simulated mobile throttling. FCP 2.0 s, TBT 0 ms, CLS 0.003. |
-| Vercel preview URL | **Not done.** It needs Rhon to connect the repo to a Vercel account. The settings are ready in `vercel.json`. |
+| Vercel preview URL | **Done.** Live at https://spill-or-shot.vercel.app/ and auto-deploys from `main`. |
 | Budget Android smoke test | **Not done.** It needs a real phone and moves to Phase 4. |
 
 **Rules the build settled.** None of these change a decision; they fill gaps the
@@ -354,7 +354,7 @@ Each release gets its own plan and gate when it's picked up.
 | --- | --- | --- | --- |
 | Lighthouse mobile 90+ | 3.1 | 3.5, 5 | 97 / 100 / 100 / 100 locally; re-run on the live site in Phase 5 |
 | WCAG AA contrast | 2 | 5 | 46 color pairs pass (`npm run check:contrast`). Lighthouse a11y 100. Manual screen-reader pass still due in Phase 5 |
-| JS bundle under 150 KB (D-18) | 3.1 | 3.5, 5 | 107.7 KB gzipped with all 310 cards, enforced in CI |
+| JS bundle under 150 KB (D-18) | 3.1 | 3.5, 5 | 112.3 KB gzipped with all 310 cards, seating, and icons, enforced in CI |
 | Playable on 3G after first load | 3.1 | 5 | Not yet tested |
 | Smooth on budget Android | 2 (motion spec) | 3.5, 4 | Not yet tested on a device |
 
