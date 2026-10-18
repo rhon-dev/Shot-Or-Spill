@@ -1,9 +1,10 @@
 /** Age gate, under-18, players + seating, decks, and How to Play (PHASES 3.2, mocks 01–04, 14, 15, 17). */
 import { useRef, useState, type FormEvent, type KeyboardEvent, type PointerEvent } from "react";
-import { DECK_IDS, DECKS, type DeckId, type Intensity } from "../content/meta";
+import { CUSTOM_DECK_ID, DECK_IDS, DECKS, type DeckId, type Intensity } from "../content/meta";
 import { layout } from "../design/tokens";
 import { eligibleCount, MAX_PLAYERS, MIN_ELIGIBLE, MIN_PLAYERS, tanggero } from "../game/engine";
-import { needsAdultOk, sameRoster } from "../game/store";
+import { CUSTOM_MAX, CUSTOM_TEXT_MAX, customCardError, needsAdultOk, sameRoster } from "../game/store";
+import type { Card } from "../content/meta";
 import type { Player } from "../game/types";
 import { useApp } from "../game/useApp";
 import { Avatar, Bunting, DeckIcon, Icon, ShotGlass, Wordmark } from "../components/art";
@@ -429,6 +430,7 @@ export function Decks() {
   const players = useApp((s) => s.players);
   const adultOk = useApp((s) => s.adultOk);
   const session = useApp((s) => s.session);
+  const customCount = useApp((s) => s.customCards.length);
   const { toggleDeck, setIntensity, confirmAdult, startNight, go } = useApp.getState();
   const [pending, setPending] = useState<Pending | null>(null);
 
@@ -464,12 +466,16 @@ export function Decks() {
           const meta = DECKS[id];
           const on = decks.includes(id);
           const n = eligibleCount([id], intensity, players.length);
+          const isCustom = id === CUSTOM_DECK_ID;
+          const empty = isCustom && customCount === 0;
+          // Empty custom deck: the tile opens the editor instead of selecting nothing.
+          const onClick = empty ? () => go("custom") : () => request({ deck: id });
           return (
             <button
               key={id}
               type="button"
-              aria-pressed={on}
-              onClick={() => request({ deck: id })}
+              aria-pressed={empty ? undefined : on}
+              onClick={onClick}
               className={cx(
                 "flex min-h-[72px] w-full items-center gap-3.5 rounded-md px-3.5 text-left transition-[background-color,border-color,transform] duration-150 active:scale-[0.99]",
                 on ? cx("border-2 bg-raised", DECK_BORDER[id]) : "border-[1.5px] border-line bg-surface hover:border-line-strong",
@@ -484,19 +490,27 @@ export function Decks() {
                   {meta.adultOptIn && <AdultBadge />}
                 </span>
                 <span className="block truncate text-[13px] font-medium text-muted">
-                  {n} {n === 1 ? "card" : "cards"} · {meta.tagline}
+                  {isCustom ? (empty ? "Tap to write your own" : `${customCount} ${customCount === 1 ? "card" : "cards"} · ${meta.tagline}`) : `${n} ${n === 1 ? "card" : "cards"} · ${meta.tagline}`}
                 </span>
               </span>
               <span
                 aria-hidden="true"
-                className={cx("grid size-7 shrink-0 place-items-center rounded-full transition-colors", on ? cx(DECK_BG[id], "text-on-bright") : "border-2 border-line-strong")}
+                className={cx(
+                  "grid size-7 shrink-0 place-items-center rounded-full transition-colors",
+                  empty ? "text-accent" : on ? cx(DECK_BG[id], "text-on-bright") : "border-2 border-line-strong",
+                )}
               >
-                {on && <Icon name="check" size={16} />}
+                {empty ? <Icon name="plus" size={18} /> : on && <Icon name="check" size={16} />}
               </span>
             </button>
           );
         })}
       </div>
+      {customCount > 0 && (
+        <button type="button" onClick={() => go("custom")} className="mt-2 flex min-h-12 items-center gap-1.5 px-1 text-sm font-semibold text-accent">
+          <Icon name="edit" size={16} /> Edit your cards
+        </button>
+      )}
 
       <h2 className="text-label mt-6 mb-3 text-muted">Intensity</h2>
       <Segmented
@@ -537,6 +551,120 @@ export function Decks() {
           <p className="mt-4 font-bold text-ink">Everyone here is okay with adult questions.</p>
         </Dialog>
       )}
+    </ScreenLayout>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Our Cards (custom cards, F17, D-27)
+// ---------------------------------------------------------------------------
+
+function CustomCardForm({ card, onDone }: { card?: Card; onDone: () => void }) {
+  const { addCustomCard, editCustomCard } = useApp.getState();
+  const [draft, setDraft] = useState(card?.text ?? "");
+  const [error, setError] = useState<string | null>(null);
+  const save = (e: FormEvent) => {
+    e.preventDefault();
+    const err = card ? editCustomCard(card.id, draft) : addCustomCard(draft);
+    setError(err);
+    if (!err) {
+      setDraft("");
+      onDone();
+    }
+  };
+  const trimmed = draft.trim();
+  const live = customCardError(trimmed);
+  // Show the placeholder error live; keep the neutral counter for length-in-progress.
+  const message = error ?? (trimmed.length > 0 && /[{}]/.test(trimmed) ? live : null);
+  return (
+    <form onSubmit={save} className="rounded-md border-2 border-accent bg-surface p-3">
+      <label className="sr-only" htmlFor="custom-text">{card ? "Edit card" : "New card"}</label>
+      <textarea
+        id="custom-text"
+        autoFocus
+        value={draft}
+        rows={2}
+        maxLength={CUSTOM_TEXT_MAX + 20}
+        placeholder="Have you ever… / What's the…"
+        aria-invalid={!!error}
+        aria-describedby="custom-help"
+        onChange={(e) => { setDraft(e.target.value); setError(null); }}
+        className="min-h-[72px] w-full resize-none rounded-sm bg-bg px-3 py-2 text-[17px] font-semibold text-ink outline-none"
+      />
+      <div className="mt-1 flex items-center justify-between">
+        <span id="custom-help" className={cx("text-[13px] font-semibold", message ? "text-danger" : "text-muted")} role={message ? "alert" : undefined}>
+          {message ?? `${trimmed.length}/${CUSTOM_TEXT_MAX}`}
+        </span>
+        <div className="flex gap-2">
+          <Button type="button" variant="ghost" block={false} onClick={onDone}>Cancel</Button>
+          <Button type="submit" size="sm" block={false} className="px-5" disabled={!!live}>{card ? "Save" : "Add"}</Button>
+        </div>
+      </div>
+    </form>
+  );
+}
+
+export function CustomCards() {
+  const cards = useApp((s) => s.customCards);
+  const { removeCustomCard, go } = useApp.getState();
+  const [adding, setAdding] = useState(false);
+  const [editing, setEditing] = useState<string | null>(null);
+  const [announcement, setAnnouncement] = useState("");
+  const full = cards.length >= CUSTOM_MAX;
+
+  return (
+    <ScreenLayout
+      title="OUR CARDS"
+      onBack={() => go("decks")}
+      footer={<Button size="lg" onClick={() => go("decks")}>Done</Button>}
+    >
+      <p className="mt-2 text-base font-medium text-muted">
+        Write your own Spill or Shot questions. Whoever holds the phone answers "you". These stay on this device.
+      </p>
+
+      {!adding ? (
+        <Button
+          variant="secondary"
+          className="mt-4"
+          disabled={full}
+          onClick={() => { setAdding(true); setEditing(null); }}
+        >
+          {full ? `That's the max (${CUSTOM_MAX})` : "Write a card"}
+        </Button>
+      ) : (
+        <div className="mt-4">
+          <CustomCardForm onDone={() => { setAdding(false); setAnnouncement("Card added."); }} />
+        </div>
+      )}
+
+      {cards.length > 0 && (
+        <h2 className="text-label mt-6 mb-2 text-muted">Your cards · {cards.length} of {CUSTOM_MAX}</h2>
+      )}
+      <ul className="space-y-2">
+        {cards.map((c) =>
+          editing === c.id ? (
+            <li key={c.id}>
+              <CustomCardForm card={c} onDone={() => { setEditing(null); setAnnouncement("Card saved."); }} />
+            </li>
+          ) : (
+            <li key={c.id} className="flex items-start gap-2 rounded-md bg-raised p-3">
+              <p className="min-w-0 flex-1 text-[15px] font-semibold text-ink">{c.text}</p>
+              <IconButton icon="edit" label={`Edit: ${c.text}`} onClick={() => { setEditing(c.id); setAdding(false); }} className="size-10 shrink-0 text-muted" />
+              <IconButton
+                icon="trash"
+                label={`Remove: ${c.text}`}
+                onClick={() => { removeCustomCard(c.id); setAnnouncement("Card removed."); }}
+                className="size-10 shrink-0 text-danger"
+              />
+            </li>
+          ),
+        )}
+      </ul>
+
+      {cards.length === 0 && !adding && (
+        <p className="mt-6 text-center text-sm font-medium text-muted">No cards yet. Write a few, then pick the Our Cards deck.</p>
+      )}
+      <p className="sr-only" aria-live="polite">{announcement}</p>
     </ScreenLayout>
   );
 }

@@ -4,7 +4,7 @@ import { effectiveScreen, type Screen } from "./game/store";
 import { useApp } from "./game/useApp";
 import { Game } from "./screens/Game";
 import { Recap } from "./screens/Recap";
-import { AgeGate, Decks, HowToPlay, Players, UnderAge } from "./screens/Setup";
+import { AgeGate, CustomCards, Decks, HowToPlay, Players, UnderAge } from "./screens/Setup";
 import { PwaBanner } from "./components/PwaBanner";
 import { registerServiceWorker } from "./lib/pwa";
 import type { InfoPageId } from "./pages/Info";
@@ -24,6 +24,7 @@ const TITLES: Record<Screen, string> = {
   howto: "How to play · Shot or Spill",
   game: "Game · Shot or Spill",
   recap: "That's the night · Shot or Spill",
+  custom: "Our cards · Shot or Spill",
 };
 
 /** Info pages live at #about, #drink-responsibly, #terms, so the back button works. */
@@ -68,6 +69,7 @@ export function App() {
           {screen === "players" && <Players />}
           {screen === "decks" && <Decks />}
           {screen === "howto" && <HowToPlay />}
+          {screen === "custom" && <CustomCards />}
           {screen === "game" && <Game />}
           {screen === "recap" && <Recap />}
         </div>

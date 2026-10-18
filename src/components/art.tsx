@@ -89,6 +89,7 @@ const DECK_ICON: Record<DeckId, string[]> = {
   couples: paths(heart),
   "family-adulting": paths(house),
   "no-filter": paths(fire),
+  "our-cards": paths(edit),
 };
 
 export function DeckIcon({ deck, size = 24, className }: { deck: DeckId; size?: number; className?: string }) {

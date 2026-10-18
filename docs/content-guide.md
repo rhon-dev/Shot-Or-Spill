@@ -159,6 +159,12 @@ Group cards (Everyone Who, Most Likely, Hot Seat, Water Break) don't need a styl
 Write "your partner", not `{p1}`. `{p1}` is a random player, which is only the partner
 when exactly two people play, and the deck should also work for a table of couples.
 
+### Custom cards (Our Cards, F17)
+
+This guide covers the bundled decks only. The "Our Cards" deck is written by players on
+their own device (D-27) and is not part of the build or the validator. Those cards are
+always a Spill or Shot for the reader, can't use placeholders, and stay on the device.
+
 ## 7. Card format
 
 One JSON array per deck in `src/content/decks/<deck>.json`:

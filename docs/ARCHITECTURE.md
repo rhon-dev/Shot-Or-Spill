@@ -203,6 +203,15 @@ Targets come from the PRD §11 quality bar.
 - Split info pages out of the first load. A CI size check enforces the JS budget (D-18).
 - Test on a budget Android phone in Phase 3.5 and Phase 4.
 
+**Custom cards (F17, v1.1).** The "Our Cards" deck is written on the device. The store
+holds the cards (`customCards`), and `registerCustomCards()` in `content/cards.ts` merges
+them into the live `CARDS` array and `CARD_BY_ID` map, which `engine.ts` and `store.ts`
+read through live module bindings, so the engine draws, looks up, favorites, and persists
+them exactly like bundled cards with no call-site changes. Registration runs at the top of
+`sanitize()` so the id and session-loadable checks see custom cards on reload. Each custom
+card is a Spill or Shot for the reader, intensity 2, no placeholders, so it needs no adult
+gate and the build-time validator (bundled decks only) never sees it. Capped at 100.
+
 **Favorite, report, and feedback (v1.1).** Favorites and reports are arrays of card
 ids in the persisted store (`favorites`, `reports`), sanitized on load against the known
 card set and never sent anywhere. Sound effects are short tones synthesized in

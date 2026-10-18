@@ -1,6 +1,6 @@
-import { describe, expect, it } from "vitest";
+import { beforeEach, describe, expect, it } from "vitest";
 import type { StateStorage } from "zustand/middleware";
-import { getCard } from "../content/cards";
+import { getCard, registerCustomCards } from "../content/cards";
 import {
   AGE_GATE_DAYS,
   createAppStore,
@@ -11,6 +11,7 @@ import {
   sanitize,
   STORAGE_KEY,
 } from "./store";
+import * as engine from "./engine";
 import { tanggeroIndex } from "./engine";
 import type { Outcome, Session } from "./types";
 
@@ -294,6 +295,59 @@ describe("persistence (F15)", () => {
     expect(clean.reports).toEqual([]);
     expect(clean.sound).toBe(true);
     expect(clean.haptics).toBe(true);
+  });
+});
+
+describe("custom cards (F17, D-27)", () => {
+  // The card registry is module-global, so start each test from a clean slate.
+  beforeEach(() => registerCustomCards([]));
+
+  it("adds, edits, and removes custom cards, with validation and de-dupe", () => {
+    const store = createAppStore(memoryStorage());
+    const s = store.getState();
+    expect(s.addCustomCard("short")).toMatch(/more/);
+    expect(s.addCustomCard("x".repeat(200))).toMatch(/under/);
+    expect(s.addCustomCard("Has a {p1} placeholder here")).toMatch(/placeholder/);
+    expect(s.addCustomCard("  What's your worst videoke habit?  ")).toBeNull();
+    expect(store.getState().customCards).toHaveLength(1);
+    expect(store.getState().customCards[0]!.text).toBe("What's your worst videoke habit?");
+    expect(s.addCustomCard("WHAT'S YOUR WORST VIDEOKE HABIT?")).toMatch(/already/);
+
+    const id = store.getState().customCards[0]!.id;
+    expect(id).toMatch(/^our-/);
+    expect(s.editCustomCard(id, "What's your best videoke habit?")).toBeNull();
+    expect(store.getState().customCards[0]!.text).toBe("What's your best videoke habit?");
+
+    s.removeCustomCard(id);
+    expect(store.getState().customCards).toHaveLength(0);
+  });
+
+  it("registers custom cards so they can be looked up and played", () => {
+    const store = createAppStore(memoryStorage());
+    store.getState().addCustomCard("What's a secret talent you have?");
+    const id = store.getState().customCards[0]!.id;
+    const card = getCard(id);
+    expect(card.deck).toBe("our-cards");
+    expect(card.type).toBe("spill_or_shot");
+    expect(engine.eligibleCount(["our-cards"], 2, 3)).toBe(1);
+  });
+
+  it("drops the custom deck from the selection when its last card is removed", () => {
+    const store = createAppStore(memoryStorage());
+    const s = store.getState();
+    s.addCustomCard("What's the pettiest grudge you hold?");
+    s.toggleDeck("our-cards");
+    expect(store.getState().decks).toContain("our-cards");
+    s.removeCustomCard(store.getState().customCards[0]!.id);
+    expect(store.getState().decks).not.toContain("our-cards");
+  });
+
+  it("restores custom cards across a reload and makes them drawable again", () => {
+    const storage = memoryStorage();
+    createAppStore(storage).getState().addCustomCard("What would you do with a free day?");
+    const reloaded = createAppStore(storage).getState();
+    expect(reloaded.customCards).toHaveLength(1);
+    expect(() => getCard(reloaded.customCards[0]!.id)).not.toThrow();
   });
 });
 

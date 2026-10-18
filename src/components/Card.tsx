@@ -20,6 +20,7 @@ const DECK_BG: Record<DeckId, string> = {
   couples: "bg-deck-couples",
   "family-adulting": "bg-deck-family-adulting",
   "no-filter": "bg-deck-no-filter",
+  "our-cards": "bg-deck-our-cards",
 };
 const DECK_BORDER: Record<DeckId, string> = {
   "warm-up": "border-deck-warm-up",
@@ -28,6 +29,7 @@ const DECK_BORDER: Record<DeckId, string> = {
   couples: "border-deck-couples",
   "family-adulting": "border-deck-family-adulting",
   "no-filter": "border-deck-no-filter",
+  "our-cards": "border-deck-our-cards",
 };
 export { DECK_BG, DECK_BORDER };
 

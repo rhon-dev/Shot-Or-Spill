@@ -6,7 +6,8 @@
  * ./schema.ts and is only used by the build-time validator.
  */
 
-export const DECK_IDS = [
+/** Decks that ship as JSON files, validated at build time. */
+export const BUNDLED_DECK_IDS = [
   "warm-up",
   "barkada-tea",
   "love-life",
@@ -14,7 +15,16 @@ export const DECK_IDS = [
   "family-adulting",
   "no-filter",
 ] as const;
+
+/**
+ * The custom deck (F17, D-27). It has no JSON file; players write its cards
+ * on the device. It's listed last so it appears after the bundled decks.
+ */
+export const CUSTOM_DECK_ID = "our-cards";
+
+export const DECK_IDS = [...BUNDLED_DECK_IDS, CUSTOM_DECK_ID] as const;
 export type DeckId = (typeof DECK_IDS)[number];
+export type BundledDeckId = (typeof BUNDLED_DECK_IDS)[number];
 
 export const CARD_TYPES = [
   "spill_or_shot",
@@ -123,6 +133,16 @@ export const DECKS: Record<DeckId, DeckMeta> = {
     tagline: "Regrets, secrets",
     adultOptIn: true,
     launchCount: 60,
+  },
+  "our-cards": {
+    id: "our-cards",
+    name: "Our Cards",
+    idPrefix: "our",
+    maxIntensity: 2,
+    theme: "Cards the table writes themselves (F17)",
+    tagline: "Written by you",
+    adultOptIn: false,
+    launchCount: 0,
   },
 };
 

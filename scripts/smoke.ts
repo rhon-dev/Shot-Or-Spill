@@ -200,6 +200,25 @@ try {
 
   console.log("Decks (F4, F5, D-14, D-15)");
   await page.getByRole("heading", { name: "PICK YOUR DECKS" }).waitFor();
+
+  console.log("Write a custom card (F17, D-27)");
+  // The empty Our Cards tile opens the editor.
+  await button(/^Our Cards/).click();
+  await page.getByRole("heading", { name: "OUR CARDS" }).waitFor();
+  await button(/^Write a card/).click();
+  await page.getByLabel(/New card/).fill("What is the most {bad} thing"); // placeholder rejected
+  check(await page.getByText(/No \{ \} placeholders/).isVisible(), "custom cards reject placeholders");
+  await page.getByLabel(/New card/).fill("What's the most ridiculous thing you've done sober?");
+  await button(/^Add$/).click();
+  check((await page.getByText("What's the most ridiculous thing you've done sober?").count()) > 0, "custom card is saved to Our Cards");
+  await shot(page, "custom-cards");
+  await button(/^Done$/).click();
+  await page.getByRole("heading", { name: "PICK YOUR DECKS" }).waitFor();
+  // The tile now shows a card count and can be selected like any deck.
+  await button(/^Our Cards/).click();
+  check((await button(/^Our Cards/).getAttribute("aria-pressed")) === "true", "Our Cards deck can be selected once it has a card");
+  await button(/^Our Cards/).click(); // turn it back off for the main flow
+
   await button(/^No Filter/).click();
   await page.getByRole("heading", { name: "NO FILTER IS FOR ADULTS" }).waitFor();
   check(true, "No Filter deck asks for the adult confirmation");

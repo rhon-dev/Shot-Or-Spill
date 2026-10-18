@@ -51,6 +51,7 @@ export const deckAccent: Record<DeckId, string> = {
   couples: "#FF9EB5", // rose
   "family-adulting": "#5CB8FF", // sky
   "no-filter": "#FF6A3D", // red-orange
+  "our-cards": "#8FA0B6", // slate (the table's own deck)
 };
 
 export const font = {

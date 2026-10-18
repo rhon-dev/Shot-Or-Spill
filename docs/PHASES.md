@@ -313,7 +313,9 @@ Not planned in detail until the first launch metrics come in (PRD §13). The ord
 from PRD §7:
 
 - **v1.1:**
-  - custom cards (F17)
+  - custom cards (F17) — **done (2026-10-18, D-27).** An "Our Cards" deck the table
+    writes on the device: Spill or Shot questions for the reader, add/edit/remove,
+    selectable and playable like any deck. Stored locally, capped at 100.
   - favorite and report a card — **done (2026-10-18, D-25).** A face-up card can be
     hearted or flagged; both are device-only, and the recap lists tonight's favorites.
   - sound effects and haptics — **done (2026-10-18, D-26).** Web Audio tones on
@@ -356,7 +358,7 @@ Each release gets its own plan and gate when it's picked up.
 | F14 | Recap | Should | 3.4 | D-19 | Engine tests (awards, ties, hidden when empty), smoke |
 | F15 | Persistence | Must | 3.1 (store), 3.4 (restore check) | | Store tests (round trip, stale cards, corrupt data, old versions), smoke (reload mid-game) |
 | F16 | Undo | Should | 3.4 | | Engine tests (full restore, across a Water Break), smoke |
-| F17 | Custom cards | v1.1 | 6 | Out of MVP | Not built |
+| F17 | Custom cards | v1.1 | v1.1 (2026-10-18) | D-27 | Store tests (add/edit/remove, de-dupe, limit, reload), engine (custom card eligible), smoke (write and select Our Cards) |
 
 | Quality bar (PRD §11) | Planned in | Verified in | Phase 3 result |
 | --- | --- | --- | --- |

@@ -7,15 +7,20 @@
  */
 import { create } from "zustand";
 import { createJSONStorage, persist, type StateStorage } from "zustand/middleware";
-import { CARD_BY_ID, getCard } from "../content/cards";
-import { DECK_IDS, DECKS, type DeckId, type Intensity } from "../content/meta";
+import { CARD_BY_ID, getCard, registerCustomCards } from "../content/cards";
+import { CUSTOM_DECK_ID, DECK_IDS, DECKS, type Card, type DeckId, type Intensity } from "../content/meta";
 import { layout } from "../design/tokens";
 import { track } from "../lib/analytics";
 import { feedback, type Cue } from "../lib/feedback";
 import * as engine from "./engine";
 import type { GameConfig, Outcome, Player, Session } from "./types";
 
-export type Screen = "age" | "under18" | "players" | "decks" | "howto" | "game" | "recap";
+export type Screen = "age" | "under18" | "players" | "decks" | "howto" | "game" | "recap" | "custom";
+
+/** Custom-card limits (F17, D-27). Spicy ceiling keeps the adult gate out of it. */
+export const CUSTOM_TEXT_MIN = 8;
+export const CUSTOM_TEXT_MAX = 180;
+export const CUSTOM_MAX = 100;
 
 export const AGE_GATE_DAYS = 30; // F1
 const AGE_GATE_MS = AGE_GATE_DAYS * 24 * 60 * 60 * 1000;
@@ -43,6 +48,8 @@ export interface AppData {
   /** Sound effects and vibration on card actions (v1.1, D-26). */
   sound: boolean;
   haptics: boolean;
+  /** Cards the table wrote themselves: the "Our Cards" deck (F17, D-27). */
+  customCards: Card[];
   screen: Screen;
   session: Session | null;
 }
@@ -88,6 +95,12 @@ export interface AppActions {
   toggleFavorite: (cardId: string) => void;
   toggleReport: (cardId: string) => void;
 
+  /** Add a custom card. Returns an error message, or null on success (F17). */
+  addCustomCard: (text: string) => string | null;
+  /** Edit a custom card's text. Returns an error message, or null on success. */
+  editCustomCard: (id: string, text: string) => string | null;
+  removeCustomCard: (id: string) => void;
+
   endNight: () => void;
   playAgain: () => void;
   newPlayers: () => void;
@@ -110,6 +123,7 @@ export const initialData: AppData = {
   reports: [],
   sound: true,
   haptics: true,
+  customCards: [],
   screen: "age",
   session: null,
 };
@@ -151,6 +165,54 @@ function newId(): string {
   return `p${Date.now().toString(36)}${idCounter.toString(36)}${Math.random().toString(36).slice(2, 6)}`;
 }
 
+/** Collapse whitespace; custom card text is one plain line (F17). */
+export function cleanCardText(raw: string): string {
+  return raw.replace(/\s+/g, " ").trim();
+}
+
+/** Error message for a custom card, or null when it's fine. Checks length and placeholders. */
+export function customCardError(raw: string): string | null {
+  const text = cleanCardText(raw);
+  if (text.length < CUSTOM_TEXT_MIN) return "Write a bit more.";
+  if (text.length > CUSTOM_TEXT_MAX) return `Keep it under ${CUSTOM_TEXT_MAX} characters.`;
+  if (/[{}]/.test(text)) return "No { } placeholders in your own cards.";
+  return null;
+}
+
+/**
+ * A custom card is always a Spill or Shot for the reader ("you"): the
+ * simplest type, with no placeholders or adult gate (F17, D-27). The store
+ * owns these; this shapes one into a full Card for the registry.
+ */
+function toCustomCard(id: string, text: string): Card {
+  return { id, deck: CUSTOM_DECK_ID, type: "spill_or_shot", intensity: 2, target: "current", text, shots: 1, tags: ["generic", "custom"] };
+}
+
+let customCounter = 0;
+function toCustomCardFromStore(text: string): Card {
+  customCounter += 1;
+  return toCustomCard(`our-${Date.now().toString(36)}${customCounter.toString(36)}`, text);
+}
+
+/** Keep only well-formed custom cards (used on load and after edits). */
+function sanitizeCustom(arr: unknown): Card[] {
+  if (!Array.isArray(arr)) return [];
+  const seen = new Set<string>();
+  const out: Card[] = [];
+  for (const c of arr) {
+    if (!c || typeof c !== "object") continue;
+    const { id, text } = c as { id?: unknown; text?: unknown };
+    if (typeof id !== "string" || typeof text !== "string") continue;
+    if (!/^our-/.test(id) || seen.has(id)) continue;
+    const clean = cleanCardText(text);
+    if (customCardError(clean)) continue;
+    seen.add(id);
+    out.push(toCustomCard(id, clean));
+    if (out.length >= CUSTOM_MAX) break;
+  }
+  return out;
+}
+
 /** The screen to actually show, after the age gate and session checks. */
 export function effectiveScreen(s: Pick<AppData, "ageConfirmedAt" | "screen" | "session" | "players">, now = Date.now()): Screen {
   if (s.screen === "under18") return "under18";
@@ -181,6 +243,9 @@ function sessionIsLoadable(session: Session): boolean {
  */
 export function sanitize(saved: Partial<AppData> | undefined): AppData {
   const s = { ...initialData, ...(saved ?? {}) };
+  // Register custom cards first, so the id and session checks below see them.
+  const customCards = sanitizeCustom(s.customCards);
+  registerCustomCards(customCards);
   const decks = (Array.isArray(s.decks) ? s.decks : []).filter((d): d is DeckId => (DECK_IDS as readonly string[]).includes(d));
   const players = (Array.isArray(s.players) ? s.players : [])
     .filter((p): p is Player => !!p && typeof p.id === "string" && typeof p.name === "string")
@@ -206,6 +271,7 @@ export function sanitize(saved: Partial<AppData> | undefined): AppData {
     reports: cardIds(s.reports),
     sound: typeof s.sound === "boolean" ? s.sound : true,
     haptics: typeof s.haptics === "boolean" ? s.haptics : true,
+    customCards,
     session,
     screen: s.screen === "under18" ? "age" : s.screen,
   };
@@ -404,6 +470,41 @@ export function createAppStore(storage?: StateStorage, now: () => number = Date.
             set({ reports: reports.includes(cardId) ? reports.filter((id) => id !== cardId) : [...reports, cardId] });
           },
 
+          addCustomCard: (raw) => {
+            const cards = get().customCards;
+            if (cards.length >= CUSTOM_MAX) return `That's the max of ${CUSTOM_MAX} cards.`;
+            const text = cleanCardText(raw);
+            const error = customCardError(text);
+            if (error) return error;
+            if (cards.some((c) => c.text.toLowerCase() === text.toLowerCase())) return "You already wrote that one.";
+            const card = toCustomCardFromStore(text);
+            const next = [...cards, card];
+            registerCustomCards(next);
+            set({ customCards: next });
+            return null;
+          },
+
+          editCustomCard: (id, raw) => {
+            const cards = get().customCards;
+            if (!cards.some((c) => c.id === id)) return null;
+            const text = cleanCardText(raw);
+            const error = customCardError(text);
+            if (error) return error;
+            if (cards.some((c) => c.id !== id && c.text.toLowerCase() === text.toLowerCase())) return "You already wrote that one.";
+            const next = cards.map((c) => (c.id === id ? { ...c, text } : c));
+            registerCustomCards(next);
+            set({ customCards: next });
+            return null;
+          },
+
+          removeCustomCard: (id) => {
+            const next = get().customCards.filter((c) => c.id !== id);
+            registerCustomCards(next);
+            // If the custom deck is now empty, drop it from the selection.
+            const decks = next.length === 0 ? get().decks.filter((d) => d !== CUSTOM_DECK_ID) : get().decks;
+            set({ customCards: next, decks: decks.length ? decks : initialData.decks });
+          },
+
           endNight: () => {
             const s = get().session;
             if (s) track({ name: "session_end", props: { cards: s.log.length } });
@@ -445,6 +546,7 @@ export function createAppStore(storage?: StateStorage, now: () => number = Date.
           reports: s.reports,
           sound: s.sound,
           haptics: s.haptics,
+          customCards: s.customCards,
           screen: s.screen === "under18" ? "age" : s.screen,
           session: s.session,
         }),

@@ -11,8 +11,8 @@ import { readFileSync, readdirSync } from "node:fs";
 import { basename, dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import {
+  BUNDLED_DECK_IDS,
   CARD_TYPES,
-  DECK_IDS,
   DECKS,
   MIN_EASY_SHARE,
   STYLE_TAGS,
@@ -97,9 +97,9 @@ function pct(n: number, total: number): string {
 // ---------------------------------------------------------------------------
 
 const files = readdirSync(DECKS_DIR).filter((f) => f.endsWith(".json"));
-const expectedFiles = new Set(DECK_IDS.map((id) => `${id}.json`));
+const expectedFiles = new Set(BUNDLED_DECK_IDS.map((id) => `${id}.json`));
 
-for (const id of DECK_IDS) {
+for (const id of BUNDLED_DECK_IDS) {
   if (!files.includes(`${id}.json`)) {
     errors.push({ where: `${id}.json`, message: "deck file is missing" });
   }
@@ -211,7 +211,7 @@ for (const card of cards.filter(isQuestion)) {
   }
 }
 const styleRows: string[] = [];
-for (const id of DECK_IDS) {
+for (const id of BUNDLED_DECK_IDS) {
   const qs = cards.filter((c) => c.deck === id && isQuestion(c));
   const count = (tag: string) => qs.filter((c) => c.tags.includes(tag)).length;
   const easy = count("hypothetical") + count("generic");
@@ -241,7 +241,7 @@ out.push("Shot or Spill content report");
 out.push("");
 out.push("Deck               Cards  Launch  Short   I1  I2  I3");
 const short: string[] = [];
-for (const id of DECK_IDS) {
+for (const id of BUNDLED_DECK_IDS) {
   const deck = cards.filter((c) => c.deck === id);
   const byI = [1, 2, 3].map((i) => deck.filter((c) => c.intensity === i).length);
   const meta = DECKS[id];
@@ -251,7 +251,7 @@ for (const id of DECK_IDS) {
     `${meta.name.padEnd(18)} ${String(deck.length).padStart(5)}  ${String(meta.launchCount).padStart(6)}  ${String(gap || "-").padStart(5)}  ${byI.map((n) => String(n).padStart(3)).join(" ")}`,
   );
 }
-const launchTotal = DECK_IDS.reduce((s, id) => s + DECKS[id].launchCount, 0);
+const launchTotal = BUNDLED_DECK_IDS.reduce((s, id) => s + DECKS[id].launchCount, 0);
 out.push(`${"Total".padEnd(18)} ${String(total).padStart(5)}  ${String(launchTotal).padStart(6)}`);
 // Cutting weak cards after playtests can drop a deck below its PRD §6 count: warn, don't fail.
 for (const msg of short) warnings.push({ where: "launch", message: msg });

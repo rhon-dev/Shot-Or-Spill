@@ -548,6 +548,7 @@ const DECK_EMOJI: Record<DeckId, string> = {
   couples: "❤️",
   "family-adulting": "🏠",
   "no-filter": "🔞",
+  "our-cards": "✍️",
 };
 
 function deckTile(x: number, y: number, w: number, h: number, id: DeckId, selected: boolean, count: number): string {
